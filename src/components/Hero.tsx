@@ -1,4 +1,4 @@
-import { FaWhatsapp, FaChevronDown } from 'react-icons/fa6';
+import { FaChevronDown } from 'react-icons/fa6';
 import Reveal from './Reveal';
 
 export default function Hero() {
@@ -14,14 +14,6 @@ export default function Hero() {
           desarrollo de la sociedad.
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
-          <a
-            href="https://wa.me/59164849322"
-            target="_blank"
-            rel="noopener"
-            className="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-primary-dark transition hover:-translate-y-px hover:bg-secondary-light"
-          >
-            <FaWhatsapp /> Solicitar información
-          </a>
           <a
             href="#carreras"
             className="inline-flex items-center gap-2 rounded-full border-2 border-secondary-light px-6 py-3 text-sm font-semibold text-white transition hover:bg-secondary-light hover:text-primary-dark"

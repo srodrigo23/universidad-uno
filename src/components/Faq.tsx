@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FaCircleQuestion, FaChevronDown } from 'react-icons/fa6';
+import { AnimatePresence, motion } from 'motion/react';
 import Reveal from './Reveal';
 
 const faqs = [
@@ -51,7 +52,20 @@ export default function Faq() {
                   {item.q}
                   <FaChevronDown className={`shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
                 </button>
-                {isOpen && <p className="mt-3 text-sm text-slate-600">{item.a}</p>}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="answer"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <p className="mt-3 text-sm text-slate-600">{item.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </Reveal>
             );
           })}

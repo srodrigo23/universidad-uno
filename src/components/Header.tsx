@@ -43,15 +43,6 @@ export default function Header() {
           </ul>
         </nav>
 
-        <a
-          href="https://wa.me/59164849322"
-          target="_blank"
-          rel="noopener"
-          className="hidden whitespace-nowrap rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-px hover:bg-primary-dark md:inline-flex"
-        >
-          Admisiones
-        </a>
-
         <button
           type="button"
           className="relative z-50 inline-flex items-center justify-center rounded-md p-2 text-primary md:hidden"
@@ -91,17 +82,6 @@ export default function Header() {
               </a>
             </li>
           ))}
-          <li>
-            <a
-              href="https://wa.me/59164849322"
-              target="_blank"
-              rel="noopener"
-              className="mt-2 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white"
-              onClick={() => setOpen(false)}
-            >
-              Admisiones
-            </a>
-          </li>
         </ul>
       </nav>
     </header>
