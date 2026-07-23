@@ -23,9 +23,11 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-2">
         <a href="/" className="flex items-center">
           <img
-            src="/logo/LogotipoOriginalVersiones/LogotipoOriginalCompleto.png"
+            src="/logo/LogotipoOriginalVersiones/recortado/LogotipoOriginalCompleto.png"
             alt="Universidad Privada UNO · Cochabamba"
-            className="h-16 w-auto sm:h-20"
+            width={101}
+            height={64}
+            className="h-14 w-auto sm:h-16"
           />
         </a>
 

@@ -1,4 +1,5 @@
 import { FaListCheck } from 'react-icons/fa6';
+import Reveal from './Reveal';
 import type { CompetenciaGrupo } from '../data/careers';
 
 interface Props {
@@ -9,13 +10,19 @@ export default function Competencias({ grupos }: Props) {
   return (
     <section className="px-6 py-16">
       <div className="mx-auto max-w-6xl">
-        <p className="mb-2 flex items-center gap-2 text-xs font-bold tracking-wide text-secondary uppercase">
-          <FaListCheck /> Perfil de egreso
-        </p>
-        <h2 className="mb-6 text-3xl text-primary-dark">Competencias</h2>
+        <Reveal>
+          <p className="mb-2 flex items-center gap-2 text-xs font-bold tracking-wide text-secondary uppercase">
+            <FaListCheck /> Perfil de egreso
+          </p>
+          <h2 className="mb-6 text-3xl text-primary-dark">Competencias</h2>
+        </Reveal>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {grupos.map((grupo) => (
-            <div key={grupo.titulo} className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+          {grupos.map((grupo, i) => (
+            <Reveal
+              key={grupo.titulo}
+              delay={i * 0.1}
+              className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
+            >
               <h3 className="mb-3 text-lg text-primary-dark">{grupo.titulo}</h3>
               <ul className="flex flex-col gap-2">
                 {grupo.items.map((item) => (
@@ -25,7 +32,7 @@ export default function Competencias({ grupos }: Props) {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

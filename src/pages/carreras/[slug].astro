@@ -23,10 +23,10 @@ const { career } = Astro.props;
 ---
 
 <Layout title={`${career.nombre} · Universidad Privada UNO`} description={career.resumen}>
-	<CareerHero nombre={career.nombre} resumen={career.resumen} />
-	<CareerMisionVision mision={career.mision} vision={career.vision} />
-	{career.competencias && <Competencias grupos={career.competencias} />}
-	<CampoLaboral titulo={career.campoLaboralTitulo} items={career.campoLaboral} />
-	<ValoresGrid valores={career.valores} />
-	<CareerCta nombre={career.nombre} />
+	<CareerHero nombre={career.nombre} resumen={career.resumen} client:visible />
+	<CareerMisionVision mision={career.mision} vision={career.vision} client:visible />
+	{career.competencias && <Competencias grupos={career.competencias} client:visible />}
+	<CampoLaboral titulo={career.campoLaboralTitulo} items={career.campoLaboral} client:visible />
+	<ValoresGrid valores={career.valores} client:visible />
+	<CareerCta nombre={career.nombre} client:visible />
 </Layout>

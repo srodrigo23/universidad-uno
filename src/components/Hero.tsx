@@ -1,9 +1,10 @@
 import { FaWhatsapp, FaChevronDown } from 'react-icons/fa6';
+import Reveal from './Reveal';
 
 export default function Hero() {
   return (
     <section className="bg-gradient-to-br from-primary to-primary-dark px-6 py-20 text-white">
-      <div className="mx-auto max-w-6xl">
+      <Reveal className="mx-auto max-w-6xl">
         <p className="mb-2 text-xs font-bold tracking-widest text-secondary-light uppercase">Subsede Cochabamba</p>
         <h1 className="max-w-3xl text-4xl font-extrabold text-white sm:text-5xl">
           Formamos profesionales que transforman Bolivia
@@ -28,7 +29,7 @@ export default function Hero() {
             Ver carreras <FaChevronDown />
           </a>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

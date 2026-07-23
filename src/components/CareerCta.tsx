@@ -1,4 +1,5 @@
 import { FaWhatsapp } from 'react-icons/fa6';
+import Reveal from './Reveal';
 
 interface Props {
   nombre: string;
@@ -7,7 +8,7 @@ interface Props {
 export default function CareerCta({ nombre }: Props) {
   return (
     <section className="bg-surface px-6 py-16 text-center">
-      <div className="mx-auto max-w-6xl">
+      <Reveal className="mx-auto max-w-6xl">
         <h2 className="mb-6 text-3xl text-primary-dark">¿Quieres estudiar {nombre}?</h2>
         <a
           href="https://wa.me/59164849322"
@@ -17,7 +18,7 @@ export default function CareerCta({ nombre }: Props) {
         >
           <FaWhatsapp /> Habla con un asesor
         </a>
-      </div>
+      </Reveal>
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FaCircleQuestion, FaChevronDown } from 'react-icons/fa6';
+import Reveal from './Reveal';
 
 const faqs = [
   {
@@ -26,15 +27,21 @@ export default function Faq() {
   return (
     <section id="faq" className="bg-surface px-6 py-16">
       <div className="mx-auto max-w-6xl">
-        <p className="mb-2 flex items-center gap-2 text-xs font-bold tracking-wide text-secondary uppercase">
-          <FaCircleQuestion /> Preguntas frecuentes
-        </p>
-        <h2 className="mb-6 text-3xl text-primary-dark">FAQ</h2>
+        <Reveal>
+          <p className="mb-2 flex items-center gap-2 text-xs font-bold tracking-wide text-secondary uppercase">
+            <FaCircleQuestion /> Preguntas frecuentes
+          </p>
+          <h2 className="mb-6 text-3xl text-primary-dark">FAQ</h2>
+        </Reveal>
         <div className="flex max-w-3xl flex-col gap-3">
           {faqs.map((item, i) => {
             const isOpen = openIndex === i;
             return (
-              <div key={item.q} className="rounded-xl border border-slate-200 bg-white px-5 py-4">
+              <Reveal
+                key={item.q}
+                delay={i * 0.08}
+                className="rounded-xl border border-slate-200 bg-white px-5 py-4"
+              >
                 <button
                   type="button"
                   className="flex w-full items-center justify-between gap-4 text-left font-semibold text-primary-dark"
@@ -45,7 +52,7 @@ export default function Faq() {
                   <FaChevronDown className={`shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {isOpen && <p className="mt-3 text-sm text-slate-600">{item.a}</p>}
-              </div>
+              </Reveal>
             );
           })}
         </div>

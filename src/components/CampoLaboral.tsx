@@ -1,4 +1,5 @@
 import { FaBriefcase, FaCircleCheck } from 'react-icons/fa6';
+import Reveal from './Reveal';
 
 interface Props {
   titulo: string;
@@ -8,7 +9,7 @@ interface Props {
 export default function CampoLaboral({ titulo, items }: Props) {
   return (
     <section className="bg-surface px-6 py-16">
-      <div className="mx-auto max-w-6xl">
+      <Reveal className="mx-auto max-w-6xl">
         <p className="mb-2 flex items-center gap-2 text-xs font-bold tracking-wide text-secondary uppercase">
           <FaBriefcase /> Oportunidades
         </p>
@@ -21,7 +22,7 @@ export default function CampoLaboral({ titulo, items }: Props) {
             </li>
           ))}
         </ul>
-      </div>
+      </Reveal>
     </section>
   );
 }

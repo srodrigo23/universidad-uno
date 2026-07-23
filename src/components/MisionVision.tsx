@@ -1,10 +1,11 @@
 import { FaBullseye, FaEye } from 'react-icons/fa6';
+import Reveal from './Reveal';
 
 export default function MisionVision() {
   return (
     <section id="mision-vision" className="px-6 py-16">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
-        <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+        <Reveal className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
           <p className="mb-2 flex items-center gap-2 text-xs font-bold tracking-wide text-secondary uppercase">
             <FaBullseye /> Misión
           </p>
@@ -12,8 +13,8 @@ export default function MisionVision() {
             Formar profesionales competentes, éticos, líderes con emprendedurismo en base a la diversidad
             cultural, la ciencia y la tecnología para contribuir al desarrollo de la sociedad.
           </p>
-        </div>
-        <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+        </Reveal>
+        <Reveal delay={0.12} className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
           <p className="mb-2 flex items-center gap-2 text-xs font-bold tracking-wide text-secondary uppercase">
             <FaEye /> Visión
           </p>
@@ -22,7 +23,7 @@ export default function MisionVision() {
             profesionales de alta calidad, con responsabilidad social y bases sólidas en la investigación e
             innovación.
           </p>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

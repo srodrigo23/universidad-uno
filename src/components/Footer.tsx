@@ -1,5 +1,6 @@
 import { FaFacebook, FaInstagram, FaTiktok, FaWhatsapp, FaLocationDot } from 'react-icons/fa6';
 import { BO, BR } from 'country-flag-icons/react/3x2';
+import Reveal from './Reveal';
 
 const socials = [
   { label: 'Facebook', href: 'https://www.facebook.com/UNOCBBA', icon: FaFacebook },
@@ -19,11 +20,13 @@ const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
 export default function Footer() {
   return (
     <footer id="contacto" className="mt-16 bg-primary-dark text-slate-300">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-14 sm:grid-cols-2 md:grid-cols-3">
+      <Reveal className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-14 sm:grid-cols-2 md:grid-cols-3">
         <div>
           <img
-            src="/logo/LogotipoOriginalVersiones/LogotipoNegativoCompleto.png"
+            src="/logo/LogotipoOriginalVersiones/recortado/LogotipoNegativoCompleto.png"
             alt="Universidad Privada UNO · Cochabamba"
+            width={127}
+            height={80}
             className="h-16 w-auto md:h-20"
           />
           <p className="mt-2 font-semibold text-white">Universidad Privada UNO · Subsede Cochabamba</p>
@@ -68,7 +71,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-      </div>
+      </Reveal>
 
       <div className="border-t border-white/10 px-6 py-5">
         <p className="mx-auto max-w-6xl text-xs text-slate-400">
