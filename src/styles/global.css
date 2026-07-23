@@ -1,10 +1,12 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary: #1e3a5f;
-  --color-primary-dark: #142943;
-  --color-secondary: #c9a24b;
-  --color-secondary-light: #e4c98a;
+  --color-primary: #21366f;
+  --color-primary-dark: #222a52;
+  --color-muted: #7a7a78;
+  --color-secondary: #029efb;
+  --color-secondary-dark: #012399;
+  --color-secondary-light: #8dd3fd; /* tint claro derivado de --color-secondary, para hover sobre fondo oscuro */
   --color-surface: #f4f6f9;
 
   --font-heading: 'Poppins', sans-serif;
