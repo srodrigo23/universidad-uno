@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CareerHero from '../../components/CareerHero';
+import CareerMisionVision from '../../components/CareerMisionVision';
+import Competencias from '../../components/Competencias';
+import CampoLaboral from '../../components/CampoLaboral';
+import ValoresGrid from '../../components/ValoresGrid';
+import CareerCta from '../../components/CareerCta';
+import { careers, type Career } from '../../data/careers';
+
+export function getStaticPaths() {
+	return careers.map((career) => ({
+		params: { slug: career.slug },
+		props: { career },
+	}));
+}
+
+interface Props {
+	career: Career;
+}
+
+const { career } = Astro.props;
+---
+
+<Layout title={`${career.nombre} · Universidad Privada UNO`} description={career.resumen}>
+	<CareerHero nombre={career.nombre} resumen={career.resumen} />
+	<CareerMisionVision mision={career.mision} vision={career.vision} />
+	{career.competencias && <Competencias grupos={career.competencias} />}
+	<CampoLaboral titulo={career.campoLaboralTitulo} items={career.campoLaboral} />
+	<ValoresGrid valores={career.valores} />
+	<CareerCta nombre={career.nombre} />
+</Layout>

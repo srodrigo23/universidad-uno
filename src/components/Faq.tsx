@@ -1,0 +1,55 @@
+import { useState } from 'react';
+import { FaCircleQuestion, FaChevronDown } from 'react-icons/fa6';
+
+const faqs = [
+  {
+    q: '¿Cuáles son los requisitos de admisión?',
+    a: 'Contáctanos por WhatsApp o visita el Edificio Central para conocer los requisitos vigentes de admisión para cada carrera.',
+  },
+  {
+    q: '¿Qué modalidad de estudio ofrecen?',
+    a: 'Ofrecemos formación presencial en la Subsede Cochabamba, con un enfoque de Educación Basada en Competencias.',
+  },
+  {
+    q: '¿Cuándo inician las clases?',
+    a: 'Las fechas de inicio de gestión se publican en nuestras redes sociales y se informan a través de nuestros asesores de admisión.',
+  },
+  {
+    q: '¿Dónde puedo ver la malla curricular de cada carrera?',
+    a: 'Puedes solicitar la malla curricular completa a través de nuestros asesores de admisión por WhatsApp.',
+  },
+];
+
+export default function Faq() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <section id="faq" className="bg-surface px-6 py-16">
+      <div className="mx-auto max-w-6xl">
+        <p className="mb-2 flex items-center gap-2 text-xs font-bold tracking-wide text-secondary uppercase">
+          <FaCircleQuestion /> Preguntas frecuentes
+        </p>
+        <h2 className="mb-6 text-3xl text-primary-dark">FAQ</h2>
+        <div className="flex max-w-3xl flex-col gap-3">
+          {faqs.map((item, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <div key={item.q} className="rounded-xl border border-slate-200 bg-white px-5 py-4">
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between gap-4 text-left font-semibold text-primary-dark"
+                  aria-expanded={isOpen}
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                >
+                  {item.q}
+                  <FaChevronDown className={`shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {isOpen && <p className="mt-3 text-sm text-slate-600">{item.a}</p>}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
