@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import WhatsAppFloatingButton from '../components/WhatsAppFloatingButton';
 import InscripcionesModal from '../components/InscripcionesModal';
+import ScrollToTopButton from '../components/ScrollToTopButton';
 import '../styles/global.css';
 
 import Analytics from '@vercel/analytics/astro';
@@ -18,6 +19,8 @@ interface Props {
 
 const { locale, dict, switchHref, title = dict.meta.title, description = dict.meta.description } = Astro.props;
 const homeHref = locale === 'es' ? '/' : '/pt/';
+const currentPath = Astro.url.pathname.replace(/\/$/, '');
+const isHome = currentPath === '' || currentPath === '/pt';
 ---
 
 <!doctype html>
@@ -44,6 +47,7 @@ const homeHref = locale === 'es' ? '/' : '/pt/';
 		<slot />
 		<Footer client:visible t={dict.footer} />
 		<WhatsAppFloatingButton client:load t={dict.whatsapp} />
-		<InscripcionesModal client:load homeHref={homeHref} t={dict.inscripcionesModal} />
+		{isHome && <InscripcionesModal client:load homeHref={homeHref} t={dict.inscripcionesModal} />}
+		<ScrollToTopButton client:load t={dict.scrollTop} />
 	</body>
 </html>

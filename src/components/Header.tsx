@@ -35,15 +35,16 @@ const itemVariants = {
 
 export default function Header({ locale, switchHref, t }: Props) {
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const homeHref = locale === 'es' ? '/' : '/pt/';
   const otherLocale: Locale = locale === 'es' ? 'pt' : 'es';
   const OtherFlag = localeFlags[otherLocale];
 
   const navItems = [
-    { href: `${homeHref}#mision-vision`, label: t.nav.misionVision },
-    { href: `${homeHref}#historia`, label: t.nav.historia },
-    { href: `${homeHref}#carreras`, label: t.nav.carreras },
-    { href: `${homeHref}#faq`, label: t.nav.faq },
+    { id: 'mision-vision', href: `${homeHref}#mision-vision`, label: t.nav.misionVision },
+    { id: 'historia', href: `${homeHref}#historia`, label: t.nav.historia },
+    { id: 'carreras', href: `${homeHref}#carreras`, label: t.nav.carreras },
+    { id: 'faq', href: `${homeHref}#faq`, label: t.nav.faq },
   ];
 
   useEffect(() => {
@@ -52,6 +53,29 @@ export default function Header({ locale, switchHref, t }: Props) {
       document.body.style.overflow = '';
     };
   }, [open]);
+
+  useEffect(() => {
+    const sections = navItems
+      .map((item) => document.getElementById(item.id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-100px 0px -70% 0px', threshold: 0 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -69,13 +93,28 @@ export default function Header({ locale, switchHref, t }: Props) {
 
           <nav className="hidden md:block">
             <ul className="flex items-center gap-6">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <a href={item.href} className="text-sm font-semibold text-slate-700 hover:text-primary">
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              {navItems.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <li key={item.href}>
+                    <a
+                      href={item.href}
+                      className={`relative pb-1 text-sm font-semibold transition-colors ${
+                        isActive ? 'text-primary' : 'text-slate-700 hover:text-primary'
+                      }`}
+                    >
+                      {item.label}
+                      {isActive && (
+                        <motion.span
+                          layoutId="nav-active-underline"
+                          className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-secondary"
+                          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                        />
+                      )}
+                    </a>
+                  </li>
+                );
+              })}
               <li>
                 <a
                   href={switchHref}
@@ -140,17 +179,27 @@ export default function Header({ locale, switchHref, t }: Props) {
                 initial="hidden"
                 animate="visible"
               >
-                {navItems.map((item) => (
-                  <motion.li key={item.href} variants={itemVariants}>
-                    <a
-                      href={item.href}
-                      className="block py-3 text-sm font-semibold text-white hover:text-secondary-light"
-                      onClick={() => setOpen(false)}
-                    >
-                      {item.label}
-                    </a>
-                  </motion.li>
-                ))}
+                {navItems.map((item) => {
+                  const isActive = activeSection === item.id;
+                  return (
+                    <motion.li key={item.href} variants={itemVariants}>
+                      <a
+                        href={item.href}
+                        className={`flex items-center gap-2 py-3 text-sm font-semibold transition-colors ${
+                          isActive ? 'text-secondary-light' : 'text-white hover:text-secondary-light'
+                        }`}
+                        onClick={() => setOpen(false)}
+                      >
+                        <span
+                          className={`h-1.5 w-1.5 shrink-0 rounded-full bg-secondary-light transition-opacity ${
+                            isActive ? 'opacity-100' : 'opacity-0'
+                          }`}
+                        />
+                        {item.label}
+                      </a>
+                    </motion.li>
+                  );
+                })}
               </motion.ul>
             </motion.nav>
           </>

@@ -112,5 +112,8 @@
   "careerCta": {
     "question": "Quer estudar {{nombre}}?",
     "cta": "Fale com um consultor"
+  },
+  "scrollTop": {
+    "label": "Voltar ao topo"
   }
 }
