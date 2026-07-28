@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { FaCircleQuestion, FaChevronDown } from 'react-icons/fa6';
 import { AnimatePresence, motion } from 'motion/react';
 import Reveal from './Reveal';
+import Eyebrow from './Eyebrow';
+import SectionGlow from './SectionGlow';
 
 const faqs = [
   {
@@ -27,11 +29,10 @@ export default function Faq() {
 
   return (
     <section id="faq" className="bg-surface px-6 py-16">
-      <div className="mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-6xl">
+        <SectionGlow />
         <Reveal>
-          <p className="mb-2 flex items-center gap-2 text-xs font-bold tracking-wide text-secondary uppercase">
-            <FaCircleQuestion /> Preguntas frecuentes
-          </p>
+          <Eyebrow icon={FaCircleQuestion} label="Preguntas frecuentes" />
           <h2 className="mb-6 text-3xl text-primary-dark">FAQ</h2>
         </Reveal>
         <div className="flex max-w-3xl flex-col gap-3">

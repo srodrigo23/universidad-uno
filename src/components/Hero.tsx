@@ -29,7 +29,7 @@ export default function Hero() {
         <div className="mt-8 flex flex-wrap gap-4">
           <a
             href="#carreras"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-secondary-light px-6 py-3 text-sm font-semibold text-white transition hover:bg-secondary-light hover:text-primary-dark"
+            className="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition hover:-translate-y-px hover:bg-secondary-dark"
           >
             Ver carreras <FaChevronDown />
           </a>

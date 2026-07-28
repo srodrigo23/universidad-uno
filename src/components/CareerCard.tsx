@@ -14,7 +14,7 @@ export default function CareerCard({ slug, nombre, resumen, index = 0 }: Props) 
   return (
     <motion.a
       href={`/carreras/${slug}`}
-      className="flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+      className="flex flex-col gap-2 rounded-2xl border border-t-4 border-slate-200 border-t-secondary bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}

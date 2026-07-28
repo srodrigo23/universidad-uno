@@ -1,5 +1,7 @@
 import { FaHeart } from 'react-icons/fa6';
 import Reveal from './Reveal';
+import Eyebrow from './Eyebrow';
+import SectionGlow from './SectionGlow';
 import type { Valor } from '../data/careers';
 
 interface Props {
@@ -9,11 +11,10 @@ interface Props {
 export default function ValoresGrid({ valores }: Props) {
   return (
     <section className="px-6 py-16">
-      <div className="mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-6xl">
+        <SectionGlow />
         <Reveal>
-          <p className="mb-2 flex items-center gap-2 text-xs font-bold tracking-wide text-secondary uppercase">
-            <FaHeart /> Nuestros principios
-          </p>
+          <Eyebrow icon={FaHeart} label="Nuestros principios" />
           <h2 className="mb-6 text-3xl text-primary-dark">Valores de la carrera</h2>
         </Reveal>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

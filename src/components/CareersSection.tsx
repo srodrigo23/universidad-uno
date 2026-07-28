@@ -1,6 +1,8 @@
 import { FaGraduationCap } from 'react-icons/fa6';
 import CareerCard from './CareerCard';
 import Reveal from './Reveal';
+import Eyebrow from './Eyebrow';
+import SectionGlow from './SectionGlow';
 import type { Career } from '../data/careers';
 
 interface Props {
@@ -10,11 +12,10 @@ interface Props {
 export default function CareersSection({ careers }: Props) {
   return (
     <section id="carreras" className="px-6 py-16">
-      <div className="mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-6xl">
+        <SectionGlow />
         <Reveal>
-          <p className="mb-2 flex items-center gap-2 text-xs font-bold tracking-wide text-secondary uppercase">
-            <FaGraduationCap /> Oferta académica
-          </p>
+          <Eyebrow icon={FaGraduationCap} label="Oferta académica" />
           <h2 className="mb-3 text-3xl text-primary-dark">Nuestras carreras</h2>
           <p className="max-w-xl text-slate-600">
             Cinco licenciaturas orientadas a la ciencia, la salud, la justicia y el desarrollo empresarial de

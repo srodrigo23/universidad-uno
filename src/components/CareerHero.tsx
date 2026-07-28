@@ -1,5 +1,6 @@
 import { FaArrowLeft } from 'react-icons/fa6';
 import Reveal from './Reveal';
+import SectionGlow from './SectionGlow';
 
 interface Props {
   nombre: string;
@@ -9,7 +10,8 @@ interface Props {
 export default function CareerHero({ nombre, resumen }: Props) {
   return (
     <section className="px-6 py-16">
-      <Reveal className="mx-auto max-w-6xl">
+      <Reveal className="relative mx-auto max-w-6xl">
+        <SectionGlow />
         <a href="/#carreras" className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-primary">
           <FaArrowLeft size={12} /> Volver a carreras
         </a>

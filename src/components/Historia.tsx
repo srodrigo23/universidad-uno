@@ -1,5 +1,7 @@
 import { FaLandmark } from 'react-icons/fa6';
 import Reveal from './Reveal';
+import Eyebrow from './Eyebrow';
+import SectionGlow from './SectionGlow';
 
 const parrafos = [
   'La Universidad Nacional del Oriente, fundada en el año 1999 e iniciando actividades académicas en la gestión 2000 en la ciudad de Santa Cruz de la Sierra, nace con el firme propósito de contribuir a la formación de profesionales íntegros y comprometidos con el desarrollo del país. Desde sus inicios, respaldada por la Resolución Ministerial Nº 203/99 emitida el 22 de junio de 1999 por el Ministerio de Educación, la institución fue ampliando progresivamente su cobertura académica y territorial, consolidando su presencia en diferentes regiones de Bolivia.',
@@ -12,10 +14,9 @@ const parrafos = [
 export default function Historia() {
   return (
     <section id="historia" className="bg-surface px-6 py-16">
-      <Reveal className="mx-auto max-w-6xl">
-        <p className="mb-2 flex items-center gap-2 text-xs font-bold tracking-wide text-secondary uppercase">
-          <FaLandmark /> Nuestra historia
-        </p>
+      <Reveal className="relative mx-auto max-w-6xl">
+        <SectionGlow />
+        <Eyebrow icon={FaLandmark} label="Nuestra historia" />
         <h2 className="mb-6 text-3xl text-primary-dark">Reseña histórica</h2>
         <div className="max-w-3xl space-y-4">
           {parrafos.map((p) => (
