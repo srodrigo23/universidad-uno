@@ -1,7 +1,8 @@
 ---
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import WhatsAppFloatingButton from '../components/WhatsAppFloatingButton.astro';
+import WhatsAppFloatingButton from '../components/WhatsAppFloatingButton';
+import InscripcionesModal from '../components/InscripcionesModal';
 import '../styles/global.css';
 
 import Analytics from '@vercel/analytics/astro';
@@ -40,6 +41,7 @@ const {
 		<Header client:load />
 		<slot />
 		<Footer client:visible />
-		<WhatsAppFloatingButton />
+		<WhatsAppFloatingButton client:load />
+		<InscripcionesModal client:load />
 	</body>
 </html>

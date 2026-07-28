@@ -1,10 +1,23 @@
 import { FaChevronDown } from 'react-icons/fa6';
 import Reveal from './Reveal';
+import heroBg from '../assets/images/hero_section.webp';
 
 export default function Hero() {
   return (
-    <section className="bg-gradient-to-br from-primary to-primary-dark px-6 py-20 text-white">
-      <Reveal className="mx-auto max-w-6xl">
+    <section className="relative overflow-hidden bg-primary-dark px-6 py-20 text-white sm:py-28">
+      <div
+        className="absolute inset-0 bg-cover bg-right bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBg.src})` }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, var(--color-primary-dark) 0%, color-mix(in srgb, var(--color-primary-dark) 96%, transparent) 55%, color-mix(in srgb, var(--color-primary-dark) 40%, transparent) 72%, color-mix(in srgb, var(--color-primary-dark) 5%, transparent) 88%)',
+        }}
+      />
+
+      <Reveal className="relative mx-auto max-w-6xl">
         <p className="mb-2 text-xs font-bold tracking-widest text-secondary-light uppercase">Subsede Cochabamba</p>
         <h1 className="max-w-3xl text-4xl font-extrabold text-white sm:text-5xl">
           Formamos profesionales que transforman Bolivia
