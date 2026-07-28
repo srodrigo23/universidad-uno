@@ -6,16 +6,20 @@ import type { Valor } from '../data/careers';
 
 interface Props {
   valores: Valor[];
+  t: {
+    eyebrow: string;
+    title: string;
+  };
 }
 
-export default function ValoresGrid({ valores }: Props) {
+export default function ValoresGrid({ valores, t }: Props) {
   return (
     <section className="px-6 py-16">
       <div className="relative mx-auto max-w-6xl">
         <SectionGlow />
         <Reveal>
-          <Eyebrow icon={FaHeart} label="Nuestros principios" />
-          <h2 className="mb-6 text-3xl text-primary-dark">Valores de la carrera</h2>
+          <Eyebrow icon={FaHeart} label={t.eyebrow} />
+          <h2 className="mb-6 text-3xl text-primary-dark">{t.title}</h2>
         </Reveal>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {valores.map((valor, i) => {

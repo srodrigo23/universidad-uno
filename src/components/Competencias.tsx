@@ -6,16 +6,20 @@ import type { CompetenciaGrupo } from '../data/careers';
 
 interface Props {
   grupos: CompetenciaGrupo[];
+  t: {
+    eyebrow: string;
+    title: string;
+  };
 }
 
-export default function Competencias({ grupos }: Props) {
+export default function Competencias({ grupos, t }: Props) {
   return (
     <section className="px-6 py-16">
       <div className="relative mx-auto max-w-6xl">
         <SectionGlow />
         <Reveal>
-          <Eyebrow icon={FaListCheck} label="Perfil de egreso" />
-          <h2 className="mb-6 text-3xl text-primary-dark">Competencias</h2>
+          <Eyebrow icon={FaListCheck} label={t.eyebrow} />
+          <h2 className="mb-6 text-3xl text-primary-dark">{t.title}</h2>
         </Reveal>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {grupos.map((grupo, i) => (

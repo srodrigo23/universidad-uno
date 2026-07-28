@@ -6,15 +6,33 @@ import Historia from '../components/Historia';
 import CareersSection from '../components/CareersSection';
 import Faq from '../components/Faq';
 import { careers } from '../data/careers';
+import { dictionaries, localizedPath } from '../i18n/config';
+
+const locale = 'es';
+const dict = dictionaries[locale];
+const careerSummaries = careers.map((career) => ({
+	slug: career.slug,
+	nombre: career[locale].nombre,
+	resumen: career[locale].resumen,
+}));
 ---
 
 <Layout
+	locale={locale}
+	dict={dict}
+	switchHref={localizedPath('pt', '/')}
 	title="Universidad Privada UNO · Subsede Cochabamba"
 	description="Universidad Privada UNO, Subsede Cochabamba: formación en Enfermería, Medicina, Fisioterapia y Kinesiología, Derecho y Administración de Empresas."
 >
-	<Hero client:visible />
-	<MisionVision client:visible />
-	<Historia client:visible />
-	<CareersSection careers={careers} client:visible />
-	<Faq client:visible />
+	<Hero t={dict.hero} client:visible />
+	<MisionVision t={dict.misionVision} client:visible />
+	<Historia t={dict.historia} client:visible />
+	<CareersSection
+		careers={careerSummaries}
+		basePath="/carreras"
+		t={dict.careersSection}
+		cardT={dict.careerCard}
+		client:visible
+	/>
+	<Faq t={dict.faq} client:visible />
 </Layout>

@@ -2,7 +2,18 @@ import { useEffect, useState } from 'react';
 import { HiX } from 'react-icons/hi';
 import { AnimatePresence, motion } from 'motion/react';
 
-export default function InscripcionesModal() {
+interface Props {
+  homeHref: string;
+  t: {
+    eyebrow: string;
+    title: string;
+    text: string;
+    cta: string;
+    close: string;
+  };
+}
+
+export default function InscripcionesModal({ homeHref, t }: Props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -51,30 +62,27 @@ export default function InscripcionesModal() {
             <button
               type="button"
               className="absolute top-4 right-4 rounded-md p-1 text-slate-400 hover:text-primary"
-              aria-label="Cerrar"
+              aria-label={t.close}
               onClick={() => setOpen(false)}
             >
               <HiX size={22} />
             </button>
 
-            <p className="text-sm font-semibold tracking-wide text-secondary uppercase">Admisión 2026</p>
+            <p className="text-sm font-semibold tracking-wide text-secondary uppercase">{t.eyebrow}</p>
             <h2
               id="inscripciones-modal-title"
               className="mt-2 text-3xl font-black text-primary sm:text-4xl"
             >
-              Inscripciones abiertas
+              {t.title}
             </h2>
-            <p className="mt-4 text-sm font-normal text-slate-600">
-              Asegura tu cupo en Enfermería, Medicina, Fisioterapia y Kinesiología, Derecho o Administración de
-              Empresas.
-            </p>
+            <p className="mt-4 text-sm font-normal text-slate-600">{t.text}</p>
 
             <a
-              href="/#carreras"
+              href={`${homeHref}#carreras`}
               className="mt-6 inline-block rounded-md bg-secondary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-secondary-dark"
               onClick={() => setOpen(false)}
             >
-              Ver carreras
+              {t.cta}
             </a>
           </motion.div>
         </motion.div>

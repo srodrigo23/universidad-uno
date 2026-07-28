@@ -6,20 +6,22 @@ import InscripcionesModal from '../components/InscripcionesModal';
 import '../styles/global.css';
 
 import Analytics from '@vercel/analytics/astro';
+import type { Locale, Dictionary } from '../i18n/config';
 
 interface Props {
+	locale: Locale;
+	dict: Dictionary;
+	switchHref: string;
 	title?: string;
 	description?: string;
 }
 
-const {
-	title = 'Universidad Privada UNO · Subsede Cochabamba',
-	description = 'Formación universitaria en Enfermería, Medicina, Fisioterapia y Kinesiología, Derecho y Administración de Empresas en Cochabamba, Bolivia.',
-} = Astro.props;
+const { locale, dict, switchHref, title = dict.meta.title, description = dict.meta.description } = Astro.props;
+const homeHref = locale === 'es' ? '/' : '/pt/';
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={locale}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -38,10 +40,10 @@ const {
 		<Analytics />
 	</head>
 	<body>
-		<Header client:load />
+		<Header client:load locale={locale} switchHref={switchHref} t={dict.header} />
 		<slot />
-		<Footer client:visible />
-		<WhatsAppFloatingButton client:load />
-		<InscripcionesModal client:load />
+		<Footer client:visible t={dict.footer} />
+		<WhatsAppFloatingButton client:load t={dict.whatsapp} />
+		<InscripcionesModal client:load homeHref={homeHref} t={dict.inscripcionesModal} />
 	</body>
 </html>

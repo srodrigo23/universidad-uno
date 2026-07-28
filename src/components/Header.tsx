@@ -1,13 +1,27 @@
 import { useEffect, useState } from 'react';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { AnimatePresence, motion } from 'motion/react';
+import { BO, BR } from 'country-flag-icons/react/3x2';
 
-const navItems = [
-  { href: '/#mision-vision', label: 'Misión y Visión' },
-  { href: '/#historia', label: 'Historia' },
-  { href: '/#carreras', label: 'Carreras' },
-  { href: '/#faq', label: 'Preguntas frecuentes' },
-];
+type Locale = 'es' | 'pt';
+
+interface Props {
+  locale: Locale;
+  switchHref: string;
+  t: {
+    nav: {
+      misionVision: string;
+      historia: string;
+      carreras: string;
+      faq: string;
+    };
+    openMenu: string;
+    closeMenu: string;
+  };
+}
+
+const localeLabels: Record<Locale, string> = { es: 'ES', pt: 'PT' };
+const localeFlags: Record<Locale, typeof BO> = { es: BO, pt: BR };
 
 const listVariants = {
   hidden: {},
@@ -19,8 +33,18 @@ const itemVariants = {
   visible: { opacity: 1, x: 0 },
 };
 
-export default function Header() {
+export default function Header({ locale, switchHref, t }: Props) {
   const [open, setOpen] = useState(false);
+  const homeHref = locale === 'es' ? '/' : '/pt/';
+  const otherLocale: Locale = locale === 'es' ? 'pt' : 'es';
+  const OtherFlag = localeFlags[otherLocale];
+
+  const navItems = [
+    { href: `${homeHref}#mision-vision`, label: t.nav.misionVision },
+    { href: `${homeHref}#historia`, label: t.nav.historia },
+    { href: `${homeHref}#carreras`, label: t.nav.carreras },
+    { href: `${homeHref}#faq`, label: t.nav.faq },
+  ];
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -33,7 +57,7 @@ export default function Header() {
     <>
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-2">
-          <a href="/" className="flex items-center">
+          <a href={homeHref} className="flex items-center">
             <img
               src="/logo/LogotipoOriginalVersiones/recortado/LogotipoOriginalCompleto.png"
               alt="Universidad Privada UNO · Cochabamba"
@@ -44,7 +68,7 @@ export default function Header() {
           </a>
 
           <nav className="hidden md:block">
-            <ul className="flex gap-6">
+            <ul className="flex items-center gap-6">
               {navItems.map((item) => (
                 <li key={item.href}>
                   <a href={item.href} className="text-sm font-semibold text-slate-700 hover:text-primary">
@@ -52,18 +76,36 @@ export default function Header() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href={switchHref}
+                  className="flex items-center gap-1.5 rounded-full border border-slate-300 px-2.5 py-1 text-xs font-bold tracking-wide text-slate-500 hover:border-primary hover:text-primary"
+                >
+                  <OtherFlag aria-hidden="true" className="h-3 w-4 shrink-0 rounded-[1px] object-cover" />
+                  {localeLabels[otherLocale]}
+                </a>
+              </li>
             </ul>
           </nav>
 
-          <button
-            type="button"
-            className="relative z-50 inline-flex items-center justify-center rounded-md p-2 text-primary md:hidden"
-            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <HiX size={26} /> : <HiMenu size={26} />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <a
+              href={switchHref}
+              className="flex items-center gap-1.5 rounded-full border border-slate-300 px-2.5 py-1 text-xs font-bold tracking-wide text-slate-500 hover:border-primary hover:text-primary"
+            >
+              <OtherFlag aria-hidden="true" className="h-3 w-4 shrink-0 rounded-[1px] object-cover" />
+              {localeLabels[otherLocale]}
+            </a>
+            <button
+              type="button"
+              className="relative z-50 inline-flex items-center justify-center rounded-md p-2 text-primary"
+              aria-label={open ? t.closeMenu : t.openMenu}
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? <HiX size={26} /> : <HiMenu size={26} />}
+            </button>
+          </div>
         </div>
       </header>
 

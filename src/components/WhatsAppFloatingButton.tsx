@@ -3,12 +3,15 @@ import { FaWhatsapp } from 'react-icons/fa6';
 import { BO, BR } from 'country-flag-icons/react/3x2';
 import { AnimatePresence, motion } from 'motion/react';
 
-const message = encodeURIComponent('Hola, quiero más información sobre las carreras de la Universidad Privada UNO.');
-
-const advisors = [
-  { country: 'Bolivia', Flag: BO, label: 'Asesor(a) Bolivia', href: `https://wa.me/59164849322?text=${message}` },
-  { country: 'Brasil', Flag: BR, label: 'Assessor(a) Brasil', href: `https://wa.me/59164847741?text=${message}` },
-];
+interface Props {
+  t: {
+    message: string;
+    advisorBolivia: string;
+    advisorBrasil: string;
+    openLabel: string;
+    closeLabel: string;
+  };
+}
 
 const listVariants = {
   hidden: {},
@@ -20,9 +23,15 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, scale: 1 },
 };
 
-export default function WhatsAppFloatingButton() {
+export default function WhatsAppFloatingButton({ t }: Props) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const message = encodeURIComponent(t.message);
+  const advisors = [
+    { country: 'Bolivia', Flag: BO, label: t.advisorBolivia, href: `https://wa.me/59164849322?text=${message}` },
+    { country: 'Brasil', Flag: BR, label: t.advisorBrasil, href: `https://wa.me/59164847741?text=${message}` },
+  ];
 
   useEffect(() => {
     if (!open) return;
@@ -78,7 +87,7 @@ export default function WhatsAppFloatingButton() {
 
       <button
         type="button"
-        aria-label={open ? 'Cerrar opciones de WhatsApp' : 'Chatea con nosotros por WhatsApp'}
+        aria-label={open ? t.closeLabel : t.openLabel}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-110"

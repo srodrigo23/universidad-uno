@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "title": "Universidad Privada UNO · Subsede Cochabamba",
+    "description": "Formação universitária em Enfermagem, Medicina, Fisioterapia e Cinesiologia, Direito e Administração de Empresas em Cochabamba, Bolívia."
+  },
+  "header": {
+    "nav": {
+      "misionVision": "Missão e Visão",
+      "historia": "História",
+      "carreras": "Cursos",
+      "faq": "Perguntas frequentes"
+    },
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu"
+  },
+  "hero": {
+    "eyebrow": "Subsede Cochabamba",
+    "title": "Formamos profissionais que transformam a Bolívia",
+    "subtitle": "Ciência, ética e liderança com espírito empreendedor, com base na diversidade cultural, para contribuir com o desenvolvimento da sociedade.",
+    "cta": "Ver cursos"
+  },
+  "misionVision": {
+    "misionLabel": "Missão",
+    "misionText": "Formar profissionais competentes, éticos e líderes com espírito empreendedor, com base na diversidade cultural, na ciência e na tecnologia, para contribuir com o desenvolvimento da sociedade.",
+    "visionLabel": "Visão",
+    "visionText": "Ser líderes em educação superior, credenciados e reconhecidos internacionalmente pela formação de profissionais de alta qualidade, com responsabilidade social e bases sólidas em pesquisa e inovação."
+  },
+  "historia": {
+    "eyebrow": "Nossa história",
+    "title": "Resenha histórica",
+    "paragraphs": [
+      "A Universidade Nacional do Oriente, fundada no ano de 1999 e iniciando suas atividades acadêmicas na gestão 2000 na cidade de Santa Cruz de la Sierra, nasce com o firme propósito de contribuir para a formação de profissionais íntegros e comprometidos com o desenvolvimento do país. Desde seus primórdios, respaldada pela Resolução Ministerial Nº 203/99 emitida em 22 de junho de 1999 pelo Ministério da Educação, a instituição foi ampliando progressivamente sua cobertura acadêmica e territorial, consolidando sua presença em diferentes regiões da Bolívia.",
+      "No âmbito desse crescimento sustentado e em resposta às demandas educacionais do eixo central do país, cria-se a Subsede Cochabamba como a sede mais recente da Universidade Nacional do Oriente, autorizada legalmente por meio da Resolução Ministerial Nº 0164/2023. Essa resolução respalda seu funcionamento e consolida seu compromisso com a excelência acadêmica e a expansão institucional.",
+      "A Subsede Cochabamba inicia suas atividades com uma proposta acadêmica orientada às necessidades do contexto regional, oferecendo programas em nível de Licenciatura em áreas estratégicas como Ciências da Saúde, Ciências Empresariais e outras disciplinas que respondem à realidade profissional atual. Entre seus principais cursos estão Enfermagem, Fisioterapia e Cinesiologia, Medicina, Direito e Administração e Direção de Empresas, que fortalecem o perfil profissional dos estudantes.",
+      "A partir de Cochabamba, a Universidade Nacional do Oriente reafirma seu compromisso com a formação científica, ética e humanista, promovendo uma educação de qualidade, o uso de ferramentas tecnológicas atualizadas e a vinculação com a sociedade. Autoridades, docentes e equipe administrativa trabalham de forma articulada para consolidar uma comunidade acadêmica dinâmica, inclusiva e comprometida com o desenvolvimento regional e nacional.",
+      "A criação da Subsede Cochabamba representa não apenas a expansão territorial da Universidade, mas também a consolidação de uma visão institucional voltada ao crescimento sustentável, à inovação acadêmica e à contribuição ativa para o progresso de nossa querida Bolívia."
+    ]
+  },
+  "careersSection": {
+    "eyebrow": "Oferta acadêmica",
+    "title": "Nossos cursos",
+    "subtitle": "Cinco cursos de graduação voltados à ciência, à saúde, à justiça e ao desenvolvimento empresarial da Bolívia."
+  },
+  "careerCard": {
+    "badge": "Graduação",
+    "cta": "Ver curso"
+  },
+  "faq": {
+    "eyebrow": "Perguntas frequentes",
+    "title": "FAQ",
+    "items": [
+      {
+        "q": "Quais são os requisitos de admissão?",
+        "a": "Entre em contato conosco pelo WhatsApp ou visite o Edifício Central para conhecer os requisitos vigentes de admissão para cada curso."
+      },
+      {
+        "q": "Qual modalidade de estudo vocês oferecem?",
+        "a": "Oferecemos formação presencial na Subsede Cochabamba, com um enfoque de Educação Baseada em Competências."
+      },
+      {
+        "q": "Quando começam as aulas?",
+        "a": "As datas de início da gestão são publicadas em nossas redes sociais e informadas por meio de nossos consultores de admissão."
+      },
+      {
+        "q": "Onde posso ver a grade curricular de cada curso?",
+        "a": "Você pode solicitar a grade curricular completa por meio de nossos consultores de admissão pelo WhatsApp."
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Formando profissionais competentes, éticos e líderes para o desenvolvimento da Bolívia.",
+    "contactTitle": "Contato",
+    "advisorBolivia": "Consultor(a) Bolívia",
+    "advisorBrasil": "Consultor Brasil",
+    "addressLabel": "Edifício Central",
+    "followTitle": "Siga-nos",
+    "rights": "Todos os direitos reservados."
+  },
+  "inscripcionesModal": {
+    "eyebrow": "Admissão 2026",
+    "title": "Inscrições abertas",
+    "text": "Garanta sua vaga em Enfermagem, Medicina, Fisioterapia e Cinesiologia, Direito ou Administração de Empresas.",
+    "cta": "Ver cursos",
+    "close": "Fechar"
+  },
+  "whatsapp": {
+    "message": "Olá, gostaria de mais informações sobre os cursos da Universidad Privada UNO.",
+    "advisorBolivia": "Consultor(a) Bolívia",
+    "advisorBrasil": "Consultor Brasil",
+    "openLabel": "Converse conosco pelo WhatsApp",
+    "closeLabel": "Fechar opções de WhatsApp"
+  },
+  "careerHero": {
+    "back": "Voltar para os cursos",
+    "badge": "Graduação"
+  },
+  "careerMisionVision": {
+    "misionLabel": "Missão",
+    "visionLabel": "Visão"
+  },
+  "campoLaboral": {
+    "eyebrow": "Oportunidades"
+  },
+  "competencias": {
+    "eyebrow": "Perfil do egresso",
+    "title": "Competências"
+  },
+  "valoresGrid": {
+    "eyebrow": "Nossos princípios",
+    "title": "Valores do curso"
+  },
+  "careerCta": {
+    "question": "Quer estudar {{nombre}}?",
+    "cta": "Fale com um consultor"
+  }
+}

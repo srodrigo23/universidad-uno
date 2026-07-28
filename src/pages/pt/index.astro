@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero';
+import MisionVision from '../../components/MisionVision';
+import Historia from '../../components/Historia';
+import CareersSection from '../../components/CareersSection';
+import Faq from '../../components/Faq';
+import { careers } from '../../data/careers';
+import { dictionaries, localizedPath } from '../../i18n/config';
+
+const locale = 'pt';
+const dict = dictionaries[locale];
+const careerSummaries = careers.map((career) => ({
+	slug: career.slug,
+	nombre: career[locale].nombre,
+	resumen: career[locale].resumen,
+}));
+---
+
+<Layout locale={locale} dict={dict} switchHref={localizedPath('es', '/')}>
+	<Hero t={dict.hero} client:visible />
+	<MisionVision t={dict.misionVision} client:visible />
+	<Historia t={dict.historia} client:visible />
+	<CareersSection
+		careers={careerSummaries}
+		basePath="/pt/carreras"
+		t={dict.careersSection}
+		cardT={dict.careerCard}
+		client:visible
+	/>
+	<Faq t={dict.faq} client:visible />
+</Layout>

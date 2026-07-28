@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "title": "Universidad Privada UNO · Subsede Cochabamba",
+    "description": "Formación universitaria en Enfermería, Medicina, Fisioterapia y Kinesiología, Derecho y Administración de Empresas en Cochabamba, Bolivia."
+  },
+  "header": {
+    "nav": {
+      "misionVision": "Misión y Visión",
+      "historia": "Historia",
+      "carreras": "Carreras",
+      "faq": "Preguntas frecuentes"
+    },
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "hero": {
+    "eyebrow": "Subsede Cochabamba",
+    "title": "Formamos profesionales que transforman Bolivia",
+    "subtitle": "Ciencia, ética y liderazgo con emprendedurismo, en base a la diversidad cultural, para contribuir al desarrollo de la sociedad.",
+    "cta": "Ver carreras"
+  },
+  "misionVision": {
+    "misionLabel": "Misión",
+    "misionText": "Formar profesionales competentes, éticos, líderes con emprendedurismo en base a la diversidad cultural, la ciencia y la tecnología para contribuir al desarrollo de la sociedad.",
+    "visionLabel": "Visión",
+    "visionText": "Ser líderes en educación superior, acreditados y reconocidos internacionalmente con la formación de profesionales de alta calidad, con responsabilidad social y bases sólidas en la investigación e innovación."
+  },
+  "historia": {
+    "eyebrow": "Nuestra historia",
+    "title": "Reseña histórica",
+    "paragraphs": [
+      "La Universidad Nacional del Oriente, fundada en el año 1999 e iniciando actividades académicas en la gestión 2000 en la ciudad de Santa Cruz de la Sierra, nace con el firme propósito de contribuir a la formación de profesionales íntegros y comprometidos con el desarrollo del país. Desde sus inicios, respaldada por la Resolución Ministerial Nº 203/99 emitida el 22 de junio de 1999 por el Ministerio de Educación, la institución fue ampliando progresivamente su cobertura académica y territorial, consolidando su presencia en diferentes regiones de Bolivia.",
+      "En el marco de este crecimiento sostenido y respondiendo a las demandas educativas del eje central del país, se crea la Sub sede Cochabamba como la sede más reciente de la Universidad Nacional del Oriente, autorizada legalmente mediante la Resolución Ministerial Nº 0164/2023. Esta resolución respalda su funcionamiento y consolida su compromiso con la excelencia académica y la expansión institucional.",
+      "La Sub sede Cochabamba inicia sus actividades con una propuesta académica orientada a las necesidades del contexto regional, ofreciendo programas a nivel Licenciatura en áreas estratégicas como Ciencias de la Salud, Ciencias Empresariales y otras disciplinas que responden a la realidad profesional actual. Entre sus principales carreras se encuentran Enfermería, Fisioterapia y Kinesiología, Medicina, Derecho y Administración y Dirección de Empresas que fortalecen el perfil profesional de los estudiantes.",
+      "Desde Cochabamba, la Universidad Nacional del Oriente reafirma su compromiso con la formación científica, ética y humanista, promoviendo una educación de calidad, el uso de herramientas tecnológicas actualizadas y la vinculación con la sociedad. Autoridades, docentes y personal administrativo trabajan de manera articulada para consolidar una comunidad académica dinámica, inclusiva y comprometida con el desarrollo regional y nacional.",
+      "La creación de la Sub sede Cochabamba representa no solo la expansión territorial de la Universidad, sino también la consolidación de una visión institucional orientada al crecimiento sostenible, la innovación académica y la contribución activa al progreso de nuestra querida Bolivia."
+    ]
+  },
+  "careersSection": {
+    "eyebrow": "Oferta académica",
+    "title": "Nuestras carreras",
+    "subtitle": "Cinco licenciaturas orientadas a la ciencia, la salud, la justicia y el desarrollo empresarial de Bolivia."
+  },
+  "careerCard": {
+    "badge": "Licenciatura",
+    "cta": "Ver carrera"
+  },
+  "faq": {
+    "eyebrow": "Preguntas frecuentes",
+    "title": "FAQ",
+    "items": [
+      {
+        "q": "¿Cuáles son los requisitos de admisión?",
+        "a": "Contáctanos por WhatsApp o visita el Edificio Central para conocer los requisitos vigentes de admisión para cada carrera."
+      },
+      {
+        "q": "¿Qué modalidad de estudio ofrecen?",
+        "a": "Ofrecemos formación presencial en la Subsede Cochabamba, con un enfoque de Educación Basada en Competencias."
+      },
+      {
+        "q": "¿Cuándo inician las clases?",
+        "a": "Las fechas de inicio de gestión se publican en nuestras redes sociales y se informan a través de nuestros asesores de admisión."
+      },
+      {
+        "q": "¿Dónde puedo ver la malla curricular de cada carrera?",
+        "a": "Puedes solicitar la malla curricular completa a través de nuestros asesores de admisión por WhatsApp."
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Formando profesionales competentes, éticos y líderes para el desarrollo de Bolivia.",
+    "contactTitle": "Contacto",
+    "advisorBolivia": "Asesor(a) Bolivia",
+    "advisorBrasil": "Asesor Brasil",
+    "addressLabel": "Edificio Central",
+    "followTitle": "Síguenos",
+    "rights": "Todos los derechos reservados."
+  },
+  "inscripcionesModal": {
+    "eyebrow": "Admisión 2026",
+    "title": "Inscripciones abiertas",
+    "text": "Asegura tu cupo en Enfermería, Medicina, Fisioterapia y Kinesiología, Derecho o Administración de Empresas.",
+    "cta": "Ver carreras",
+    "close": "Cerrar"
+  },
+  "whatsapp": {
+    "message": "Hola, quiero más información sobre las carreras de la Universidad Privada UNO.",
+    "advisorBolivia": "Asesor(a) Bolivia",
+    "advisorBrasil": "Assessor(a) Brasil",
+    "openLabel": "Chatea con nosotros por WhatsApp",
+    "closeLabel": "Cerrar opciones de WhatsApp"
+  },
+  "careerHero": {
+    "back": "Volver a carreras",
+    "badge": "Licenciatura"
+  },
+  "careerMisionVision": {
+    "misionLabel": "Misión",
+    "visionLabel": "Visión"
+  },
+  "campoLaboral": {
+    "eyebrow": "Oportunidades"
+  },
+  "competencias": {
+    "eyebrow": "Perfil de egreso",
+    "title": "Competencias"
+  },
+  "valoresGrid": {
+    "eyebrow": "Nuestros principios",
+    "title": "Valores de la carrera"
+  },
+  "careerCta": {
+    "question": "¿Quieres estudiar {{nombre}}?",
+    "cta": "Habla con un asesor"
+  }
+}

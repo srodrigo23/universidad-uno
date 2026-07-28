@@ -5,26 +5,15 @@ import Reveal from './Reveal';
 import Eyebrow from './Eyebrow';
 import SectionGlow from './SectionGlow';
 
-const faqs = [
-  {
-    q: '¿Cuáles son los requisitos de admisión?',
-    a: 'Contáctanos por WhatsApp o visita el Edificio Central para conocer los requisitos vigentes de admisión para cada carrera.',
-  },
-  {
-    q: '¿Qué modalidad de estudio ofrecen?',
-    a: 'Ofrecemos formación presencial en la Subsede Cochabamba, con un enfoque de Educación Basada en Competencias.',
-  },
-  {
-    q: '¿Cuándo inician las clases?',
-    a: 'Las fechas de inicio de gestión se publican en nuestras redes sociales y se informan a través de nuestros asesores de admisión.',
-  },
-  {
-    q: '¿Dónde puedo ver la malla curricular de cada carrera?',
-    a: 'Puedes solicitar la malla curricular completa a través de nuestros asesores de admisión por WhatsApp.',
-  },
-];
+interface Props {
+  t: {
+    eyebrow: string;
+    title: string;
+    items: { q: string; a: string }[];
+  };
+}
 
-export default function Faq() {
+export default function Faq({ t }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
@@ -32,11 +21,11 @@ export default function Faq() {
       <div className="relative mx-auto max-w-6xl">
         <SectionGlow />
         <Reveal>
-          <Eyebrow icon={FaCircleQuestion} label="Preguntas frecuentes" />
-          <h2 className="mb-6 text-3xl text-primary-dark">FAQ</h2>
+          <Eyebrow icon={FaCircleQuestion} label={t.eyebrow} />
+          <h2 className="mb-6 text-3xl text-primary-dark">{t.title}</h2>
         </Reveal>
         <div className="flex max-w-3xl flex-col gap-3">
-          {faqs.map((item, i) => {
+          {t.items.map((item, i) => {
             const isOpen = openIndex === i;
             return (
               <Reveal
