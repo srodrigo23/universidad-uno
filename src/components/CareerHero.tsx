@@ -16,7 +16,7 @@ export default function CareerHero({ nombre, resumen, image, backHref, t }: Prop
   const excerpt = resumen.length > 180 ? `${resumen.slice(0, 180).trimEnd()}…` : resumen;
 
   return (
-    <section className="relative overflow-hidden bg-primary-dark px-6 py-16 text-white sm:py-20">
+    <section className="relative flex min-h-[75vh] items-center overflow-hidden bg-primary-dark px-6 py-24 text-white">
       <img src={image.src} alt="" className="absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-primary-dark/75" />
 

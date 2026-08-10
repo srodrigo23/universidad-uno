@@ -13,6 +13,7 @@
   --font-body: 'Montserrat', sans-serif;
 
   --animate-bounce-gentle: bounce-gentle 3.2s ease-in-out infinite;
+  --animate-hero-zoom: hero-zoom 9s ease-in-out infinite alternate;
 }
 
 @keyframes bounce-gentle {
@@ -28,6 +29,15 @@
   }
   40% {
     transform: translateY(-3px);
+  }
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.12);
   }
 }
 

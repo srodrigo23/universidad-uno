@@ -36,9 +36,14 @@ const itemVariants = {
 export default function Header({ locale, switchHref, t }: Props) {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const homeHref = locale === 'es' ? '/' : '/pt/';
   const otherLocale: Locale = locale === 'es' ? 'pt' : 'es';
   const OtherFlag = localeFlags[otherLocale];
+
+  const pillClass = scrolled
+    ? 'border-slate-300 text-slate-500 hover:border-primary hover:text-primary'
+    : 'border-white/40 text-white hover:border-secondary-light hover:text-secondary-light';
 
   const navItems = [
     { id: 'mision-vision', href: `${homeHref}#mision-vision`, label: t.nav.misionVision },
@@ -53,6 +58,13 @@ export default function Header({ locale, switchHref, t }: Props) {
       document.body.style.overflow = '';
     };
   }, [open]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     const sections = navItems
@@ -79,11 +91,19 @@ export default function Header({ locale, switchHref, t }: Props) {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
+      <header
+        className={`fixed inset-x-0 top-0 z-40 border-b transition-colors duration-300 ${
+          scrolled ? 'border-slate-200 bg-white/90 backdrop-blur' : 'border-transparent bg-transparent'
+        }`}
+      >
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-2">
           <a href={homeHref} className="flex items-center">
             <img
-              src="/logo/LogotipoOriginalVersiones/recortado/LogotipoOriginalCompleto.png"
+              src={
+                scrolled
+                  ? '/logo/LogotipoOriginalVersiones/recortado/LogotipoOriginalCompleto.png'
+                  : '/logo/LogotipoOriginalVersiones/recortado/LogotipoNegativoCompleto.png'
+              }
               alt="Universidad Privada UNO · Cochabamba"
               width={101}
               height={64}
@@ -100,7 +120,13 @@ export default function Header({ locale, switchHref, t }: Props) {
                     <a
                       href={item.href}
                       className={`relative pb-1 text-sm font-semibold transition-colors ${
-                        isActive ? 'text-primary' : 'text-slate-700 hover:text-primary'
+                        scrolled
+                          ? isActive
+                            ? 'text-primary'
+                            : 'text-slate-700 hover:text-primary'
+                          : isActive
+                            ? 'text-secondary-light'
+                            : 'text-white hover:text-secondary-light'
                       }`}
                     >
                       {item.label}
@@ -118,7 +144,7 @@ export default function Header({ locale, switchHref, t }: Props) {
               <li>
                 <a
                   href={switchHref}
-                  className="flex items-center gap-1.5 rounded-full border border-slate-300 px-2.5 py-1 text-xs font-bold tracking-wide text-slate-500 hover:border-primary hover:text-primary"
+                  className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold tracking-wide transition-colors ${pillClass}`}
                 >
                   <OtherFlag aria-hidden="true" className="h-3 w-4 shrink-0 rounded-[1px] object-cover" />
                   {localeLabels[otherLocale]}
@@ -130,14 +156,16 @@ export default function Header({ locale, switchHref, t }: Props) {
           <div className="flex items-center gap-2 md:hidden">
             <a
               href={switchHref}
-              className="flex items-center gap-1.5 rounded-full border border-slate-300 px-2.5 py-1 text-xs font-bold tracking-wide text-slate-500 hover:border-primary hover:text-primary"
+              className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold tracking-wide transition-colors ${pillClass}`}
             >
               <OtherFlag aria-hidden="true" className="h-3 w-4 shrink-0 rounded-[1px] object-cover" />
               {localeLabels[otherLocale]}
             </a>
             <button
               type="button"
-              className="relative z-50 inline-flex items-center justify-center rounded-md p-2 text-primary"
+              className={`relative z-50 inline-flex items-center justify-center rounded-md p-2 transition-colors ${
+                scrolled ? 'text-primary' : 'text-white'
+              }`}
               aria-label={open ? t.closeMenu : t.openMenu}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}

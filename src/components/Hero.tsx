@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaChevronDown, FaCircleCheck } from 'react-icons/fa6';
-import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
+import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import Reveal from './Reveal';
 
@@ -10,90 +10,96 @@ import slide3 from '../assets/images/medicina/med-todos.webp';
 import slide4 from '../assets/images/enfermeria/enf-estudiandes-uno.webp';
 import slide5 from '../assets/images/admin/admin-todos-uno.webp';
 
-type EmblaApi = NonNullable<UseEmblaCarouselType[1]>;
-
 const slides = [slide1, slide2, slide3, slide4, slide5];
-
-const PARALLAX_FACTOR = 1.6;
 
 interface Props {
   t: {
     eyebrow: string;
     title: string;
-    subtitle: string;
+    rotatingPhrases: string[];
     resolution: string;
     cta: string;
   };
 }
+
+const TYPE_SPEED_MS = 45;
+const TYPE_START_DELAY_MS = 350;
+
+const ROTATE_TYPE_SPEED_MS = 40;
+const ROTATE_DELETE_SPEED_MS = 22;
+const ROTATE_HOLD_MS = 1800;
+const ROTATE_PAUSE_MS = 400;
 
 export default function Hero({ t }: Props) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }),
   ]);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const parallaxNodes = useRef<HTMLElement[]>([]);
-  const parallaxFactor = useRef(0);
+  const [typedTitle, setTypedTitle] = useState('');
+  const [rotatingText, setRotatingText] = useState('');
 
-  const setParallaxNodes = useCallback((api: EmblaApi) => {
-    parallaxNodes.current = api
-      .slideNodes()
-      .map((node) => node.querySelector<HTMLElement>('.hero-slide-img'))
-      .filter((node): node is HTMLElement => node !== null);
-  }, []);
+  useEffect(() => {
+    setTypedTitle('');
+    let charCount = 0;
+    let typeInterval: ReturnType<typeof setInterval>;
 
-  const setParallaxFactor = useCallback((api: EmblaApi) => {
-    parallaxFactor.current = PARALLAX_FACTOR * api.scrollSnapList().length;
-  }, []);
+    const startTimeout = setTimeout(() => {
+      typeInterval = setInterval(() => {
+        charCount += 1;
+        setTypedTitle(t.title.slice(0, charCount));
+        if (charCount >= t.title.length) clearInterval(typeInterval);
+      }, TYPE_SPEED_MS);
+    }, TYPE_START_DELAY_MS);
 
-  const applyParallax = useCallback((api: EmblaApi) => {
-    const engine = api.internalEngine();
-    const scrollProgress = api.scrollProgress();
-    const slidesInView = api.slidesInView();
+    return () => {
+      clearTimeout(startTimeout);
+      clearInterval(typeInterval);
+    };
+  }, [t.title]);
 
-    api.scrollSnapList().forEach((scrollSnap, snapIndex) => {
-      let diffToTarget = scrollSnap - scrollProgress;
-      const slidesInSnap = engine.slideRegistry[snapIndex];
+  useEffect(() => {
+    const phrases = t.rotatingPhrases;
+    if (!phrases || phrases.length === 0) return;
 
-      slidesInSnap.forEach((slideIndex) => {
-        if (!slidesInView.includes(slideIndex)) return;
+    let phraseIndex = 0;
+    let charCount = 0;
+    let timeoutId: ReturnType<typeof setTimeout>;
 
-        if (engine.options.loop) {
-          engine.slideLooper.loopPoints.forEach((loopItem) => {
-            const target = loopItem.target();
-            if (slideIndex === loopItem.index && target !== 0) {
-              const sign = Math.sign(target);
-              if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress);
-              if (sign === 1) diffToTarget = scrollSnap + (1 - scrollProgress);
-            }
-          });
-        }
+    const type = () => {
+      const current = phrases[phraseIndex];
+      charCount += 1;
+      setRotatingText(current.slice(0, charCount));
+      timeoutId = setTimeout(charCount < current.length ? type : erase, charCount < current.length ? ROTATE_TYPE_SPEED_MS : ROTATE_HOLD_MS);
+    };
 
-        const translate = diffToTarget * (-1 * parallaxFactor.current) * 100;
-        const node = parallaxNodes.current[slideIndex];
-        if (node) node.style.transform = `translateX(${translate}%) scale(1.25)`;
-      });
-    });
-  }, []);
+    const erase = () => {
+      const current = phrases[phraseIndex];
+      charCount -= 1;
+      setRotatingText(current.slice(0, charCount));
+      if (charCount > 0) {
+        timeoutId = setTimeout(erase, ROTATE_DELETE_SPEED_MS);
+      } else {
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        timeoutId = setTimeout(type, ROTATE_PAUSE_MS);
+      }
+    };
+
+    const initialDelay = TYPE_START_DELAY_MS + t.title.length * TYPE_SPEED_MS + ROTATE_PAUSE_MS;
+    setRotatingText('');
+    timeoutId = setTimeout(type, initialDelay);
+
+    return () => clearTimeout(timeoutId);
+  }, [t.rotatingPhrases, t.title]);
 
   useEffect(() => {
     if (!emblaApi) return;
 
-    setParallaxNodes(emblaApi);
-    setParallaxFactor(emblaApi);
-    applyParallax(emblaApi);
     setSelectedIndex(emblaApi.selectedScrollSnap());
-
-    emblaApi
-      .on('reInit', setParallaxNodes)
-      .on('reInit', setParallaxFactor)
-      .on('reInit', applyParallax)
-      .on('scroll', applyParallax)
-      .on('slideFocus', applyParallax)
-      .on('select', (api) => setSelectedIndex(api.selectedScrollSnap()));
-  }, [emblaApi, setParallaxNodes, setParallaxFactor, applyParallax]);
+    emblaApi.on('select', (api) => setSelectedIndex(api.selectedScrollSnap()));
+  }, [emblaApi]);
 
   return (
-    <section className="relative overflow-hidden bg-primary-dark px-6 py-20 text-white sm:py-28">
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-primary-dark px-6 py-24 text-white">
       <div className="absolute inset-0 overflow-hidden" ref={emblaRef}>
         <div className="flex h-full">
           {slides.map((slide, i) => (
@@ -101,7 +107,7 @@ export default function Hero({ t }: Props) {
               <img
                 src={slide.src}
                 alt=""
-                className="hero-slide-img h-full w-full scale-125 object-cover will-change-transform"
+                className="h-full w-full origin-center animate-hero-zoom object-cover will-change-transform"
               />
             </div>
           ))}
@@ -111,14 +117,30 @@ export default function Hero({ t }: Props) {
         className="absolute inset-0"
         style={{
           backgroundImage:
-            'linear-gradient(to right, var(--color-primary-dark) 0%, color-mix(in srgb, var(--color-primary-dark) 96%, transparent) 55%, color-mix(in srgb, var(--color-primary-dark) 40%, transparent) 72%, color-mix(in srgb, var(--color-primary-dark) 5%, transparent) 88%)',
+            'linear-gradient(115deg, color-mix(in srgb, var(--color-primary-dark) 62%, transparent) 0%, color-mix(in srgb, var(--color-primary-dark) 32%, transparent) 50%, color-mix(in srgb, var(--color-primary-dark) 15%, transparent) 100%)',
+        }}
+      />
+      <div
+        className="absolute inset-0 opacity-[0.15] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
         }}
       />
 
-      <Reveal className="relative mx-auto max-w-6xl">
+      <Reveal className="absolute mx-auto max-w-6xl bottom-0 pb-10">
         <p className="mb-2 text-xs font-bold tracking-widest text-secondary-light uppercase">{t.eyebrow}</p>
-        <h1 className="max-w-3xl text-4xl font-extrabold text-white sm:text-5xl">{t.title}</h1>
-        <p className="mt-4 max-w-xl text-lg font-light text-white/85">{t.subtitle}</p>
+        <h1 className="max-w-3xl text-4xl font-extrabold text-white sm:text-5xl" aria-label={t.title}>
+          <span aria-hidden="true">{typedTitle}</span>
+          <span
+            aria-hidden="true"
+            className="ml-0.5 inline-block h-[0.85em] w-0.75 translate-y-[0.1em] animate-pulse bg-secondary-light align-middle"
+          />
+        </h1>
+        <p className="mt-4 min-h-14 max-w-xl text-lg font-light text-white/85 sm:min-h-8" aria-hidden="true">
+          {rotatingText}
+          <span className="ml-0.5 inline-block h-[0.8em] w-0.5 translate-y-[0.1em] animate-pulse bg-white/70 align-middle" />
+        </p>
         <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-secondary-light/40 bg-secondary/15 px-3 py-1.5 text-xs font-semibold text-secondary-light">
           <FaCircleCheck size={12} className="shrink-0" />
           {t.resolution}
