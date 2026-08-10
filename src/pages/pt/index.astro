@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero';
 import MisionVision from '../../components/MisionVision';
 import CareersSection from '../../components/CareersSection';
+import Testimonios from '../../components/Testimonios';
 import PreinscripcionCta from '../../components/PreinscripcionCta';
 import { careers } from '../../data/careers';
 import { dictionaries, localizedPath } from '../../i18n/config';
@@ -28,6 +29,7 @@ const careerSummaries = careers.map((career) => ({
 		videoT={dict.videoModal}
 		client:visible
 	/>
+	<Testimonios t={dict.testimonios} client:visible />
 	<PreinscripcionCta
 		titulo={dict.preinscripcion.sectionTitleHome}
 		careers={careerSummaries}

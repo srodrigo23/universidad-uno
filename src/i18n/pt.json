@@ -138,6 +138,13 @@
     "eyebrow": "Nossos princípios",
     "title": "Valores do curso"
   },
+  "testimonios": {
+    "eyebrow": "Nossos estudantes",
+    "title": "O que dizem da UNO",
+    "subtitle": "Histórias reais de quem já faz parte da nossa comunidade acadêmica.",
+    "prev": "Depoimento anterior",
+    "next": "Próximo depoimento"
+  },
   "preinscripcion": {
     "sectionTitleHome": "Pronto para dar o primeiro passo?",
     "sectionTitleCareer": "Quer estudar {{nombre}}?",
