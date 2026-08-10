@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SobreNosotrosHero from '../../components/SobreNosotrosHero';
+import Historia from '../../components/Historia';
+import Ubicacion from '../../components/Ubicacion';
+import { dictionaries, localizedPath } from '../../i18n/config';
+
+const locale = 'pt';
+const dict = dictionaries[locale];
+---
+
+<Layout
+	locale={locale}
+	dict={dict}
+	switchHref={localizedPath('es', '/sobre-nosotros')}
+	title={`${dict.sobreNosotros.title} · ${dict.meta.title}`}
+>
+	<SobreNosotrosHero t={dict.sobreNosotros} client:load />
+	<Historia t={dict.historia} client:visible />
+	<Ubicacion t={dict.ubicacion} client:visible />
+</Layout>

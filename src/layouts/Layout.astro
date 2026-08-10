@@ -52,7 +52,7 @@ const isHome = currentPath === '' || currentPath === '/pt';
 		<Analytics />
 	</head>
 	<body>
-		<Header client:load locale={locale} switchHref={switchHref} t={dict.header} />
+		<Header client:load locale={locale} switchHref={switchHref} currentPath={Astro.url.pathname} t={dict.header} />
 		<slot />
 		<Footer client:visible t={dict.footer} />
 		<WhatsAppFloatingButton client:load t={dict.whatsapp} />

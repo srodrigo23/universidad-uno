@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero';
 import MisionVision from '../components/MisionVision';
-import Historia from '../components/Historia';
 import CareersSection from '../components/CareersSection';
 import Faq from '../components/Faq';
 import { careers } from '../data/careers';
@@ -26,7 +25,6 @@ const careerSummaries = careers.map((career) => ({
 >
 	<Hero t={dict.hero} client:visible />
 	<MisionVision t={dict.misionVision} client:visible />
-	<Historia t={dict.historia} client:visible />
 	<CareersSection
 		careers={careerSummaries}
 		basePath="/carreras"

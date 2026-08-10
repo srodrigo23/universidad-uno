@@ -6,7 +6,7 @@
   "header": {
     "nav": {
       "misionVision": "Misión y Visión",
-      "historia": "Historia",
+      "sobreNosotros": "Sobre nosotros",
       "carreras": "Carreras",
       "faq": "Preguntas frecuentes"
     },
@@ -30,6 +30,16 @@
     "misionText": "Formar profesionales competentes, éticos, líderes con emprendedurismo en base a la diversidad cultural, la ciencia y la tecnología para contribuir al desarrollo de la sociedad.",
     "visionLabel": "Visión",
     "visionText": "Ser líderes en educación superior, acreditados y reconocidos internacionalmente con la formación de profesionales de alta calidad, con responsabilidad social y bases sólidas en la investigación e innovación."
+  },
+  "sobreNosotros": {
+    "eyebrow": "Subsede Cochabamba",
+    "title": "Sobre nosotros",
+    "intro": "Conoce quiénes somos: nuestra historia, nuestra comunidad y el lugar donde formamos profesionales para Bolivia."
+  },
+  "ubicacion": {
+    "eyebrow": "Visítanos",
+    "title": "¿Dónde estamos?",
+    "mapTitle": "Mapa: ubicación del Edificio Central"
   },
   "historia": {
     "eyebrow": "Nuestra historia",

@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaChevronDown, FaCircleCheck } from 'react-icons/fa6';
-import useEmblaCarousel from 'embla-carousel-react';
-import Autoplay from 'embla-carousel-autoplay';
 import Reveal from './Reveal';
+import { useHeroCarousel, CarouselBackground, CarouselDots } from './HeroCarousel';
 
 import slide1 from '../assets/images/estudiantes/estudiantes-biblioteca.webp';
 import slide2 from '../assets/images/estudiantes/estudiantes-libro-biblioteca.webp';
@@ -31,10 +30,7 @@ const ROTATE_HOLD_MS = 1800;
 const ROTATE_PAUSE_MS = 400;
 
 export default function Hero({ t }: Props) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }),
-  ]);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const { emblaRef, emblaApi, selectedIndex } = useHeroCarousel();
   const [typedTitle, setTypedTitle] = useState('');
   const [rotatingText, setRotatingText] = useState('');
 
@@ -91,28 +87,9 @@ export default function Hero({ t }: Props) {
     return () => clearTimeout(timeoutId);
   }, [t.rotatingPhrases, t.title]);
 
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-    emblaApi.on('select', (api) => setSelectedIndex(api.selectedScrollSnap()));
-  }, [emblaApi]);
-
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden bg-primary-dark px-6 py-24 text-white">
-      <div className="absolute inset-0 overflow-hidden" ref={emblaRef}>
-        <div className="flex h-full">
-          {slides.map((slide, i) => (
-            <div key={i} className="relative h-full min-w-0 flex-[0_0_100%] overflow-hidden">
-              <img
-                src={slide.src}
-                alt=""
-                className="h-full w-full origin-center animate-hero-zoom object-cover will-change-transform"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+    <section className="relative flex min-h-screen items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-12 text-white">
+      <CarouselBackground emblaRef={emblaRef} slides={slides} />
       <div
         className="absolute inset-0"
         style={{
@@ -128,7 +105,7 @@ export default function Hero({ t }: Props) {
         }}
       />
 
-      <Reveal className="absolute mx-auto max-w-6xl bottom-0 pb-10">
+      <Reveal className="relative mx-auto w-full max-w-6xl">
         <p className="mb-2 text-xs font-bold tracking-widest text-secondary-light uppercase">{t.eyebrow}</p>
         <h1 className="max-w-3xl text-4xl font-extrabold text-white sm:text-5xl" aria-label={t.title}>
           <span aria-hidden="true">{typedTitle}</span>
@@ -154,19 +131,12 @@ export default function Hero({ t }: Props) {
           </a>
         </div>
 
-        <div className="mt-8 flex gap-2">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={`${i + 1}`}
-              onClick={() => emblaApi?.scrollTo(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === selectedIndex ? 'w-6 bg-secondary' : 'w-1.5 bg-white/40 hover:bg-white/60'
-              }`}
-            />
-          ))}
-        </div>
+        <CarouselDots
+          className="mt-8"
+          count={slides.length}
+          selectedIndex={selectedIndex}
+          onSelect={(i) => emblaApi?.scrollTo(i)}
+        />
       </Reveal>
     </section>
   );

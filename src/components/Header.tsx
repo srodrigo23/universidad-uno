@@ -8,10 +8,11 @@ type Locale = 'es' | 'pt';
 interface Props {
   locale: Locale;
   switchHref: string;
+  currentPath: string;
   t: {
     nav: {
       misionVision: string;
-      historia: string;
+      sobreNosotros: string;
       carreras: string;
       faq: string;
     };
@@ -33,7 +34,7 @@ const itemVariants = {
   visible: { opacity: 1, x: 0 },
 };
 
-export default function Header({ locale, switchHref, t }: Props) {
+export default function Header({ locale, switchHref, currentPath, t }: Props) {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -45,12 +46,18 @@ export default function Header({ locale, switchHref, t }: Props) {
     ? 'border-slate-300 text-slate-500 hover:border-primary hover:text-primary'
     : 'border-white/40 text-white hover:border-secondary-light hover:text-secondary-light';
 
+  const sobreNosotrosHref = locale === 'es' ? '/sobre-nosotros' : '/pt/sobre-nosotros';
+  const normalizedPath = currentPath.replace(/\/$/, '');
+
   const navItems = [
-    { id: 'mision-vision', href: `${homeHref}#mision-vision`, label: t.nav.misionVision },
-    { id: 'historia', href: `${homeHref}#historia`, label: t.nav.historia },
-    { id: 'carreras', href: `${homeHref}#carreras`, label: t.nav.carreras },
-    { id: 'faq', href: `${homeHref}#faq`, label: t.nav.faq },
+    { id: 'mision-vision', href: `${homeHref}#mision-vision`, label: t.nav.misionVision, isRoute: false },
+    { id: 'sobre-nosotros', href: sobreNosotrosHref, label: t.nav.sobreNosotros, isRoute: true },
+    { id: 'carreras', href: `${homeHref}#carreras`, label: t.nav.carreras, isRoute: false },
+    { id: 'faq', href: `${homeHref}#faq`, label: t.nav.faq, isRoute: false },
   ];
+
+  const isItemActive = (item: (typeof navItems)[number]) =>
+    item.isRoute ? normalizedPath === item.href : activeSection === item.id;
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -68,6 +75,7 @@ export default function Header({ locale, switchHref, t }: Props) {
 
   useEffect(() => {
     const sections = navItems
+      .filter((item) => !item.isRoute)
       .map((item) => document.getElementById(item.id))
       .filter((el): el is HTMLElement => el !== null);
 
@@ -114,7 +122,7 @@ export default function Header({ locale, switchHref, t }: Props) {
           <nav className="hidden md:block">
             <ul className="flex items-center gap-6">
               {navItems.map((item) => {
-                const isActive = activeSection === item.id;
+                const isActive = isItemActive(item);
                 return (
                   <li key={item.href}>
                     <a
@@ -208,7 +216,7 @@ export default function Header({ locale, switchHref, t }: Props) {
                 animate="visible"
               >
                 {navItems.map((item) => {
-                  const isActive = activeSection === item.id;
+                  const isActive = isItemActive(item);
                   return (
                     <motion.li key={item.href} variants={itemVariants}>
                       <a

@@ -3,6 +3,8 @@ import Reveal from './Reveal';
 import Eyebrow from './Eyebrow';
 import SectionGlow from './SectionGlow';
 
+import bgImage from '../assets/images/estudiantes/estudiantes-mochila-modelo.webp';
+
 interface Props {
   t: {
     eyebrow: string;
@@ -13,7 +15,15 @@ interface Props {
 
 export default function Historia({ t }: Props) {
   return (
-    <section id="historia" className="bg-surface px-6 py-16">
+    <section className="relative overflow-hidden bg-surface px-6 py-16">
+      <img src={bgImage.src} alt="" className="absolute inset-0 h-full w-full object-cover" />
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(100deg, color-mix(in srgb, var(--color-surface) 97%, transparent) 0%, color-mix(in srgb, var(--color-surface) 94%, transparent) 55%, color-mix(in srgb, var(--color-surface) 72%, transparent) 100%)',
+        }}
+      />
       <Reveal className="relative mx-auto max-w-6xl">
         <SectionGlow />
         <Eyebrow icon={FaLandmark} label={t.eyebrow} />
