@@ -17,7 +17,7 @@ export default function Faq({ t }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="bg-surface px-6 py-16">
+    <section id="faq" className="px-6 py-16">
       <div className="relative mx-auto max-w-6xl">
         <SectionGlow />
         <Reveal>
@@ -31,7 +31,7 @@ export default function Faq({ t }: Props) {
               <Reveal
                 key={item.q}
                 delay={i * 0.08}
-                className="rounded-xl border border-slate-200 bg-white px-5 py-4"
+                className="rounded-xl border border-slate-200 bg-white px-5 py-4 shadow-sm"
               >
                 <button
                   type="button"

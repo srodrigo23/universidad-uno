@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { FaChevronDown, FaCircleCheck } from 'react-icons/fa6';
 import Reveal from './Reveal';
+import HeroBottomFade from './HeroBottomFade';
 import { useHeroCarousel, CarouselBackground, CarouselDots } from './HeroCarousel';
 
+// import slide0 from '../assets/images/estudiantes/estudiante-mujer-modelo-uno.webp';
 import slide1 from '../assets/images/estudiantes/estudiantes-biblioteca.webp';
 import slide2 from '../assets/images/estudiantes/estudiantes-libro-biblioteca.webp';
 import slide3 from '../assets/images/medicina/med-todos.webp';
@@ -88,7 +90,7 @@ export default function Hero({ t }: Props) {
   }, [t.rotatingPhrases, t.title]);
 
   return (
-    <section className="relative flex min-h-screen items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-12 text-white">
+    <section className="relative flex min-h-screen items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white">
       <CarouselBackground emblaRef={emblaRef} slides={slides} />
       <div
         className="absolute inset-0"
@@ -104,6 +106,7 @@ export default function Hero({ t }: Props) {
             "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
         }}
       />
+      <HeroBottomFade />
 
       <Reveal className="relative mx-auto w-full max-w-6xl">
         <p className="mb-2 text-xs font-bold tracking-widest text-secondary-light uppercase">{t.eyebrow}</p>

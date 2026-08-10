@@ -21,9 +21,11 @@ export function useHeroCarousel() {
 interface BackgroundProps {
   emblaRef: ReturnType<typeof useHeroCarousel>['emblaRef'];
   slides: ImageMetadata[];
+  /** Ajusta el encuadre por breakpoint, p. ej. "md:object-top md:origin-top". */
+  imageClassName?: string;
 }
 
-export function CarouselBackground({ emblaRef, slides }: BackgroundProps) {
+export function CarouselBackground({ emblaRef, slides, imageClassName = '' }: BackgroundProps) {
   return (
     <div className="absolute inset-0 overflow-hidden" ref={emblaRef}>
       <div className="flex h-full">
@@ -32,7 +34,7 @@ export function CarouselBackground({ emblaRef, slides }: BackgroundProps) {
             <img
               src={slide.src}
               alt=""
-              className="h-full w-full origin-center animate-hero-zoom object-cover will-change-transform"
+              className={`h-full w-full origin-center animate-hero-zoom object-cover will-change-transform ${imageClassName}`}
             />
           </div>
         ))}

@@ -13,7 +13,7 @@ interface Props {
 
 export default function CampoLaboral({ titulo, items, t }: Props) {
   return (
-    <section className="bg-surface px-6 py-16">
+    <section className="px-6 py-16">
       <Reveal className="relative mx-auto max-w-6xl">
         <SectionGlow />
         <Eyebrow icon={FaBriefcase} label={t.eyebrow} />

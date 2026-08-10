@@ -13,7 +13,7 @@ interface Props {
 
 export default function CareerMisionVision({ mision, vision, t }: Props) {
   return (
-    <section className="bg-surface px-6 py-16">
+    <section className="px-6 py-16">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
         <Reveal className="rounded-2xl border border-t-4 border-slate-200 border-t-secondary bg-white p-7 shadow-sm">
           <Eyebrow icon={FaBullseye} label={t.misionLabel} />

@@ -76,8 +76,8 @@ export default function Header({ locale, switchHref, currentPath, careerLinks, t
 
   const navItems = [
     { id: 'mision-vision', href: `${homeHref}#mision-vision`, label: t.nav.misionVision, isRoute: false },
-    { id: 'sobre-nosotros', href: sobreNosotrosHref, label: t.nav.sobreNosotros, isRoute: true },
     { id: 'carreras', href: `${homeHref}#carreras`, label: t.nav.carreras, isRoute: false },
+    { id: 'sobre-nosotros', href: sobreNosotrosHref, label: t.nav.sobreNosotros, isRoute: true },
     { id: 'faq', href: `${sobreNosotrosHref}#faq`, label: t.nav.faq, isRoute: false },
   ];
 

@@ -26,7 +26,7 @@ interface Props {
 
 export default function CareersSection({ careers, basePath, t, cardT }: Props) {
   return (
-    <section id="carreras" className="px-6 py-16">
+    <section id="carreras" className="px-6 pt-6">
       <div className="relative mx-auto max-w-6xl">
         <SectionGlow />
         <Reveal>

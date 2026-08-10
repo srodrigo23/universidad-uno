@@ -1,5 +1,6 @@
 import { FaArrowLeft, FaFilePdf } from 'react-icons/fa6';
 import Reveal from './Reveal';
+import HeroBottomFade from './HeroBottomFade';
 
 interface Props {
   nombre: string;
@@ -18,9 +19,10 @@ export default function CareerHero({ nombre, resumen, image, backHref, mallaHref
   const excerpt = resumen.length > 180 ? `${resumen.slice(0, 180).trimEnd()}…` : resumen;
 
   return (
-    <section className="relative flex min-h-[75vh] items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-12 text-white">
+    <section className="relative flex min-h-[75vh] items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white">
       <img src={image.src} alt="" className="absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-primary-dark/75" />
+      <HeroBottomFade />
 
       <Reveal className="relative mx-auto w-full max-w-6xl">
         <a href={backHref} className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-secondary-light">

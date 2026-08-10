@@ -14,7 +14,7 @@ export default function CareerCta({ nombre, t }: Props) {
   const question = t.question.replace('{{nombre}}', nombre);
 
   return (
-    <section className="relative bg-surface px-6 py-16 text-center">
+    <section className="relative px-6 py-16 text-center">
       <Reveal className="relative mx-auto max-w-6xl">
         <SectionGlow />
         <h2 className="mb-6 text-3xl text-primary-dark">{question}</h2>

@@ -22,13 +22,25 @@ export default function Historia({ t }: Props) {
   const [firstParagraph, ...restParagraphs] = t.paragraphs;
 
   return (
-    <section className="relative overflow-hidden bg-surface px-6 py-16">
-      <img src={bgImage.src} alt="" className="absolute inset-0 h-full w-full object-cover" />
+    <section className="relative overflow-hidden px-6 py-24">
+      <img src={bgImage.src} alt="" className="absolute inset-0 h-full w-full object-cover object-top" />
+      {/* En móvil el texto ocupa todo el ancho, así que el velo va parejo. */}
+      <div className="absolute inset-0 bg-white/88 md:hidden" />
+      {/* En desktop el texto vive en los dos tercios izquierdos: la derecha se abre a la foto. */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 hidden md:block"
         style={{
           backgroundImage:
-            'linear-gradient(100deg, color-mix(in srgb, var(--color-surface) 97%, transparent) 0%, color-mix(in srgb, var(--color-surface) 94%, transparent) 55%, color-mix(in srgb, var(--color-surface) 72%, transparent) 100%)',
+            'linear-gradient(100deg, rgb(255 255 255 / 0.92) 0%, rgb(255 255 255 / 0.86) 50%, rgb(255 255 255 / 0.52) 74%, rgb(255 255 255 / 0.18) 100%)',
+        }}
+      />
+      {/* Funde los bordes superior e inferior para que la foto no forme una banda con cortes secos. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(to bottom, #fff 0%, transparent 20%, transparent 80%, #fff 100%)',
         }}
       />
       <Reveal className="relative mx-auto max-w-6xl">

@@ -1,4 +1,5 @@
 import Reveal from './Reveal';
+import HeroBottomFade from './HeroBottomFade';
 import { useHeroCarousel, CarouselBackground, CarouselDots } from './HeroCarousel';
 
 import slide1 from '../assets/images/estudiantes/estudiante-mujer-modelo-uno.webp';
@@ -20,22 +21,33 @@ export default function SobreNosotrosHero({ t }: Props) {
   const { emblaRef, emblaApi, selectedIndex } = useHeroCarousel();
 
   return (
-    <section className="relative flex min-h-[75vh] items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-12 text-white">
-      <CarouselBackground emblaRef={emblaRef} slides={slides} />
+    <section className='relative flex min-h-[75vh] items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white'>
+      <CarouselBackground
+        emblaRef={emblaRef}
+        slides={slides}
+        imageClassName='md:origin-[50%_25%] md:object-[50%_25%]'
+      />
       <div
-        className="absolute inset-0"
+        className='absolute inset-0'
         style={{
           backgroundImage:
             'linear-gradient(115deg, color-mix(in srgb, var(--color-primary-dark) 62%, transparent) 0%, color-mix(in srgb, var(--color-primary-dark) 32%, transparent) 50%, color-mix(in srgb, var(--color-primary-dark) 15%, transparent) 100%)',
         }}
       />
+      <HeroBottomFade />
 
-      <Reveal className="relative mx-auto w-full max-w-6xl">
-        <p className="mb-2 text-xs font-bold tracking-widest text-secondary-light uppercase">{t.eyebrow}</p>
-        <h1 className="max-w-3xl text-4xl font-extrabold text-white sm:text-5xl">{t.title}</h1>
-        <p className="mt-4 max-w-2xl text-lg font-light text-white/85">{t.intro}</p>
+      <Reveal className='relative mx-auto w-full max-w-6xl'>
+        <p className='mb-2 text-xs font-bold tracking-widest text-secondary-light uppercase'>
+          {t.eyebrow}
+        </p>
+        <h1 className='max-w-3xl text-4xl font-extrabold text-white sm:text-5xl'>
+          {t.title}
+        </h1>
+        <p className='mt-4 max-w-2xl text-lg font-light text-white/85'>
+          {t.intro}
+        </p>
         <CarouselDots
-          className="mt-8"
+          className='mt-8'
           count={slides.length}
           selectedIndex={selectedIndex}
           onSelect={(i) => emblaApi?.scrollTo(i)}
