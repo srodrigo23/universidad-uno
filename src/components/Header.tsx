@@ -1,14 +1,20 @@
-import { useEffect, useState } from 'react';
-import { HiMenu, HiX } from 'react-icons/hi';
+import { useEffect, useRef, useState } from 'react';
+import { HiMenu, HiX, HiChevronDown } from 'react-icons/hi';
 import { AnimatePresence, motion } from 'motion/react';
 import { BO, BR } from 'country-flag-icons/react/3x2';
 
 type Locale = 'es' | 'pt';
 
+export interface CareerLink {
+  slug: string;
+  nombre: string;
+}
+
 interface Props {
   locale: Locale;
   switchHref: string;
   currentPath: string;
+  careerLinks: CareerLink[];
   t: {
     nav: {
       misionVision: string;
@@ -16,6 +22,7 @@ interface Props {
       carreras: string;
       faq: string;
     };
+    verTodasCarreras: string;
     openMenu: string;
     closeMenu: string;
   };
@@ -34,10 +41,26 @@ const itemVariants = {
   visible: { opacity: 1, x: 0 },
 };
 
-export default function Header({ locale, switchHref, currentPath, t }: Props) {
+/** Escalonado propio para la sublista de carreras: reusar listVariants recompondría
+    su delayChildren sobre el retraso del padre y las carreras entrarían tarde. */
+const subListVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.045 } },
+};
+
+const CLOSE_DELAY_MS = 140;
+
+export default function Header({ locale, switchHref, currentPath, careerLinks, t }: Props) {
   const [open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+
+  const wrapperRef = useRef<HTMLLIElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const homeHref = locale === 'es' ? '/' : '/pt/';
   const otherLocale: Locale = locale === 'es' ? 'pt' : 'es';
   const OtherFlag = localeFlags[otherLocale];
@@ -47,17 +70,39 @@ export default function Header({ locale, switchHref, currentPath, t }: Props) {
     : 'border-white/40 text-white hover:border-secondary-light hover:text-secondary-light';
 
   const sobreNosotrosHref = locale === 'es' ? '/sobre-nosotros' : '/pt/sobre-nosotros';
+  const careersBase = locale === 'es' ? '/carreras' : '/pt/carreras';
   const normalizedPath = currentPath.replace(/\/$/, '');
+  const isCareerRoute = normalizedPath.startsWith(`${careersBase}/`);
 
   const navItems = [
     { id: 'mision-vision', href: `${homeHref}#mision-vision`, label: t.nav.misionVision, isRoute: false },
     { id: 'sobre-nosotros', href: sobreNosotrosHref, label: t.nav.sobreNosotros, isRoute: true },
     { id: 'carreras', href: `${homeHref}#carreras`, label: t.nav.carreras, isRoute: false },
-    { id: 'faq', href: `${homeHref}#faq`, label: t.nav.faq, isRoute: false },
+    { id: 'faq', href: `${sobreNosotrosHref}#faq`, label: t.nav.faq, isRoute: false },
   ];
 
-  const isItemActive = (item: (typeof navItems)[number]) =>
-    item.isRoute ? normalizedPath === item.href : activeSection === item.id;
+  const isItemActive = (item: (typeof navItems)[number]) => {
+    if (item.id === 'carreras') return isCareerRoute || activeSection === 'carreras';
+    return item.isRoute ? normalizedPath === item.href && activeSection === null : activeSection === item.id;
+  };
+
+  const cancelClose = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimerRef.current = setTimeout(() => {
+      // No cerrar bajo el cursor si alguien navegó al panel con el teclado.
+      if (panelRef.current?.contains(document.activeElement)) return;
+      setDropdownOpen(false);
+    }, CLOSE_DELAY_MS);
+  };
+
+  useEffect(() => cancelClose, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -72,6 +117,27 @@ export default function Header({ locale, switchHref, currentPath, t }: Props) {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!dropdownOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setDropdownOpen(false);
+      triggerRef.current?.focus();
+    };
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (!wrapperRef.current?.contains(event.target as Node)) setDropdownOpen(false);
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('pointerdown', onPointerDown);
+    };
+  }, [dropdownOpen]);
 
   useEffect(() => {
     const sections = navItems
@@ -96,6 +162,25 @@ export default function Header({ locale, switchHref, currentPath, t }: Props) {
     return () => observer.disconnect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const linkClass = (isActive: boolean) =>
+    `relative pb-1 text-sm font-semibold transition-colors ${
+      scrolled
+        ? isActive
+          ? 'text-primary'
+          : 'text-slate-700 hover:text-primary'
+        : isActive
+          ? 'text-secondary-light'
+          : 'text-white hover:text-secondary-light'
+    }`;
+
+  const activeUnderline = (
+    <motion.span
+      layoutId="nav-active-underline"
+      className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-secondary"
+      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+    />
+  );
 
   return (
     <>
@@ -123,28 +208,96 @@ export default function Header({ locale, switchHref, currentPath, t }: Props) {
             <ul className="flex items-center gap-6">
               {navItems.map((item) => {
                 const isActive = isItemActive(item);
+
+                if (item.id === 'carreras') {
+                  return (
+                    <li
+                      key={item.href}
+                      ref={wrapperRef}
+                      className="relative"
+                      onPointerEnter={(event) => {
+                        if (event.pointerType !== 'mouse') return;
+                        cancelClose();
+                        setDropdownOpen(true);
+                      }}
+                      onPointerLeave={(event) => {
+                        if (event.pointerType !== 'mouse') return;
+                        scheduleClose();
+                      }}
+                    >
+                      <button
+                        type="button"
+                        ref={triggerRef}
+                        aria-expanded={dropdownOpen}
+                        aria-controls="nav-carreras-panel"
+                        onClick={() => setDropdownOpen((v) => !v)}
+                        className={`${linkClass(isActive)} inline-flex items-center gap-1`}
+                      >
+                        {item.label}
+                        <HiChevronDown
+                          aria-hidden="true"
+                          className={`h-4 w-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
+                        />
+                        {isActive && activeUnderline}
+                      </button>
+
+                      <AnimatePresence>
+                        {dropdownOpen && (
+                          <div className="absolute top-full left-1/2 z-50 -translate-x-1/2 pt-3">
+                            <motion.div
+                              ref={panelRef}
+                              id="nav-carreras-panel"
+                              initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                              animate={{ opacity: 1, y: 0, scale: 1 }}
+                              exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                              className="w-64 origin-top overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-xl shadow-primary-dark/15"
+                            >
+                              <ul>
+                                <li>
+                                  <a
+                                    href={item.href}
+                                    onClick={() => setDropdownOpen(false)}
+                                    className="block rounded-xl px-3 py-2 text-sm font-semibold text-primary transition-colors hover:bg-surface"
+                                  >
+                                    {t.verTodasCarreras}
+                                  </a>
+                                </li>
+                                <li aria-hidden="true" className="mx-3 my-1 h-px bg-slate-200" />
+                                {careerLinks.map((career) => {
+                                  const href = `${careersBase}/${career.slug}`;
+                                  const isCurrent = normalizedPath === href;
+                                  return (
+                                    <li key={career.slug}>
+                                      <a
+                                        href={href}
+                                        aria-current={isCurrent ? 'page' : undefined}
+                                        onClick={() => setDropdownOpen(false)}
+                                        className={`block rounded-xl px-3 py-2 text-sm transition-colors hover:bg-surface hover:text-primary ${
+                                          isCurrent
+                                            ? 'bg-surface font-semibold text-primary'
+                                            : 'font-medium text-slate-600'
+                                        }`}
+                                      >
+                                        {career.nombre}
+                                      </a>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            </motion.div>
+                          </div>
+                        )}
+                      </AnimatePresence>
+                    </li>
+                  );
+                }
+
                 return (
                   <li key={item.href}>
-                    <a
-                      href={item.href}
-                      className={`relative pb-1 text-sm font-semibold transition-colors ${
-                        scrolled
-                          ? isActive
-                            ? 'text-primary'
-                            : 'text-slate-700 hover:text-primary'
-                          : isActive
-                            ? 'text-secondary-light'
-                            : 'text-white hover:text-secondary-light'
-                      }`}
-                    >
+                    <a href={item.href} className={linkClass(isActive)}>
                       {item.label}
-                      {isActive && (
-                        <motion.span
-                          layoutId="nav-active-underline"
-                          className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-secondary"
-                          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                        />
-                      )}
+                      {isActive && activeUnderline}
                     </a>
                   </li>
                 );
@@ -203,7 +356,7 @@ export default function Header({ locale, switchHref, currentPath, t }: Props) {
 
             <motion.nav
               key="drawer"
-              className="fixed top-0 right-0 z-40 h-full w-72 max-w-[80vw] bg-primary-dark shadow-2xl md:hidden"
+              className="fixed top-0 right-0 z-40 h-full w-72 max-w-[80vw] overflow-y-auto overscroll-contain bg-primary-dark shadow-2xl md:hidden"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -233,6 +386,33 @@ export default function Header({ locale, switchHref, currentPath, t }: Props) {
                         />
                         {item.label}
                       </a>
+
+                      {item.id === 'carreras' && (
+                        <motion.ul
+                          variants={subListVariants}
+                          aria-label={item.label}
+                          className="mt-0.5 mb-2 ml-0.5 flex flex-col gap-0.5 border-l border-white/20 pl-4"
+                        >
+                          {careerLinks.map((career) => {
+                            const href = `${careersBase}/${career.slug}`;
+                            const isCurrent = normalizedPath === href;
+                            return (
+                              <motion.li key={career.slug} variants={itemVariants}>
+                                <a
+                                  href={href}
+                                  aria-current={isCurrent ? 'page' : undefined}
+                                  onClick={() => setOpen(false)}
+                                  className={`block py-2 text-[13px] transition-colors hover:text-secondary-light ${
+                                    isCurrent ? 'font-semibold text-secondary-light' : 'font-medium text-white/70'
+                                  }`}
+                                >
+                                  {career.nombre}
+                                </a>
+                              </motion.li>
+                            );
+                          })}
+                        </motion.ul>
+                      )}
                     </motion.li>
                   );
                 })}

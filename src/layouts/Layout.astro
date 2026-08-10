@@ -7,6 +7,7 @@ import ScrollToTopButton from '../components/ScrollToTopButton';
 import '../styles/global.css';
 
 import Analytics from '@vercel/analytics/astro';
+import { careers } from '../data/careers';
 import type { Locale, Dictionary } from '../i18n/config';
 
 interface Props {
@@ -21,6 +22,7 @@ const { locale, dict, switchHref, title = dict.meta.title, description = dict.me
 const homeHref = locale === 'es' ? '/' : '/pt/';
 const currentPath = Astro.url.pathname.replace(/\/$/, '');
 const isHome = currentPath === '' || currentPath === '/pt';
+const careerLinks = careers.map((career) => ({ slug: career.slug, nombre: career[locale].nombre }));
 ---
 
 <!doctype html>
@@ -52,7 +54,14 @@ const isHome = currentPath === '' || currentPath === '/pt';
 		<Analytics />
 	</head>
 	<body>
-		<Header client:load locale={locale} switchHref={switchHref} currentPath={Astro.url.pathname} t={dict.header} />
+		<Header
+			client:load
+			locale={locale}
+			switchHref={switchHref}
+			currentPath={Astro.url.pathname}
+			careerLinks={careerLinks}
+			t={dict.header}
+		/>
 		<slot />
 		<Footer client:visible t={dict.footer} />
 		<WhatsAppFloatingButton client:load t={dict.whatsapp} />

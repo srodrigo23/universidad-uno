@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero';
 import MisionVision from '../components/MisionVision';
 import CareersSection from '../components/CareersSection';
-import Faq from '../components/Faq';
 import { careers } from '../data/careers';
 import { dictionaries, localizedPath } from '../i18n/config';
 
@@ -32,5 +31,4 @@ const careerSummaries = careers.map((career) => ({
 		cardT={dict.careerCard}
 		client:visible
 	/>
-	<Faq t={dict.faq} client:visible />
 </Layout>

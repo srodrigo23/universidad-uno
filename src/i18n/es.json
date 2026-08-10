@@ -10,6 +10,7 @@
       "carreras": "Carreras",
       "faq": "Preguntas frecuentes"
     },
+    "verTodasCarreras": "Ver todas las carreras",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú"
   },
@@ -44,6 +45,8 @@
   "historia": {
     "eyebrow": "Nuestra historia",
     "title": "Reseña histórica",
+    "readMore": "Ver más",
+    "readLess": "Ver menos",
     "paragraphs": [
       "La Universidad Nacional del Oriente, fundada en el año 1999 e iniciando actividades académicas en la gestión 2000 en la ciudad de Santa Cruz de la Sierra, nace con el firme propósito de contribuir a la formación de profesionales íntegros y comprometidos con el desarrollo del país. Desde sus inicios, respaldada por la Resolución Ministerial Nº 203/99 emitida el 22 de junio de 1999 por el Ministerio de Educación, la institución fue ampliando progresivamente su cobertura académica y territorial, consolidando su presencia en diferentes regiones de Bolivia.",
       "En el marco de este crecimiento sostenido y respondiendo a las demandas educativas del eje central del país, se crea la Sub sede Cochabamba como la sede más reciente de la Universidad Nacional del Oriente, autorizada legalmente mediante la Resolución Ministerial Nº 0164/2023. Esta resolución respalda su funcionamiento y consolida su compromiso con la excelencia académica y la expansión institucional.",
@@ -108,7 +111,8 @@
   },
   "careerHero": {
     "back": "Volver a carreras",
-    "badge": "Licenciatura"
+    "badge": "Licenciatura",
+    "malla": "Ver malla curricular"
   },
   "careerMisionVision": {
     "misionLabel": "Misión",

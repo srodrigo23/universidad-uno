@@ -1,4 +1,4 @@
-import { FaArrowLeft } from 'react-icons/fa6';
+import { FaArrowLeft, FaFilePdf } from 'react-icons/fa6';
 import Reveal from './Reveal';
 
 interface Props {
@@ -6,13 +6,15 @@ interface Props {
   resumen: string;
   image: ImageMetadata;
   backHref: string;
+  mallaHref: string;
   t: {
     back: string;
     badge: string;
+    malla: string;
   };
 }
 
-export default function CareerHero({ nombre, resumen, image, backHref, t }: Props) {
+export default function CareerHero({ nombre, resumen, image, backHref, mallaHref, t }: Props) {
   const excerpt = resumen.length > 180 ? `${resumen.slice(0, 180).trimEnd()}…` : resumen;
 
   return (
@@ -27,6 +29,15 @@ export default function CareerHero({ nombre, resumen, image, backHref, t }: Prop
         <p className="mb-2 text-xs font-bold tracking-wide text-secondary-light uppercase">{t.badge}</p>
         <h1 className="max-w-3xl text-3xl text-white sm:text-4xl">{nombre}</h1>
         <p className="mt-4 max-w-2xl text-white/85">{excerpt}</p>
+        <a
+          href={mallaHref}
+          target="_blank"
+          rel="noopener"
+          className="mt-6 inline-flex items-center gap-2 rounded-full bg-secondary px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition hover:-translate-y-px hover:bg-secondary-dark"
+        >
+          <FaFilePdf size={14} className="shrink-0" />
+          {t.malla}
+        </a>
       </Reveal>
     </section>
   );
