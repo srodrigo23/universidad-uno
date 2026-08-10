@@ -15,6 +15,8 @@ interface Props {
     subtitle: string;
     prev: string;
     next: string;
+    readMore: string;
+    readLess: string;
   };
 }
 
@@ -23,12 +25,25 @@ export default function Testimonios({ t }: Props) {
     Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true }),
   ]);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
-    emblaApi.on('select', (api) => setSelectedIndex(api.selectedScrollSnap()));
+    emblaApi.on('select', (api) => {
+      setSelectedIndex(api.selectedScrollSnap());
+      // Al cambiar de slide se cierra lo desplegado: si no, queda abierto fuera de vista.
+      setExpandedIndex(null);
+    });
   }, [emblaApi]);
+
+  // Mientras se lee un testimonio completo el carrusel no debe avanzar solo.
+  useEffect(() => {
+    const autoplay = emblaApi?.plugins()?.autoplay;
+    if (!autoplay) return;
+    if (expandedIndex === null) autoplay.play();
+    else autoplay.stop();
+  }, [emblaApi, expandedIndex]);
 
   const navClass =
     'inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-primary transition-colors hover:border-secondary hover:bg-secondary hover:text-white';
@@ -58,12 +73,20 @@ export default function Testimonios({ t }: Props) {
         {/* -ml-4 + pl-4 en cada slide: crea la separación sin romper el cálculo de ancho del loop. */}
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="-ml-4 flex items-stretch">
-            {testimonios.map((item) => (
+            {testimonios.map((item, i) => (
               <div
                 key={item.nombre}
                 className="min-w-0 flex-[0_0_100%] pl-4 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%]"
               >
-                <TestimonioCard nombre={item.nombre} testimonio={item.testimonio} pais={item.pais} />
+                <TestimonioCard
+                  nombre={item.nombre}
+                  testimonio={item.testimonio}
+                  pais={item.pais}
+                  foto={item.foto}
+                  expanded={expandedIndex === i}
+                  onToggle={() => setExpandedIndex((current) => (current === i ? null : i))}
+                  t={t}
+                />
               </div>
             ))}
           </div>

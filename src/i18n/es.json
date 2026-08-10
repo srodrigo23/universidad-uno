@@ -118,7 +118,7 @@
   "careerHero": {
     "back": "Volver a carreras",
     "badge": "Licenciatura",
-    "malla": "Ver malla curricular",
+    "malla": "Malla curricular",
     "verVideo": "Ver video"
   },
   "careerMisionVision": {
@@ -143,7 +143,9 @@
     "title": "Lo que dicen de la UNO",
     "subtitle": "Historias reales de quienes ya forman parte de nuestra comunidad académica.",
     "prev": "Testimonio anterior",
-    "next": "Testimonio siguiente"
+    "next": "Testimonio siguiente",
+    "readMore": "Ver más",
+    "readLess": "Ver menos"
   },
   "preinscripcion": {
     "sectionTitleHome": "¿Listo para dar el primer paso?",

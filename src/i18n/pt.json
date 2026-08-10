@@ -143,7 +143,9 @@
     "title": "O que dizem da UNO",
     "subtitle": "Histórias reais de quem já faz parte da nossa comunidade acadêmica.",
     "prev": "Depoimento anterior",
-    "next": "Próximo depoimento"
+    "next": "Próximo depoimento",
+    "readMore": "Ver mais",
+    "readLess": "Ver menos"
   },
   "preinscripcion": {
     "sectionTitleHome": "Pronto para dar o primeiro passo?",
