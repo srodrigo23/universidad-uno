@@ -50,14 +50,6 @@ export default function CareerHero({
         <h1 className="max-w-3xl text-3xl text-white sm:text-4xl">{nombre}</h1>
         <p className="mt-4 max-w-2xl text-white/85">{excerpt}</p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <button
-            type="button"
-            onClick={() => setVideoOpen(true)}
-            className="inline-flex items-center gap-2 rounded-full bg-secondary px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition hover:-translate-y-px hover:bg-secondary-dark"
-          >
-            <FaPlay size={12} className="shrink-0" />
-            {t.verVideo}
-          </button>
           <a
             href={mallaHref}
             target="_blank"
@@ -67,6 +59,14 @@ export default function CareerHero({
             <FaFilePdf size={14} className="shrink-0" />
             {t.malla}
           </a>
+          <button
+            type="button"
+            onClick={() => setVideoOpen(true)}
+            className="inline-flex items-center gap-2 rounded-full bg-secondary px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition hover:-translate-y-px hover:bg-secondary-dark"
+          >
+            <FaPlay size={12} className="shrink-0" />
+            {t.verVideo}
+          </button>
         </div>
       </Reveal>
 

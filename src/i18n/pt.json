@@ -138,9 +138,27 @@
     "eyebrow": "Nossos princípios",
     "title": "Valores do curso"
   },
-  "careerCta": {
-    "question": "Quer estudar {{nombre}}?",
-    "cta": "Fale com um consultor"
+  "preinscripcion": {
+    "sectionTitleHome": "Pronto para dar o primeiro passo?",
+    "sectionTitleCareer": "Quer estudar {{nombre}}?",
+    "cta": "Faça sua pré-inscrição",
+    "title": "Pré-inscrição",
+    "subtitle": "Deixe seus dados e um consultor entrará em contato com você.",
+    "nombres": "Nome",
+    "apellidos": "Sobrenome",
+    "celular": "Celular",
+    "correo": "E-mail",
+    "carrera": "Curso de interesse",
+    "carreraPlaceholder": "Selecione um curso",
+    "prefijo": "Código do país",
+    "submit": "Enviar pré-inscrição",
+    "close": "Fechar",
+    "successTitle": "Pronto!",
+    "successText": "Sua pré-inscrição foi registrada, um consultor entrará em contato com você em breve.",
+    "requerido": "Este campo é obrigatório.",
+    "hintLetras": "Somente letras são permitidas.",
+    "hintCelular": "Somente números, entre 6 e 15 dígitos.",
+    "hintCorreo": "Informe um e-mail válido, por exemplo nome@dominio.com"
   },
   "scrollTop": {
     "label": "Voltar ao topo"

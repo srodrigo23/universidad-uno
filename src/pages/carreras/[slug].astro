@@ -5,7 +5,7 @@ import CareerMisionVision from '../../components/CareerMisionVision';
 import Competencias from '../../components/Competencias';
 import CampoLaboral from '../../components/CampoLaboral';
 import ValoresGrid from '../../components/ValoresGrid';
-import CareerCta from '../../components/CareerCta';
+import PreinscripcionCta from '../../components/PreinscripcionCta';
 import { careers, type Career } from '../../data/careers';
 import { dictionaries, localizedPath } from '../../i18n/config';
 
@@ -24,6 +24,7 @@ const { career } = Astro.props;
 const locale = 'es';
 const dict = dictionaries[locale];
 const content = career[locale];
+const careerOptions = careers.map((item) => ({ slug: item.slug, nombre: item[locale].nombre }));
 ---
 
 <Layout
@@ -48,5 +49,11 @@ const content = career[locale];
 	{content.competencias && <Competencias grupos={content.competencias} t={dict.competencias} client:visible />}
 	<CampoLaboral titulo={content.campoLaboralTitulo} items={content.campoLaboral} t={dict.campoLaboral} client:visible />
 	<ValoresGrid valores={content.valores} t={dict.valoresGrid} client:visible />
-	<CareerCta nombre={content.nombre} t={dict.careerCta} client:visible />
+	<PreinscripcionCta
+		titulo={dict.preinscripcion.sectionTitleCareer.replace('{{nombre}}', content.nombre)}
+		careers={careerOptions}
+		defaultCareer={career.slug}
+		t={dict.preinscripcion}
+		client:visible
+	/>
 </Layout>

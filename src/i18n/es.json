@@ -138,9 +138,27 @@
     "eyebrow": "Nuestros principios",
     "title": "Valores de la carrera"
   },
-  "careerCta": {
-    "question": "¿Quieres estudiar {{nombre}}?",
-    "cta": "Habla con un asesor"
+  "preinscripcion": {
+    "sectionTitleHome": "¿Listo para dar el primer paso?",
+    "sectionTitleCareer": "¿Quieres estudiar {{nombre}}?",
+    "cta": "Preinscríbete",
+    "title": "Preinscripción",
+    "subtitle": "Déjanos tus datos y un asesor se comunicará contigo.",
+    "nombres": "Nombres",
+    "apellidos": "Apellidos",
+    "celular": "Celular",
+    "correo": "Correo electrónico",
+    "carrera": "Carrera de interés",
+    "carreraPlaceholder": "Selecciona una carrera",
+    "prefijo": "Código de país",
+    "submit": "Enviar preinscripción",
+    "close": "Cerrar",
+    "successTitle": "¡Listo!",
+    "successText": "Tu preinscripción ha sido registrada, un asesor se comunicará contigo muy pronto.",
+    "requerido": "Este campo es obligatorio.",
+    "hintLetras": "Solo se permiten letras.",
+    "hintCelular": "Solo números, entre 6 y 15 dígitos.",
+    "hintCorreo": "Ingresa un correo válido, por ejemplo nombre@dominio.com"
   },
   "scrollTop": {
     "label": "Volver arriba"
