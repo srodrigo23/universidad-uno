@@ -64,7 +64,11 @@
   },
   "careerCard": {
     "badge": "Licenciatura",
-    "cta": "Ver carrera"
+    "cta": "Ver carrera",
+    "verVideo": "Ver video"
+  },
+  "videoModal": {
+    "close": "Cerrar video"
   },
   "faq": {
     "eyebrow": "Preguntas frecuentes",
@@ -114,7 +118,8 @@
   "careerHero": {
     "back": "Volver a carreras",
     "badge": "Licenciatura",
-    "malla": "Ver malla curricular"
+    "malla": "Ver malla curricular",
+    "verVideo": "Ver video"
   },
   "careerMisionVision": {
     "misionLabel": "Misión",

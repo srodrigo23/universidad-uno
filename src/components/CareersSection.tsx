@@ -1,12 +1,16 @@
+import { useState } from 'react';
 import { FaGraduationCap } from 'react-icons/fa6';
 import CareerCard from './CareerCard';
+import VideoModal from './VideoModal';
 import Reveal from './Reveal';
 import Eyebrow from './Eyebrow';
 import SectionGlow from './SectionGlow';
+import { careerVideo } from '../data/careers';
 
 interface CareerSummary {
   slug: string;
   nombre: string;
+  videoSlug: string;
   image: ImageMetadata;
 }
 
@@ -21,10 +25,17 @@ interface Props {
   cardT: {
     badge: string;
     cta: string;
+    verVideo: string;
+  };
+  videoT: {
+    close: string;
   };
 }
 
-export default function CareersSection({ careers, basePath, t, cardT }: Props) {
+export default function CareersSection({ careers, basePath, t, cardT, videoT }: Props) {
+  const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const active = careers.find((career) => career.slug === activeSlug) ?? null;
+
   return (
     <section id="carreras" className="px-6 pt-6">
       <div className="relative mx-auto max-w-6xl">
@@ -41,13 +52,25 @@ export default function CareersSection({ careers, basePath, t, cardT }: Props) {
               href={`${basePath}/${career.slug}`}
               nombre={career.nombre}
               image={career.image}
+              video={careerVideo(career.videoSlug)}
               badge={cardT.badge}
               cta={cardT.cta}
+              verVideo={cardT.verVideo}
+              onPlay={() => setActiveSlug(career.slug)}
               index={i}
             />
           ))}
         </div>
       </div>
+
+      {/* Una sola instancia para toda la grilla. */}
+      <VideoModal
+        open={active !== null}
+        nombre={active?.nombre ?? ''}
+        video={active ? careerVideo(active.videoSlug) : null}
+        onClose={() => setActiveSlug(null)}
+        t={videoT}
+      />
     </section>
   );
 }

@@ -39,7 +39,9 @@ const content = career[locale];
 		image={career.heroImage}
 		backHref={`/#carreras`}
 		mallaHref={`/pdf/vaucher/${career.slug}.pdf`}
+		videoSlug={career.videoSlug}
 		t={dict.careerHero}
+		videoT={dict.videoModal}
 		client:visible
 	/>
 	<CareerMisionVision mision={content.mision} vision={content.vision} t={dict.careerMisionVision} client:visible />

@@ -24,8 +24,9 @@ pnpm-debug.log*
 .idea/
 
 
-/public/video/original
+# fuentes de video y binarios de proceso: fuera de public/ para que no se publiquen
+/video-src/original
 
-/public/video/bin
+/video-src/bin
 
 *.pdf

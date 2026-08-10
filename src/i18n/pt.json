@@ -64,7 +64,11 @@
   },
   "careerCard": {
     "badge": "Graduação",
-    "cta": "Ver curso"
+    "cta": "Ver curso",
+    "verVideo": "Ver vídeo"
+  },
+  "videoModal": {
+    "close": "Fechar vídeo"
   },
   "faq": {
     "eyebrow": "Perguntas frequentes",
@@ -114,7 +118,8 @@
   "careerHero": {
     "back": "Voltar para os cursos",
     "badge": "Graduação",
-    "malla": "Ver grade curricular"
+    "malla": "Ver grade curricular",
+    "verVideo": "Ver vídeo"
   },
   "careerMisionVision": {
     "misionLabel": "Missão",

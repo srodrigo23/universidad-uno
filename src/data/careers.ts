@@ -24,15 +24,32 @@ export interface CareerContent {
 
 export interface Career {
   slug: string;
+  /** Nombre base de los archivos en public/video/optimized; no siempre coincide con `slug`. */
+  videoSlug: string;
   image: ImageMetadata;
   heroImage: ImageMetadata;
   es: CareerContent;
   pt: CareerContent;
 }
 
+export interface CareerVideo {
+  src: string;
+  preview: string;
+  poster: string;
+}
+
+export function careerVideo(videoSlug: string): CareerVideo {
+  return {
+    src: `/video/optimized/complete/${videoSlug}.mp4`,
+    preview: `/video/optimized/loop/${videoSlug}-preview.mp4`,
+    poster: `/video/optimized/poster/${videoSlug}.jpg`,
+  };
+}
+
 export const careers: Career[] = [
   {
     slug: 'enfermeria',
+    videoSlug: 'enfermeria',
     image: enfermeriaImg,
     heroImage: enfermeriaHeroImg,
     es: {
@@ -106,6 +123,7 @@ export const careers: Career[] = [
   },
   {
     slug: 'medicina',
+    videoSlug: 'medicina',
     image: medicinaImg,
     heroImage: medicinaHeroImg,
     es: {
@@ -245,6 +263,7 @@ export const careers: Career[] = [
   },
   {
     slug: 'fisioterapia-kinesiologia',
+    videoSlug: 'fisio',
     image: fisioImg,
     heroImage: fisioHeroImg,
     es: {
@@ -414,6 +433,7 @@ export const careers: Career[] = [
   },
   {
     slug: 'derecho',
+    videoSlug: 'derecho',
     image: derechoImg,
     heroImage: derechoImg,
     es: {
@@ -487,6 +507,7 @@ export const careers: Career[] = [
   },
   {
     slug: 'administracion-empresas',
+    videoSlug: 'administracion',
     image: adminImg,
     heroImage: adminImg,
     es: {
