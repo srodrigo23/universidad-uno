@@ -30,7 +30,9 @@
     "misionLabel": "Misión",
     "misionText": "Formar profesionales competentes, éticos, líderes con emprendedurismo en base a la diversidad cultural, la ciencia y la tecnología para contribuir al desarrollo de la sociedad.",
     "visionLabel": "Visión",
-    "visionText": "Ser líderes en educación superior, acreditados y reconocidos internacionalmente con la formación de profesionales de alta calidad, con responsabilidad social y bases sólidas en la investigación e innovación."
+    "visionText": "Ser líderes en educación superior, acreditados y reconocidos internacionalmente con la formación de profesionales de alta calidad, con responsabilidad social y bases sólidas en la investigación e innovación.",
+    "readMore": "Ver más",
+    "readLess": "Ver menos"
   },
   "sobreNosotros": {
     "eyebrow": "Subsede Cochabamba",
@@ -116,7 +118,9 @@
   },
   "careerMisionVision": {
     "misionLabel": "Misión",
-    "visionLabel": "Visión"
+    "visionLabel": "Visión",
+    "readMore": "Ver más",
+    "readLess": "Ver menos"
   },
   "campoLaboral": {
     "eyebrow": "Oportunidades"
