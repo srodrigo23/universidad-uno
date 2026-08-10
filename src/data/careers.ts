@@ -1,3 +1,9 @@
+import enfermeriaImg from '../assets/images/enfermeria/enf-enseniando-presion.webp';
+import medicinaImg from '../assets/images/medicina/med-laboratorio.webp';
+import fisioImg from '../assets/images/fisio/fisio-area-fisio.webp';
+import derechoImg from '../assets/images/derecho/derecho-juicio.webp';
+import adminImg from '../assets/images/admin/admin-laboratorio-de-comp.webp';
+
 export type Valor = string | { titulo: string; descripcion: string };
 export type CompetenciaGrupo = { titulo: string; items: string[] };
 
@@ -14,6 +20,7 @@ export interface CareerContent {
 
 export interface Career {
   slug: string;
+  image: ImageMetadata;
   es: CareerContent;
   pt: CareerContent;
 }
@@ -21,6 +28,7 @@ export interface Career {
 export const careers: Career[] = [
   {
     slug: 'enfermeria',
+    image: enfermeriaImg,
     es: {
       nombre: 'Enfermería',
       resumen:
@@ -92,6 +100,7 @@ export const careers: Career[] = [
   },
   {
     slug: 'medicina',
+    image: medicinaImg,
     es: {
       nombre: 'Medicina',
       resumen:
@@ -229,6 +238,7 @@ export const careers: Career[] = [
   },
   {
     slug: 'fisioterapia-kinesiologia',
+    image: fisioImg,
     es: {
       nombre: 'Fisioterapia y Kinesiología',
       resumen:
@@ -396,6 +406,7 @@ export const careers: Career[] = [
   },
   {
     slug: 'derecho',
+    image: derechoImg,
     es: {
       nombre: 'Derecho',
       resumen:
@@ -467,6 +478,7 @@ export const careers: Career[] = [
   },
   {
     slug: 'administracion-empresas',
+    image: adminImg,
     es: {
       nombre: 'Administración y Dirección de Empresas',
       resumen:

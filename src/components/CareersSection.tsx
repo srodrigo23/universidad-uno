@@ -7,7 +7,7 @@ import SectionGlow from './SectionGlow';
 interface CareerSummary {
   slug: string;
   nombre: string;
-  resumen: string;
+  image: ImageMetadata;
 }
 
 interface Props {
@@ -40,7 +40,7 @@ export default function CareersSection({ careers, basePath, t, cardT }: Props) {
               key={career.slug}
               href={`${basePath}/${career.slug}`}
               nombre={career.nombre}
-              resumen={career.resumen}
+              image={career.image}
               badge={cardT.badge}
               cta={cardT.cta}
               index={i}
