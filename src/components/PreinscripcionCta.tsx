@@ -36,18 +36,21 @@ export default function PreinscripcionCta({ titulo, careers, defaultCareer, t }:
   const [open, setOpen] = useState(false);
 
   return (
-    <section className="relative px-6 py-16 text-center">
-      <Reveal className="relative mx-auto max-w-6xl">
+    <section className='relative px-6 py-16 text-center'>
+      {/* <Reveal className="relative mx-auto max-w-6xl"> */}
+      <div className='relative mx-auto max-w-6xl'>
         <SectionGlow />
-        <h2 className="mb-6 text-3xl text-primary-dark">{titulo}</h2>
+        <h2 className='mb-6 text-3xl text-primary-dark'>{titulo}</h2>
         <button
-          type="button"
+          type='button'
           onClick={() => setOpen(true)}
-          className="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition hover:-translate-y-px hover:bg-secondary-dark"
+          // onClick={() => console.log('gg')}
+          className='inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition hover:-translate-y-px hover:bg-secondary-dark cursor-pointer'
         >
           <FaPenToSquare size={14} /> {t.cta}
         </button>
-      </Reveal>
+        {/* </Reveal> */}
+      </div>
 
       <PreinscripcionModal
         open={open}

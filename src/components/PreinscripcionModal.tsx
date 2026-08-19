@@ -2,7 +2,30 @@ import { useEffect, useRef, useState } from 'react';
 import { useForm, type UseFormRegisterReturn } from 'react-hook-form';
 import { HiX } from 'react-icons/hi';
 import { FaCircleCheck, FaPaperPlane } from 'react-icons/fa6';
-import { BO, BR } from 'country-flag-icons/react/3x2';
+import {
+  AR,
+  BO,
+  BR,
+  CL,
+  CO,
+  CR,
+  CU,
+  DO,
+  EC,
+  ES,
+  GQ,
+  GT,
+  HN,
+  MX,
+  NI,
+  PA,
+  PE,
+  PR,
+  PY,
+  SV,
+  UY,
+  VE,
+} from 'country-flag-icons/react/3x2';
 import { AnimatePresence, motion } from 'motion/react';
 
 export interface CareerOption {
@@ -10,9 +33,32 @@ export interface CareerOption {
   nombre: string;
 }
 
+// Bolivia primero por ser la sede; el resto alfabético.
+// Puerto Rico y República Dominicana comparten el +1, así que llevan su código de área
+// para que `code` siga siendo único (es la key y el value del select).
 const prefixes = [
   { code: '+591', label: 'Bolivia', Flag: BO },
+  { code: '+54', label: 'Argentina', Flag: AR },
   { code: '+55', label: 'Brasil', Flag: BR },
+  { code: '+56', label: 'Chile', Flag: CL },
+  { code: '+57', label: 'Colombia', Flag: CO },
+  { code: '+506', label: 'Costa Rica', Flag: CR },
+  { code: '+53', label: 'Cuba', Flag: CU },
+  { code: '+593', label: 'Ecuador', Flag: EC },
+  { code: '+503', label: 'El Salvador', Flag: SV },
+  { code: '+34', label: 'España', Flag: ES },
+  { code: '+502', label: 'Guatemala', Flag: GT },
+  { code: '+240', label: 'Guinea Ecuatorial', Flag: GQ },
+  { code: '+504', label: 'Honduras', Flag: HN },
+  { code: '+52', label: 'México', Flag: MX },
+  { code: '+505', label: 'Nicaragua', Flag: NI },
+  { code: '+507', label: 'Panamá', Flag: PA },
+  { code: '+595', label: 'Paraguay', Flag: PY },
+  { code: '+51', label: 'Perú', Flag: PE },
+  { code: '+1787', label: 'Puerto Rico', Flag: PR },
+  { code: '+1809', label: 'República Dominicana', Flag: DO },
+  { code: '+598', label: 'Uruguay', Flag: UY },
+  { code: '+58', label: 'Venezuela', Flag: VE },
 ];
 
 // À-ÿ cubre acentos y ñ/Ñ; el guion va último para que sea literal dentro de la clase.
@@ -248,12 +294,12 @@ export default function PreinscripcionModal({ open, onClose, careers, defaultCar
                         />
                         <select
                           aria-label={t.prefijo}
-                          className="bg-transparent py-2.5 text-sm font-semibold text-primary-dark outline-none"
+                          className="w-28 truncate bg-transparent py-2.5 text-sm font-semibold text-primary-dark outline-none"
                           {...register('prefijo')}
                         >
                           {prefixes.map((item) => (
                             <option key={item.code} value={item.code}>
-                              {item.code}
+                              {item.code} {item.label}
                             </option>
                           ))}
                         </select>
