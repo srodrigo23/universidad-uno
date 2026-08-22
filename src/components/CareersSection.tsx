@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaGraduationCap } from 'react-icons/fa6';
 import CareerCard from './CareerCard';
 import VideoModal from './VideoModal';
-import Reveal from './Reveal';
+import Reveal from './shared/Reveal';
 import Eyebrow from './Eyebrow';
 import SectionGlow from './SectionGlow';
 import { careerVideo } from '../data/careers';
@@ -32,20 +32,26 @@ interface Props {
   };
 }
 
-export default function CareersSection({ careers, basePath, t, cardT, videoT }: Props) {
+export default function CareersSection({
+  careers,
+  basePath,
+  t,
+  cardT,
+  videoT,
+}: Props) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const active = careers.find((career) => career.slug === activeSlug) ?? null;
 
   return (
-    <section id="carreras" className="px-6 pt-6">
-      <div className="relative mx-auto max-w-6xl">
+    <section id='carreras' className='px-6 pt-6'>
+      <div className='relative mx-auto max-w-6xl'>
         <SectionGlow />
         <Reveal>
           <Eyebrow icon={FaGraduationCap} label={t.eyebrow} />
-          <h2 className="mb-3 text-3xl text-primary-dark">{t.title}</h2>
-          <p className="max-w-xl text-slate-600">{t.subtitle}</p>
+          <h2 className='mb-3 text-3xl text-primary-dark'>{t.title}</h2>
+          <p className='max-w-xl text-slate-600'>{t.subtitle}</p>
         </Reveal>
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className='mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'>
           {careers.map((career, i) => (
             <CareerCard
               key={career.slug}

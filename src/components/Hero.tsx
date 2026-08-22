@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import { FaChevronDown, FaCircleCheck } from 'react-icons/fa6';
-import Reveal from './Reveal';
+import Reveal from './shared/Reveal';
 import HeroBottomFade from './HeroBottomFade';
-import { useHeroCarousel, CarouselBackground, CarouselDots } from './HeroCarousel';
+import {
+  useHeroCarousel,
+  CarouselBackground,
+  CarouselDots,
+} from './HeroCarousel';
 
 // import slide0 from '../assets/images/estudiantes/estudiante-mujer-modelo-uno.webp';
 import slide1 from '../assets/images/estudiantes/estudiantes-biblioteca.webp';
@@ -67,7 +71,10 @@ export default function Hero({ t }: Props) {
       const current = phrases[phraseIndex];
       charCount += 1;
       setRotatingText(current.slice(0, charCount));
-      timeoutId = setTimeout(charCount < current.length ? type : erase, charCount < current.length ? ROTATE_TYPE_SPEED_MS : ROTATE_HOLD_MS);
+      timeoutId = setTimeout(
+        charCount < current.length ? type : erase,
+        charCount < current.length ? ROTATE_TYPE_SPEED_MS : ROTATE_HOLD_MS,
+      );
     };
 
     const erase = () => {
@@ -82,7 +89,8 @@ export default function Hero({ t }: Props) {
       }
     };
 
-    const initialDelay = TYPE_START_DELAY_MS + t.title.length * TYPE_SPEED_MS + ROTATE_PAUSE_MS;
+    const initialDelay =
+      TYPE_START_DELAY_MS + t.title.length * TYPE_SPEED_MS + ROTATE_PAUSE_MS;
     setRotatingText('');
     timeoutId = setTimeout(type, initialDelay);
 
@@ -90,17 +98,17 @@ export default function Hero({ t }: Props) {
   }, [t.rotatingPhrases, t.title]);
 
   return (
-    <section className="relative flex min-h-screen items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white">
+    <section className='relative flex min-h-screen items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white'>
       <CarouselBackground emblaRef={emblaRef} slides={slides} />
       <div
-        className="absolute inset-0"
+        className='absolute inset-0'
         style={{
           backgroundImage:
             'linear-gradient(115deg, color-mix(in srgb, var(--color-primary-dark) 62%, transparent) 0%, color-mix(in srgb, var(--color-primary-dark) 32%, transparent) 50%, color-mix(in srgb, var(--color-primary-dark) 15%, transparent) 100%)',
         }}
       />
       <div
-        className="absolute inset-0 opacity-[0.15] mix-blend-overlay"
+        className='absolute inset-0 opacity-[0.15] mix-blend-overlay'
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
@@ -108,34 +116,42 @@ export default function Hero({ t }: Props) {
       />
       <HeroBottomFade />
 
-      <Reveal className="relative mx-auto w-full max-w-6xl">
-        <p className="mb-2 text-xs font-bold tracking-widest text-secondary-light uppercase">{t.eyebrow}</p>
-        <h1 className="max-w-3xl text-4xl font-extrabold text-white sm:text-5xl" aria-label={t.title}>
-          <span aria-hidden="true">{typedTitle}</span>
+      <Reveal className='relative mx-auto w-full max-w-6xl'>
+        <p className='mb-2 text-xs font-bold tracking-widest text-secondary-light uppercase'>
+          {t.eyebrow}
+        </p>
+        <h1
+          className='max-w-3xl text-4xl font-extrabold text-white sm:text-5xl'
+          aria-label={t.title}
+        >
+          <span aria-hidden='true'>{typedTitle}</span>
           <span
-            aria-hidden="true"
-            className="ml-0.5 inline-block h-[0.85em] w-0.75 translate-y-[0.1em] animate-pulse bg-secondary-light align-middle"
+            aria-hidden='true'
+            className='ml-0.5 inline-block h-[0.85em] w-0.75 translate-y-[0.1em] animate-pulse bg-secondary-light align-middle'
           />
         </h1>
-        <p className="mt-4 min-h-14 max-w-xl text-lg font-light text-white/85 sm:min-h-8" aria-hidden="true">
+        <p
+          className='mt-4 min-h-14 max-w-xl text-lg font-light text-white/85 sm:min-h-8'
+          aria-hidden='true'
+        >
           {rotatingText}
-          <span className="ml-0.5 inline-block h-[0.8em] w-0.5 translate-y-[0.1em] animate-pulse bg-white/70 align-middle" />
+          <span className='ml-0.5 inline-block h-[0.8em] w-0.5 translate-y-[0.1em] animate-pulse bg-white/70 align-middle' />
         </p>
-        <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-secondary-light/40 bg-secondary/15 px-3 py-1.5 text-xs font-semibold text-secondary-light">
-          <FaCircleCheck size={12} className="shrink-0" />
+        <div className='mt-5 inline-flex items-center gap-2 rounded-full border border-secondary-light/40 bg-secondary/15 px-3 py-1.5 text-xs font-semibold text-secondary-light'>
+          <FaCircleCheck size={12} className='shrink-0' />
           {t.resolution}
         </div>
-        <div className="mt-6 flex flex-wrap gap-4">
+        <div className='mt-6 flex flex-wrap gap-4'>
           <a
-            href="#carreras"
-            className="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition hover:-translate-y-px hover:bg-secondary-dark"
+            href='#carreras'
+            className='inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition hover:-translate-y-px hover:bg-secondary-dark'
           >
             {t.cta} <FaChevronDown />
           </a>
         </div>
 
         <CarouselDots
-          className="mt-8"
+          className='mt-8'
           count={slides.length}
           selectedIndex={selectedIndex}
           onSelect={(i) => emblaApi?.scrollTo(i)}

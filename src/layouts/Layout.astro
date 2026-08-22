@@ -1,9 +1,9 @@
 ---
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import WhatsAppFloatingButton from '../components/WhatsAppFloatingButton';
-import InscripcionesModal from '../components/InscripcionesModal';
-import ScrollToTopButton from '../components/ScrollToTopButton';
+import Header from '../components/shared/Header';
+import Footer from '../components/shared/Footer';
+import WhatsAppFloatingButton from '../components/shared/WhatsAppFloatingButton';
+import InscripcionesModal from '../components/modals/InscripcionesModal';
+import ScrollToTopButton from '../components/shared/ScrollToTopButton';
 import '../styles/global.css';
 
 import Analytics from '@vercel/analytics/astro';
@@ -11,75 +11,96 @@ import { careers } from '../data/careers';
 import type { Locale, Dictionary } from '../i18n/config';
 
 interface Props {
-	locale: Locale;
-	dict: Dictionary;
-	switchHref: string;
-	title?: string;
-	description?: string;
+  locale: Locale;
+  dict: Dictionary;
+  switchHref: string;
+  title?: string;
+  description?: string;
 }
 
-const { locale, dict, switchHref, title = dict.meta.title, description = dict.meta.description } = Astro.props;
+const {
+  locale,
+  dict,
+  switchHref,
+  title = dict.meta.title,
+  description = dict.meta.description,
+} = Astro.props;
 const homeHref = locale === 'es' ? '/' : '/pt/';
 const currentPath = Astro.url.pathname.replace(/\/$/, '');
 const isHome = currentPath === '' || currentPath === '/pt';
-const careerLinks = careers.map((career) => ({ slug: career.slug, nombre: career[locale].nombre }));
+const careerLinks = careers.map((career) => ({
+  slug: career.slug,
+  nombre: career[locale].nombre,
+}));
 ---
 
 <!doctype html>
 <html lang={locale}>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		
-		<!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
-		<!-- <link rel="icon" href="/favicon.ico" /> -->
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
 
-		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-		<!-- <meta name="apple-mobile-web-app-title" content="universidad-uno" /> -->
-		<link rel="manifest" href="/site.webmanifest" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+    <!-- <link rel="icon" href="/favicon.ico" /> -->
 
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins:wght@600;800;900&display=swap"
-			rel="stylesheet"
-		/>
-		<title>{title}</title>
+    <link rel='icon' type='image/png' href='/favicon-96x96.png' sizes='96x96' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <link rel='shortcut icon' href='/favicon.ico' />
+    <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
+    <!-- <meta name="apple-mobile-web-app-title" content="universidad-uno" /> -->
+    <link rel='manifest' href='/site.webmanifest' />
 
-		<Analytics />
-	</head>
-	<body>
-		{/* Lavado ambiental continuo: las secciones son transparentes y se apoyan en él,
-		    así no hay bandas alternadas que marquen dónde empieza y termina cada una. */}
-		<div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 bg-white">
-			<div
-				class="absolute inset-0"
-				style="background-image:
+    <meta name='generator' content={Astro.generator} />
+    <meta name='description' content={description} />
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins:wght@600;800;900&display=swap'
+      rel='stylesheet'
+    />
+    <title>{title}</title>
+
+    <Analytics />
+  </head>
+  <body>
+    {
+      /* Lavado ambiental continuo: las secciones son transparentes y se apoyan en él,
+		    así no hay bandas alternadas que marquen dónde empieza y termina cada una. */
+    }
+    <div
+      aria-hidden='true'
+      class='pointer-events-none fixed inset-0 -z-10 bg-white'
+    >
+      <div
+        class='absolute inset-0'
+        style='background-image:
 					radial-gradient(70% 55% at 88% 6%, color-mix(in srgb, var(--color-secondary) 9%, transparent) 0%, transparent 62%),
 					radial-gradient(62% 50% at 4% 42%, color-mix(in srgb, var(--color-secondary) 7%, transparent) 0%, transparent 62%),
-					radial-gradient(85% 55% at 65% 96%, color-mix(in srgb, var(--color-secondary) 7%, transparent) 0%, transparent 66%);"
-			>
-			</div>
-		</div>
-		<Header
-			client:load
-			locale={locale}
-			switchHref={switchHref}
-			currentPath={Astro.url.pathname}
-			careerLinks={careerLinks}
-			t={dict.header}
-		/>
-		<slot />
-		<Footer client:visible t={dict.footer} />
-		<WhatsAppFloatingButton client:load t={dict.whatsapp} />
-		{isHome && (
-			<InscripcionesModal client:load locale={locale} homeHref={homeHref} t={dict.inscripcionesModal} />
-		)}
-		<ScrollToTopButton client:load t={dict.scrollTop} />
-	</body>
+					radial-gradient(85% 55% at 65% 96%, color-mix(in srgb, var(--color-secondary) 7%, transparent) 0%, transparent 66%);'
+      >
+      </div>
+    </div>
+    <Header
+      client:load
+      locale={locale}
+      switchHref={switchHref}
+      currentPath={Astro.url.pathname}
+      careerLinks={careerLinks}
+      t={dict.header}
+    />
+    <slot />
+    <Footer client:visible t={dict.footer} />
+    <WhatsAppFloatingButton client:load t={dict.whatsapp} />
+    {
+      isHome && (
+        <InscripcionesModal
+          client:load
+          locale={locale}
+          homeHref={homeHref}
+          t={dict.inscripcionesModal}
+        />
+      )
+    }
+    <ScrollToTopButton client:load t={dict.scrollTop} />
+  </body>
 </html>

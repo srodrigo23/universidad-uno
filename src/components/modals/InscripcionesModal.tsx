@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { HiX } from 'react-icons/hi';
 import { AnimatePresence, motion } from 'motion/react';
 
-import modalEsp from '../assets/images/inscripcion/modal-esp.webp';
-import modalPort from '../assets/images/inscripcion/modal-port.webp';
+import modalEsp from '../../assets/images/inscripcion/modal-esp.webp';
+import modalPort from '../../assets/images/inscripcion/modal-port.webp';
 
 type Locale = 'es' | 'pt';
 

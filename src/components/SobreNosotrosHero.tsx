@@ -1,6 +1,10 @@
-import Reveal from './Reveal';
+import Reveal from './shared/Reveal';
 import HeroBottomFade from './HeroBottomFade';
-import { useHeroCarousel, CarouselBackground, CarouselDots } from './HeroCarousel';
+import {
+  useHeroCarousel,
+  CarouselBackground,
+  CarouselDots,
+} from './HeroCarousel';
 
 import slide1 from '../assets/images/estudiantes/estudiante-mujer-modelo-uno.webp';
 import slide2 from '../assets/images/estudiantes/estudiante-hombre-modelo-mochila.webp';

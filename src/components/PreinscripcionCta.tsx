@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { FaPenToSquare } from 'react-icons/fa6';
-import Reveal from './Reveal';
+import Reveal from './shared/Reveal';
 import SectionGlow from './SectionGlow';
-import PreinscripcionModal, { type CareerOption } from './PreinscripcionModal';
+import PreinscripcionModal, {
+  type CareerOption,
+} from './modals/PreinscripcionModal';
 
 interface Props {
   /** Título de la sección; en las rutas de carrera llega ya interpolado. */
@@ -32,7 +34,12 @@ interface Props {
   };
 }
 
-export default function PreinscripcionCta({ titulo, careers, defaultCareer, t }: Props) {
+export default function PreinscripcionCta({
+  titulo,
+  careers,
+  defaultCareer,
+  t,
+}: Props) {
   const [open, setOpen] = useState(false);
 
   return (
