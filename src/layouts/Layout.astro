@@ -108,10 +108,11 @@ const careerLinks = careers.map((career) => ({
 
     <!-- Google tag (gtag.js) -->
     <script
-      type='text/partytown'
+      is:inline
+      type='text/partytown '
       async
       src='https://www.googletagmanager.com/gtag/js?id=G-W8Y9BQ5NPL'></script>
-    <script type='text/partytown'>
+    <script is:inline type='text/partytown'>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
@@ -120,6 +121,9 @@ const careerLinks = careers.map((career) => ({
       gtag('config', 'G-W8Y9BQ5NPL');
     </script>
     <title>{title}</title>
+
+    <!-- Datos estructurados JSON-LD que aporta cada página. -->
+    <slot name='head' />
 
     <Analytics />
   </head>

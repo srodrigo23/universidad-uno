@@ -5,6 +5,8 @@ import Historia from '../components/Historia';
 import Faq from '../components/Faq';
 import Ubicacion from '../components/Ubicacion';
 import { dictionaries, localizedPath } from '../i18n/config';
+import SeoJsonLd from '../components/SeoJsonLd.astro';
+import { faqSchema } from '../data/schema';
 
 const locale = 'es';
 const dict = dictionaries[locale];
@@ -16,6 +18,10 @@ const dict = dictionaries[locale];
 	switchHref={localizedPath('pt', '/sobre-nosotros')}
 	title={`${dict.sobreNosotros.title} · ${dict.meta.title}`}
 >
+	<Fragment slot="head">
+		<SeoJsonLd schema={faqSchema(dict)} />
+	</Fragment>
+
 	<SobreNosotrosHero t={dict.sobreNosotros} client:load />
 	<Historia t={dict.historia} client:visible />
 	<Faq t={dict.faq} client:visible />

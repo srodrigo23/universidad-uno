@@ -7,6 +7,8 @@ import Testimonios from '../components/Testimonios';
 import PreinscripcionCta from '../components/PreinscripcionCta';
 import { careers } from '../data/careers';
 import { dictionaries, localizedPath } from '../i18n/config';
+import SeoJsonLd from '../components/SeoJsonLd.astro';
+import { organizationSchema, careerListSchema } from '../data/schema';
 
 const locale = 'es';
 const dict = dictionaries[locale];
@@ -25,6 +27,11 @@ const careerSummaries = careers.map((career) => ({
 	title="Universidad Privada UNO · Subsede Cochabamba"
 	description="Universidad Privada UNO, Subsede Cochabamba: formación en Enfermería, Medicina, Fisioterapia y Kinesiología, Derecho y Administración de Empresas."
 >
+	<Fragment slot="head">
+		<SeoJsonLd schema={organizationSchema(Astro.site, locale, dict)} />
+		<SeoJsonLd schema={careerListSchema(Astro.site, locale, dict)} />
+	</Fragment>
+
 	<Hero t={dict.hero} client:visible />
 	<MisionVision t={dict.misionVision} client:visible />
 	<CareersSection

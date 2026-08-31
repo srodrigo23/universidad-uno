@@ -1,0 +1,17 @@
+---
+/**
+ * Emite un bloque de datos estructurados. Los objetos se construyen en
+ * `src/data/schema.ts` a partir del contenido real de la página.
+ */
+interface Props {
+  schema: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { schema } = Astro.props;
+
+// `set:html` no escapa: se neutraliza `<` para que ningún texto del diccionario
+// pueda cerrar la etiqueta <script>.
+const json = JSON.stringify(schema).replace(/</g, '\\u003c');
+---
+
+<script type='application/ld+json' is:inline set:html={json} />

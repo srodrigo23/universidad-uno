@@ -8,6 +8,8 @@ import ValoresGrid from '../../components/ValoresGrid';
 import PreinscripcionCta from '../../components/PreinscripcionCta';
 import { careers, type Career } from '../../data/careers';
 import { dictionaries, localizedPath } from '../../i18n/config';
+import SeoJsonLd from '../../components/SeoJsonLd.astro';
+import { careerProgramSchema } from '../../data/schema';
 
 export function getStaticPaths() {
 	return careers.map((career) => ({
@@ -35,6 +37,10 @@ const careerOptions = careers.map((item) => ({ slug: item.slug, nombre: item[loc
 	description={content.resumen}
 	ogImage={`/og/${career.slug}.jpg`}
 >
+	<Fragment slot="head">
+		<SeoJsonLd schema={careerProgramSchema(Astro.site, locale, career)} />
+	</Fragment>
+
 	<CareerHero
 		nombre={content.nombre}
 		resumen={content.resumen}

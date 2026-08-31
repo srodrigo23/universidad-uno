@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaPenToSquare } from 'react-icons/fa6';
-import Reveal from './shared/Reveal';
+// import Reveal from './shared/Reveal';
 import SectionGlow from './SectionGlow';
 import PreinscripcionModal, {
   type CareerOption,
