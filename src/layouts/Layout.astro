@@ -16,6 +16,8 @@ interface Props {
   switchHref: string;
   title?: string;
   description?: string;
+  /** Ruta pública de la tarjeta social (1200×630). Se generan con `node scripts/generate-og.mjs`. */
+  ogImage?: string;
 }
 
 const {
@@ -24,8 +26,27 @@ const {
   switchHref,
   title = dict.meta.title,
   description = dict.meta.description,
+  ogImage = '/og/default.jpg',
 } = Astro.props;
 const homeHref = locale === 'es' ? '/' : '/pt/';
+
+// URL canónica absoluta. Se normaliza con barra final para que coincida con las
+// rutas que emite el sitemap (build en formato directorio) y evitar que
+// /ruta y /ruta/ se indexen como dos páginas distintas.
+const canonicalPath = Astro.url.pathname.endsWith('/')
+  ? Astro.url.pathname
+  : `${Astro.url.pathname}/`;
+const canonical = new URL(canonicalPath, Astro.site);
+const ogImageUrl = new URL(ogImage, Astro.site);
+// WhatsApp y Facebook cortan la descripción alrededor de los 200 caracteres;
+// los resúmenes de carrera son mucho más largos, así que se recortan por palabra.
+const socialDescription =
+  description.length > 200
+    ? `${description.slice(0, 197).replace(/\s+\S*$/, '')}…`
+    : description;
+const ogLocale = locale === 'es' ? 'es_BO' : 'pt_BR';
+const ogLocaleAlternate = locale === 'es' ? 'pt_BR' : 'es_BO';
+
 const currentPath = Astro.url.pathname.replace(/\/$/, '');
 const isHome = currentPath === '' || currentPath === '/pt';
 const careerLinks = careers.map((career) => ({
@@ -52,6 +73,32 @@ const careerLinks = careers.map((career) => ({
 
     <meta name='generator' content={Astro.generator} />
     <meta name='description' content={description} />
+    <link rel='canonical' href={canonical} />
+
+    <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
+    <meta property='og:type' content='website' />
+    <meta
+      property='og:site_name'
+      content='Universidad Privada UNO · Subsede Cochabamba'
+    />
+    <meta property='og:locale' content={ogLocale} />
+    <meta property='og:locale:alternate' content={ogLocaleAlternate} />
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={socialDescription} />
+    <meta property='og:url' content={canonical} />
+    <meta property='og:image' content={ogImageUrl} />
+    <meta property='og:image:type' content='image/jpeg' />
+    <meta property='og:image:width' content='1200' />
+    <meta property='og:image:height' content='630' />
+    <meta property='og:image:alt' content={title} />
+
+    <!-- Twitter / X -->
+    <meta name='twitter:card' content='summary_large_image' />
+    <meta name='twitter:title' content={title} />
+    <meta name='twitter:description' content={socialDescription} />
+    <meta name='twitter:image' content={ogImageUrl} />
+
+    <meta name='theme-color' content='#21366f' />
     <link rel='preconnect' href='https://fonts.googleapis.com' />
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
     <link

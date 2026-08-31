@@ -5,10 +5,25 @@ import react from '@astrojs/react';
 
 import tailwindcss from '@tailwindcss/vite';
 // import vercel from '@astrojs/vercel/serverless';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react()],
+  site: 'https://www.uno.edu.bo', // real site name
+  integrations: [
+    react(), 
+    sitemap(
+      { 
+        i18n: { 
+          defaultLocale: 'es', 
+          locales: { 
+            es: 'es-BO', 
+            pt: 'pt-BR' 
+          } 
+        } 
+      }
+    )
+  ],
 
   i18n: {
     locales: ['es', 'pt'],

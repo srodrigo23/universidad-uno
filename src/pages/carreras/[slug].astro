@@ -33,6 +33,7 @@ const careerOptions = careers.map((item) => ({ slug: item.slug, nombre: item[loc
 	switchHref={localizedPath('pt', `/carreras/${career.slug}`)}
 	title={`${content.nombre} · Universidad Privada UNO`}
 	description={content.resumen}
+	ogImage={`/og/${career.slug}.jpg`}
 >
 	<CareerHero
 		nombre={content.nombre}
