@@ -33,7 +33,7 @@ const ROTATE_HOLD_MS = 2600;
 const ROTATE_PAUSE_MS = 400;
 
 export default function Hero({ t }: Props) {
-  const { emblaRef, emblaApi, selectedIndex } = useHeroCarousel();
+  const { emblaRef, emblaApi, selectedIndex, settledIndex } = useHeroCarousel();
   // La primera frase se renderiza completa desde el inicio (SSR incluido) para
   // que la línea nunca aparezca vacía; el ciclo arranca borrándola.
   const [rotatingText, setRotatingText] = useState(t.rotatingPhrases?.[0] ?? '');
@@ -76,7 +76,12 @@ export default function Hero({ t }: Props) {
 
   return (
     <section className='relative flex min-h-screen items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white sm:pb-24'>
-      <CarouselBackground emblaRef={emblaRef} slides={slides} />
+      <CarouselBackground
+        emblaRef={emblaRef}
+        slides={slides}
+        activeIndex={selectedIndex}
+        settledIndex={settledIndex}
+      />
       <div
         className='absolute inset-0'
         style={{

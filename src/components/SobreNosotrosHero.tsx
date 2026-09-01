@@ -22,13 +22,15 @@ interface Props {
 }
 
 export default function SobreNosotrosHero({ t }: Props) {
-  const { emblaRef, emblaApi, selectedIndex } = useHeroCarousel();
+  const { emblaRef, emblaApi, selectedIndex, settledIndex } = useHeroCarousel();
 
   return (
     <section className='relative flex min-h-[75vh] items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white'>
       <CarouselBackground
         emblaRef={emblaRef}
         slides={slides}
+        activeIndex={selectedIndex}
+        settledIndex={settledIndex}
         imageClassName='md:origin-[50%_25%] md:object-[50%_25%]'
       />
       <div
