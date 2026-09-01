@@ -26,6 +26,56 @@
     "resolution": "Resolución Ministerial Nº 0164/2023",
     "cta": "Ver carreras"
   },
+  "credenciales": {
+    "eyebrow": "Respaldo institucional",
+    "title": "Una universidad con respaldo legal y trayectoria",
+    "subtitle": "La Subsede Cochabamba forma parte de la Universidad Nacional del Oriente, autorizada por el Ministerio de Educación del Estado Plurinacional de Bolivia.",
+    "items": [
+      {
+        "value": "1999",
+        "label": "Fundación de la universidad",
+        "detail": "Resolución Ministerial Nº 203/99, del 22 de junio de 1999"
+      },
+      {
+        "value": "R.M. 0164/2023",
+        "label": "Autorización de la Subsede Cochabamba",
+        "detail": "Ministerio de Educación del Estado Plurinacional de Bolivia"
+      },
+      {
+        "value": "5",
+        "label": "Carreras a nivel licenciatura",
+        "detail": "Ciencias de la Salud, Ciencias Empresariales y Derecho"
+      },
+      {
+        "value": "ES · PT",
+        "label": "Asesoría en español y portugués",
+        "detail": "Abierta a estudiantes de Bolivia, Brasil y Latinoamérica"
+      }
+    ]
+  },
+  "porQueUno": {
+    "eyebrow": "Por qué la UNO",
+    "title": "Una formación pensada para el ejercicio profesional",
+    "subtitle": "Lo que define la propuesta académica de la Subsede Cochabamba.",
+    "items": [
+      {
+        "titulo": "Educación Basada en Competencias",
+        "texto": "Cada carrera define competencias concretas —genéricas y específicas— que se trabajan y evalúan a lo largo de toda la formación, no solo al final."
+      },
+      {
+        "titulo": "Presencial, en el eje central del país",
+        "texto": "Clases presenciales en el Edificio Central de Cochabamba, una subsede creada para responder a las demandas educativas de la región."
+      },
+      {
+        "titulo": "Ciencia, ética y liderazgo",
+        "texto": "Formamos profesionales competentes y éticos, con liderazgo y emprendedurismo, sobre la base de la diversidad cultural, la ciencia y la tecnología."
+      },
+      {
+        "titulo": "Una comunidad diversa",
+        "texto": "Estudiantes de Bolivia, Brasil y otros países de la región conviven en una comunidad académica dinámica e inclusiva."
+      }
+    ]
+  },
   "misionVision": {
     "misionLabel": "Misión",
     "misionText": "Formar profesionales competentes, éticos, líderes con emprendedurismo en base a la diversidad cultural, la ciencia y la tecnología para contribuir al desarrollo de la sociedad.",
@@ -42,7 +92,8 @@
   "ubicacion": {
     "eyebrow": "Visítanos",
     "title": "¿Dónde estamos?",
-    "mapTitle": "Mapa: ubicación del Edificio Central"
+    "mapTitle": "Mapa: ubicación del Edificio Central",
+    "verEnMapa": "Ver en Google Maps"
   },
   "historia": {
     "eyebrow": "Nuestra historia",
@@ -67,6 +118,35 @@
     "cta": "Ver carrera",
     "verVideo": "Ver video"
   },
+  "vidaUniversitaria": {
+    "eyebrow": "Vida universitaria",
+    "title": "Así se estudia en la UNO Cochabamba",
+    "subtitle": "Laboratorios, prácticas y espacios de encuentro del Edificio Central."
+  },
+  "comoPostular": {
+    "eyebrow": "Admisión",
+    "title": "Cómo postular",
+    "subtitle": "Cuatro pasos para iniciar tu formación en la Subsede Cochabamba.",
+    "steps": [
+      {
+        "titulo": "Elige tu carrera",
+        "texto": "Revisa las cinco licenciaturas y descarga la malla curricular de la que te interese."
+      },
+      {
+        "titulo": "Consulta los requisitos",
+        "texto": "Nuestros asesores de admisión te informan los requisitos vigentes por WhatsApp o en el Edificio Central."
+      },
+      {
+        "titulo": "Completa tu preinscripción",
+        "texto": "Llena el formulario con tus datos y la carrera elegida; un asesor se pondrá en contacto contigo."
+      },
+      {
+        "titulo": "Formaliza tu inscripción",
+        "texto": "Presenta tu documentación en el Edificio Central para completar el proceso."
+      }
+    ],
+    "cta": "Preinscribirme ahora"
+  },
   "videoModal": {
     "close": "Cerrar video"
   },
@@ -90,7 +170,8 @@
         "q": "¿Dónde puedo ver la malla curricular de cada carrera?",
         "a": "Puedes solicitar la malla curricular completa a través de nuestros asesores de admisión por WhatsApp."
       }
-    ]
+    ],
+    "seeAll": "Ver todas las preguntas"
   },
   "footer": {
     "tagline": "Formando profesionales competentes, éticos y líderes para el desarrollo de Bolivia.",

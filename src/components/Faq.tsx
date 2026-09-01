@@ -1,20 +1,25 @@
 import { useState } from 'react';
-import { FaCircleQuestion, FaChevronDown } from 'react-icons/fa6';
+import { FaCircleQuestion, FaChevronDown, FaArrowRight } from 'react-icons/fa6';
 import { AnimatePresence, motion } from 'motion/react';
 import Reveal from './shared/Reveal';
 import Eyebrow from './Eyebrow';
 import SectionGlow from './SectionGlow';
 
 interface Props {
+  /** En la home mostramos un extracto; la lista completa vive en sobre-nosotros. */
+  limit?: number;
+  seeAllHref?: string;
   t: {
     eyebrow: string;
     title: string;
+    seeAll: string;
     items: { q: string; a: string }[];
   };
 }
 
-export default function Faq({ t }: Props) {
+export default function Faq({ limit, seeAllHref, t }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const items = limit ? t.items.slice(0, limit) : t.items;
 
   return (
     <section id='faq' className='px-6 py-16'>
@@ -25,7 +30,7 @@ export default function Faq({ t }: Props) {
           <h2 className='mb-6 text-3xl text-primary-dark'>{t.title}</h2>
         </Reveal>
         <div className='flex max-w-3xl flex-col gap-3'>
-          {t.items.map((item, i) => {
+          {items.map((item, i) => {
             const isOpen = openIndex === i;
             return (
               <Reveal
@@ -61,6 +66,16 @@ export default function Faq({ t }: Props) {
               </Reveal>
             );
           })}
+          {seeAllHref && items.length < t.items.length && (
+            <Reveal delay={items.length * 0.08}>
+              <a
+                href={seeAllHref}
+                className='inline-flex items-center gap-2 text-sm font-bold text-secondary transition-colors hover:text-secondary-dark'
+              >
+                {t.seeAll} <FaArrowRight size={12} />
+              </a>
+            </Reveal>
+          )}
         </div>
       </div>
     </section>

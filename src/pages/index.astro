@@ -1,10 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero';
+import Credenciales from '../components/Credenciales';
+import PorQueUno from '../components/PorQueUno';
 import CareersSection from '../components/CareersSection';
+import VidaUniversitaria from '../components/VidaUniversitaria';
 import Testimonios from '../components/Testimonios';
+import ComoPostular from '../components/ComoPostular';
+import Faq from '../components/Faq';
+import Ubicacion from '../components/Ubicacion';
 import PreinscripcionCta from '../components/PreinscripcionCta';
+import { getImage } from 'astro:assets';
 import { careers } from '../data/careers';
+import { galeria } from '../data/galeria';
 import { dictionaries, localizedPath } from '../i18n/config';
 import SeoJsonLd from '../components/SeoJsonLd.astro';
 import { organizationSchema, careerListSchema } from '../data/schema';
@@ -17,6 +25,25 @@ const careerSummaries = careers.map((career) => ({
 	videoSlug: career.videoSlug,
 	image: career.image,
 }));
+
+// La galería se procesa en build: el componente recibe variantes de 640 y 1024 px,
+// nunca el original de 22 MP. Las tarjetas se pintan a ~368 px de ancho.
+const galeriaFotos = await Promise.all(
+	galeria.map(async (foto) => {
+		const [sm, lg] = await Promise.all([
+			getImage({ src: foto.image, width: 640, format: 'webp', quality: 74 }),
+			getImage({ src: foto.image, width: 1024, format: 'webp', quality: 76 }),
+		]);
+
+		return {
+			src: lg.src,
+			srcSet: `${sm.src} 640w, ${lg.src} 1024w`,
+			width: 1024,
+			height: Math.round((1024 * foto.image.height) / foto.image.width),
+			alt: foto.alt[locale],
+		};
+	}),
+);
 ---
 
 <Layout
@@ -32,6 +59,8 @@ const careerSummaries = careers.map((career) => ({
 	</Fragment>
 
 	<Hero t={dict.hero} client:visible />
+	<Credenciales t={dict.credenciales} client:visible />
+	<PorQueUno t={dict.porQueUno} client:visible />
 	<CareersSection
 		careers={careerSummaries}
 		basePath="/carreras"
@@ -40,7 +69,11 @@ const careerSummaries = careers.map((career) => ({
 		videoT={dict.videoModal}
 		client:visible
 	/>
+	<VidaUniversitaria fotos={galeriaFotos} t={dict.vidaUniversitaria} client:visible />
 	<Testimonios t={dict.testimonios} client:visible />
+	<ComoPostular t={dict.comoPostular} client:visible />
+	<Faq limit={3} seeAllHref="/sobre-nosotros#faq" t={dict.faq} client:visible />
+	<Ubicacion compact t={dict.ubicacion} client:visible />
 	<PreinscripcionCta
 		titulo={dict.preinscripcion.sectionTitleHome}
 		careers={careerSummaries}

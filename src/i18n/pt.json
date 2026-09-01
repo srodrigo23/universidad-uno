@@ -26,6 +26,56 @@
     "resolution": "Resolução Ministerial Nº 0164/2023",
     "cta": "Ver cursos"
   },
+  "credenciales": {
+    "eyebrow": "Respaldo institucional",
+    "title": "Uma universidade com respaldo legal e trajetória",
+    "subtitle": "A Subsede Cochabamba faz parte da Universidade Nacional do Oriente, autorizada pelo Ministério de Educação do Estado Plurinacional da Bolívia.",
+    "items": [
+      {
+        "value": "1999",
+        "label": "Fundação da universidade",
+        "detail": "Resolução Ministerial Nº 203/99, de 22 de junho de 1999"
+      },
+      {
+        "value": "R.M. 0164/2023",
+        "label": "Autorização da Subsede Cochabamba",
+        "detail": "Ministério de Educação do Estado Plurinacional da Bolívia"
+      },
+      {
+        "value": "5",
+        "label": "Cursos de graduação",
+        "detail": "Ciências da Saúde, Ciências Empresariais e Direito"
+      },
+      {
+        "value": "ES · PT",
+        "label": "Atendimento em espanhol e português",
+        "detail": "Aberta a estudantes da Bolívia, do Brasil e da América Latina"
+      }
+    ]
+  },
+  "porQueUno": {
+    "eyebrow": "Por que a UNO",
+    "title": "Uma formação pensada para o exercício profissional",
+    "subtitle": "O que define a proposta acadêmica da Subsede Cochabamba.",
+    "items": [
+      {
+        "titulo": "Educação Baseada em Competências",
+        "texto": "Cada curso define competências concretas —genéricas e específicas— que são trabalhadas e avaliadas ao longo de toda a formação, não apenas no final."
+      },
+      {
+        "titulo": "Presencial, no eixo central do país",
+        "texto": "Aulas presenciais no Edifício Central de Cochabamba, uma subsede criada para responder às demandas educacionais da região."
+      },
+      {
+        "titulo": "Ciência, ética e liderança",
+        "texto": "Formamos profissionais competentes e éticos, com liderança e empreendedorismo, com base na diversidade cultural, na ciência e na tecnologia."
+      },
+      {
+        "titulo": "Uma comunidade diversa",
+        "texto": "Estudantes da Bolívia, do Brasil e de outros países da região convivem em uma comunidade acadêmica dinâmica e inclusiva."
+      }
+    ]
+  },
   "misionVision": {
     "misionLabel": "Missão",
     "misionText": "Formar profissionais competentes, éticos e líderes com espírito empreendedor, com base na diversidade cultural, na ciência e na tecnologia, para contribuir com o desenvolvimento da sociedade.",
@@ -42,7 +92,8 @@
   "ubicacion": {
     "eyebrow": "Visite-nos",
     "title": "Onde estamos?",
-    "mapTitle": "Mapa: localização do Edifício Central"
+    "mapTitle": "Mapa: localização do Edifício Central",
+    "verEnMapa": "Ver no Google Maps"
   },
   "historia": {
     "eyebrow": "Nossa história",
@@ -67,6 +118,35 @@
     "cta": "Ver curso",
     "verVideo": "Ver vídeo"
   },
+  "vidaUniversitaria": {
+    "eyebrow": "Vida universitária",
+    "title": "Assim se estuda na UNO Cochabamba",
+    "subtitle": "Laboratórios, práticas e espaços de convivência do Edifício Central."
+  },
+  "comoPostular": {
+    "eyebrow": "Admissão",
+    "title": "Como se inscrever",
+    "subtitle": "Quatro passos para iniciar sua formação na Subsede Cochabamba.",
+    "steps": [
+      {
+        "titulo": "Escolha seu curso",
+        "texto": "Conheça os cinco cursos de graduação e baixe a grade curricular do que mais te interessar."
+      },
+      {
+        "titulo": "Consulte os requisitos",
+        "texto": "Nossos assessores de admissão informam os requisitos vigentes pelo WhatsApp ou no Edifício Central."
+      },
+      {
+        "titulo": "Faça sua pré-inscrição",
+        "texto": "Preencha o formulário com seus dados e o curso escolhido; um assessor entrará em contato com você."
+      },
+      {
+        "titulo": "Formalize sua matrícula",
+        "texto": "Apresente sua documentação no Edifício Central para concluir o processo."
+      }
+    ],
+    "cta": "Fazer minha pré-inscrição"
+  },
   "videoModal": {
     "close": "Fechar vídeo"
   },
@@ -90,7 +170,8 @@
         "q": "Onde posso ver a grade curricular de cada curso?",
         "a": "Você pode solicitar a grade curricular completa por meio de nossos consultores de admissão pelo WhatsApp."
       }
-    ]
+    ],
+    "seeAll": "Ver todas as perguntas"
   },
   "footer": {
     "tagline": "Formando profissionais competentes, éticos e líderes para o desenvolvimento da Bolívia.",

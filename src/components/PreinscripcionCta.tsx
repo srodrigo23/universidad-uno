@@ -43,7 +43,7 @@ export default function PreinscripcionCta({
   const [open, setOpen] = useState(false);
 
   return (
-    <section className='relative px-6 py-16 text-center'>
+    <section id='preinscripcion' className='relative px-6 py-16 text-center'>
       {/* <Reveal className="relative mx-auto max-w-6xl"> */}
       <div className='relative mx-auto max-w-6xl'>
         <SectionGlow />
