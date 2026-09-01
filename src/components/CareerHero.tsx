@@ -38,7 +38,7 @@ export default function CareerHero({
   const [videoOpen, setVideoOpen] = useState(false);
 
   return (
-    <section className='relative flex min-h-[75vh] items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white'>
+    <section className='relative flex min-h-screen items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white'>
       <img
         src={image.src}
         alt=''

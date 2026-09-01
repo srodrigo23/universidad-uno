@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import SobreNosotrosHero from '../../components/SobreNosotrosHero';
 import Historia from '../../components/Historia';
+import MisionVision from '../../components/MisionVision';
 import Faq from '../../components/Faq';
 import Ubicacion from '../../components/Ubicacion';
 import { dictionaries, localizedPath } from '../../i18n/config';
@@ -24,6 +25,7 @@ const dict = dictionaries[locale];
 
 	<SobreNosotrosHero t={dict.sobreNosotros} client:load />
 	<Historia t={dict.historia} client:visible />
+	<MisionVision t={dict.misionVision} client:visible />
 	<Faq t={dict.faq} client:visible />
 	<Ubicacion t={dict.ubicacion} client:visible />
 </Layout>
