@@ -1,6 +1,7 @@
 import { FaLocationDot } from 'react-icons/fa6';
 import Reveal from './shared/Reveal';
 import Eyebrow from './Eyebrow';
+import MapaCochabamba from './MapaCochabamba';
 
 // const address =
 //   'Calle Junín entre Calle de la Reza y Calle La Paz, Cochabamba, Bolivia';
@@ -26,22 +27,36 @@ export default function Ubicacion({ compact = false, t }: Props) {
   return (
     <section className='px-6 py-16'>
       <Reveal className='mx-auto max-w-6xl'>
+        {compact ? (
+          <div className='grid grid-cols-1 items-center gap-10 md:grid-cols-[1fr_auto] md:gap-16'>
+            <div>
+              <Eyebrow icon={FaLocationDot} label={t.eyebrow} />
+              <h2 className='mb-4 text-3xl text-primary-dark'>{t.title}</h2>
+              <p className='mb-6 text-slate-600'>
+                Edificio Central — Calle Junín entre J. de la Reza y Calle La Paz
+              </p>
+              <a
+                href={mapsHref}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='inline-flex items-center gap-2 rounded-full border border-secondary/40 px-5 py-2.5 text-sm font-semibold text-secondary transition-colors hover:border-secondary hover:bg-secondary/10'
+              >
+                <FaLocationDot size={13} className='shrink-0' />
+                {t.verEnMapa}
+              </a>
+            </div>
+            <MapaCochabamba
+              label={t.mapTitle}
+              className='mx-auto h-64 w-auto sm:h-80 md:h-96'
+            />
+          </div>
+        ) : (
+          <>
         <Eyebrow icon={FaLocationDot} label={t.eyebrow} />
         <h2 className='mb-4 text-3xl text-primary-dark'>{t.title}</h2>
         <p className='mb-6 text-slate-600'>
           Edificio Central — Calle Junín entre J. de la Reza y Calle La Paz
         </p>
-        {compact ? (
-          <a
-            href={mapsHref}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='inline-flex items-center gap-2 rounded-full border border-secondary/40 px-5 py-2.5 text-sm font-semibold text-secondary transition-colors hover:border-secondary hover:bg-secondary/10'
-          >
-            <FaLocationDot size={13} className='shrink-0' />
-            {t.verEnMapa}
-          </a>
-        ) : (
         <div className='overflow-hidden rounded-2xl border border-slate-200 shadow-lg'>
           <iframe
             src={mapSrc}
@@ -52,6 +67,7 @@ export default function Ubicacion({ compact = false, t }: Props) {
             allowFullScreen
           />
         </div>
+          </>
         )}
       </Reveal>
     </section>

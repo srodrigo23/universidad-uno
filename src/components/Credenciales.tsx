@@ -2,6 +2,7 @@ import { FaShieldHalved } from 'react-icons/fa6';
 import Reveal from './shared/Reveal';
 import Eyebrow from './Eyebrow';
 import SectionGlow from './SectionGlow';
+import CochabambaWatermark from './CochabambaWatermark';
 
 interface Props {
   t: {
@@ -14,7 +15,8 @@ interface Props {
 
 export default function Credenciales({ t }: Props) {
   return (
-    <section className='px-6 py-16'>
+    <section className='relative overflow-hidden px-6 py-16'>
+      <CochabambaWatermark className='absolute -top-24 -right-28 -z-10 h-[150%] text-primary opacity-[0.055] sm:-right-16' />
       <div className='relative mx-auto max-w-6xl'>
         <SectionGlow />
         <Reveal>
