@@ -4,6 +4,7 @@ import {
   FaTiktok,
   FaWhatsapp,
   FaLocationDot,
+  FaYoutube,
 } from 'react-icons/fa6';
 import { BO, BR } from 'country-flag-icons/react/3x2';
 import Reveal from './Reveal';
@@ -23,7 +24,7 @@ interface Props {
 const socials = [
   {
     label: 'Facebook',
-    href: 'https://www.facebook.com/UNOCBBA',
+    href: 'https://www.facebook.com/people/Universidad-Privada-UNO-Cochabamba/61563303573557/',
     icon: FaFacebook,
   },
   {
@@ -36,11 +37,14 @@ const socials = [
     href: 'https://www.tiktok.com/@universidadunocbba',
     icon: FaTiktok,
   },
+  {
+    label: 'YouTube',
+    href: 'https://www.youtube.com/@UniversidadUNOCbba',
+    icon: FaYoutube,
+  },
 ];
 
-const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  'Calle Junín entre Calle de la Reza y Calle La Paz, Cochabamba, Bolivia',
-)}`;
+const mapsHref = 'https://maps.app.goo.gl/eDiXyVm8TD1GwuWg6';
 
 export default function Footer({ t }: Props) {
   const whatsappContacts = [
@@ -87,7 +91,7 @@ export default function Footer({ t }: Props) {
                 <a
                   href={href}
                   target='_blank'
-                  rel='noopener'
+                  rel='noopener noreferrer'
                   className='flex items-center gap-2 hover:text-secondary-light'
                 >
                   <Flag
@@ -102,7 +106,7 @@ export default function Footer({ t }: Props) {
               <a
                 href={mapsHref}
                 target='_blank'
-                rel='noopener'
+                rel='noopener noreferrer'
                 className='flex items-start gap-2 hover:text-secondary-light'
               >
                 <FaLocationDot className='mt-0.5 shrink-0' /> {t.addressLabel}:
@@ -122,7 +126,7 @@ export default function Footer({ t }: Props) {
                 <a
                   href={href}
                   target='_blank'
-                  rel='noopener'
+                  rel='noopener noreferrer'
                   className='flex items-center gap-2 hover:text-secondary-light'
                 >
                   <Icon className='shrink-0' /> {label}

@@ -1,6 +1,10 @@
+import alejandraBorda from '../assets/images/testimonios/alejandra-borda.webp';
+import danielaPacsi from '../assets/images/testimonios/daniela-pacsi.webp';
 import mariaCelyne from '../assets/images/testimonios/maria-celyne.webp';
 import mariaEduarda from '../assets/images/testimonios/maria-eduarda.webp';
 import mikaelleEpaminondas from '../assets/images/testimonios/mikaelle-epaminondas.webp';
+import natalyRoman from '../assets/images/testimonios/nataly-roman.webp';
+import nuriaPorcel from '../assets/images/testimonios/nuria-porcel.webp';
 import samuelSedris from '../assets/images/testimonios/samuel-sedris.webp';
 
 export type Nacionalidad = 'BO' | 'BR';
@@ -24,22 +28,26 @@ export const testimonios: Testimonio[] = [
     nombre: 'Daniela Saraí Pacsi Zamorano',
     testimonio: 'En la UNO nos inspira a crecer y a transformar el futuro.',
     pais: 'BO',
+    foto: danielaPacsi,
   },
   {
     nombre: 'Nuria Gisela Pórcel Villarroel',
     testimonio: 'La UNO nos une para crecer.',
     pais: 'BO',
+    foto: nuriaPorcel,
   },
   {
     nombre: 'Alejandra Borda Villagomez',
     testimonio:
       'La universidad forma conocimientos, en la UNO impulsan nuestros conocimientos y construimos nuestro futuro.',
     pais: 'BO',
+    foto: alejandraBorda,
   },
   {
     nombre: 'Nataly Gabriela Roman Erayzo',
     testimonio: 'Con estudio y convicción, brillamos.',
     pais: 'BO',
+    foto: natalyRoman,
   },
   {
     nombre: 'Samuel Sedris',

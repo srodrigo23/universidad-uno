@@ -62,7 +62,7 @@ export default function CareerCard({
       {/* La imagen queda siempre debajo: evita el frame en blanco mientras el clip carga. */}
       <img
         src={image.src}
-        alt={nombre}
+        alt={`Estudiantes de ${nombre} en la Universidad Privada UNO Cochabamba`}
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
       {showPreview && (
