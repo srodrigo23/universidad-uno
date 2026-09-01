@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { IconType } from 'react-icons';
 import { FaChevronDown } from 'react-icons/fa6';
-import Reveal from './shared/Reveal';
+import Reveal from '../shared/Reveal';
 
 interface Props {
   icon: IconType;

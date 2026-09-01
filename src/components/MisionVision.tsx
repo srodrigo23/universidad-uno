@@ -1,5 +1,5 @@
 import { FaBullseye, FaEye } from 'react-icons/fa6';
-import MisionVisionCard from './MisionVisionCard';
+import MisionVisionCard from './cards/MisionVisionCard';
 
 interface Props {
   t: {

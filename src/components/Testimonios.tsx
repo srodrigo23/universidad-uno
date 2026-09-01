@@ -5,7 +5,7 @@ import { FaComments, FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import Reveal from './shared/Reveal';
 import Eyebrow from './Eyebrow';
 import SectionGlow from './SectionGlow';
-import TestimonioCard from './TestimonioCard';
+import TestimonioCard from './cards/TestimonioCard';
 import { testimonios } from '../data/testimonios';
 
 interface Props {
@@ -100,6 +100,7 @@ export default function Testimonios({ t }: Props) {
                   testimonio={item.testimonio}
                   pais={item.pais}
                   foto={item.foto}
+                  encuadre={item.encuadre}
                   expanded={expandedIndex === i}
                   onToggle={() =>
                     setExpandedIndex((current) => (current === i ? null : i))

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaGraduationCap } from 'react-icons/fa6';
-import CareerCard from './CareerCard';
+import CareerCard from './cards/CareerCard';
 import VideoModal from './VideoModal';
 import Reveal from './shared/Reveal';
 import Eyebrow from './Eyebrow';
