@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FaPenToSquare, FaArrowRight } from 'react-icons/fa6';
 import Reveal from './shared/Reveal';
 import CochabambaWatermark from './CochabambaWatermark';
+import { track } from '../lib/analytics';
 import PreinscripcionModal, {
   type CareerOption,
 } from './modals/PreinscripcionModal';
@@ -88,7 +89,12 @@ export default function PreinscripcionCta({
 
             <button
               type='button'
-              onClick={() => setOpen(true)}
+              onClick={() => {
+                track('preinscripcion_abrir', {
+                  origen: defaultCareer ?? 'home',
+                });
+                setOpen(true);
+              }}
               className='group relative mt-9 inline-flex cursor-pointer items-center gap-2.5 overflow-hidden rounded-full bg-secondary px-9 py-4 text-base font-semibold text-white shadow-xl shadow-secondary/40 ring-1 ring-white/20 transition duration-300 hover:-translate-y-0.5 hover:bg-secondary-dark hover:shadow-2xl hover:shadow-secondary/50'
             >
               {/* Destello diagonal al pasar el cursor: solo transform, sin repintar. */}

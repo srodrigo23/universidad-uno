@@ -2,6 +2,7 @@ import { FaClipboardList, FaArrowRight } from 'react-icons/fa6';
 import Reveal from './shared/Reveal';
 import Eyebrow from './Eyebrow';
 import SectionGlow from './SectionGlow';
+import { track } from '../lib/analytics';
 
 interface Props {
   t: {
@@ -42,6 +43,7 @@ export default function ComoPostular({ t }: Props) {
         <Reveal delay={0.32}>
           <a
             href='#preinscripcion'
+            onClick={() => track('pasos_cta_click')}
             className='group mt-10 inline-flex items-center gap-2 rounded-full bg-secondary px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition hover:-translate-y-0.5 hover:bg-secondary-dark hover:shadow-xl hover:shadow-secondary/40'
           >
             {t.cta}

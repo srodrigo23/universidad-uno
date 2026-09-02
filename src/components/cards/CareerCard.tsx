@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { FaArrowRight, FaPlay } from 'react-icons/fa6';
 import type { CareerVideo } from '../../data/careers';
+import { track } from '../../lib/analytics';
 
 interface Props {
   href: string;
@@ -93,7 +94,10 @@ export default function CareerCard({
 
       <button
         type='button'
-        onClick={onPlay}
+        onClick={() => {
+          track('video_carrera_abrir', { carrera: nombre, origen: 'tarjeta' });
+          onPlay();
+        }}
         aria-label={`${verVideo}: ${nombre}`}
         className='absolute top-4 right-4 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-white shadow-lg shadow-primary-dark/30 transition hover:scale-110 hover:bg-secondary-dark'
       >
@@ -108,6 +112,7 @@ export default function CareerCard({
         {/* after:inset-0 extiende el enlace a toda la tarjeta sin anidar el botón dentro de un <a>. */}
         <a
           href={href}
+          onClick={() => track('select_content', { content_type: 'carrera', item_id: nombre })}
           className='mt-2 flex items-center gap-1.5 text-sm font-bold text-white transition-colors after:absolute after:inset-0 group-hover:text-secondary-light'
         >
           {cta} <FaArrowRight size={12} />

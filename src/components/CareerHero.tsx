@@ -4,6 +4,7 @@ import Reveal from './shared/Reveal';
 import HeroBottomFade from './HeroBottomFade';
 import VideoModal from './VideoModal';
 import { careerVideo } from '../data/careers';
+import { track } from '../lib/analytics';
 
 interface Props {
   nombre: string;
@@ -64,6 +65,13 @@ export default function CareerHero({
             href={mallaHref}
             target='_blank'
             rel='noopener'
+            onClick={() =>
+              track('file_download', {
+                file_name: `${nombre} — malla curricular`,
+                file_extension: 'pdf',
+                link_url: mallaHref,
+              })
+            }
             className='inline-flex items-center gap-2 rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-px hover:border-secondary-light hover:text-secondary-light'
           >
             <FaFilePdf size={14} className='shrink-0' />
@@ -71,7 +79,10 @@ export default function CareerHero({
           </a>
           <button
             type='button'
-            onClick={() => setVideoOpen(true)}
+            onClick={() => {
+              track('video_carrera_abrir', { carrera: nombre, origen: 'hero' });
+              setVideoOpen(true);
+            }}
             className='inline-flex items-center gap-2 rounded-full bg-secondary px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition hover:-translate-y-px hover:bg-secondary-dark'
           >
             <FaPlay size={12} className='shrink-0' />

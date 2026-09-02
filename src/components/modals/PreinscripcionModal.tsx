@@ -27,6 +27,7 @@ import {
   VE,
 } from 'country-flag-icons/react/3x2';
 import { AnimatePresence, motion } from 'motion/react';
+import { track } from '../../lib/analytics';
 
 export interface CareerOption {
   slug: string;
@@ -161,6 +162,7 @@ export default function PreinscripcionModal({ open, onClose, careers, defaultCar
 
   const onSubmit = (values: FormValues) => {
     console.log('Preinscripción', values);
+    track('generate_lead', { carrera: values.carrera, prefijo: values.prefijo });
     setSubmitted(true);
   };
 

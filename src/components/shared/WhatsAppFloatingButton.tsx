@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa6';
 import { BO, BR } from 'country-flag-icons/react/3x2';
 import { AnimatePresence, motion } from 'motion/react';
+import { track } from '../../lib/analytics';
 
 interface Props {
   t: {
@@ -73,7 +74,10 @@ export default function WhatsAppFloatingButton({ t }: Props) {
                 href={href}
                 target="_blank"
                 rel="noopener"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  track('whatsapp_click', { asesor: country });
+                  setOpen(false);
+                }}
                 variants={itemVariants}
                 className="flex items-center gap-2 rounded-full bg-white py-2 pr-4 pl-3 text-sm font-semibold text-primary shadow-lg transition-transform hover:scale-105"
               >

@@ -2,6 +2,7 @@ import { FaLocationDot } from 'react-icons/fa6';
 import Reveal from './shared/Reveal';
 import Eyebrow from './Eyebrow';
 import MapaCochabamba from './MapaCochabamba';
+import { track } from '../lib/analytics';
 
 // const address =
 //   'Calle Junín entre Calle de la Reza y Calle La Paz, Cochabamba, Bolivia';
@@ -39,6 +40,7 @@ export default function Ubicacion({ compact = false, t }: Props) {
                 href={mapsHref}
                 target='_blank'
                 rel='noopener noreferrer'
+                onClick={() => track('mapa_abrir')}
                 className='inline-flex items-center gap-2 rounded-full border border-secondary/40 px-5 py-2.5 text-sm font-semibold text-secondary transition-colors hover:border-secondary hover:bg-secondary/10'
               >
                 <FaLocationDot size={13} className='shrink-0' />
