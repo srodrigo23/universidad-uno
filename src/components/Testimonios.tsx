@@ -89,11 +89,11 @@ export default function Testimonios({ t }: Props) {
 
         {/* -ml-4 + pl-4 en cada slide: crea la separación sin romper el cálculo de ancho del loop. */}
         <div className='overflow-hidden' ref={emblaRef}>
-          <div className='-ml-4 flex items-stretch'>
+          <div className='-ml-3 flex items-stretch'>
             {testimonios.map((item, i) => (
               <div
                 key={item.nombre}
-                className='min-w-0 flex-[0_0_100%] pl-4 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%]'
+                className='min-w-0 flex-[0_0_100%] pl-3 sm:flex-[0_0_50%] lg:flex-[0_0_25%]'
               >
                 <TestimonioCard
                   nombre={item.nombre}

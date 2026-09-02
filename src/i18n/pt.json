@@ -229,6 +229,9 @@
     "readLess": "Ver menos"
   },
   "preinscripcion": {
+    "eyebrow": "Pré-inscrição",
+    "sectionSubtitle": "Deixe seus dados e um assessor de admissão entrará em contato para orientar você no processo.",
+    "verPasos": "Ver como se inscrever",
     "sectionTitleHome": "Pronto para dar o primeiro passo?",
     "sectionTitleCareer": "Quer estudar {{nombre}}?",
     "cta": "Faça sua pré-inscrição",

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { FaQuoteLeft, FaChevronDown } from 'react-icons/fa6';
 import { BO, BR } from 'country-flag-icons/react/3x2';
 import {
@@ -37,12 +38,30 @@ export default function TestimonioCard({
   t,
 }: Props) {
   const Flag = flags[pais];
-  // Con dos líneas visibles no todo testimonio necesita el enlace.
-  const necesitaVerMas = testimonio.length > 90;
+  const textRef = useRef<HTMLParagraphElement>(null);
+  // El largo del texto solo sirve como suposición para el HTML servido; cuántas
+  // líneas caben de verdad depende del ancho de la tarjeta, que cambia por
+  // breakpoint. Se mide en cuanto hay DOM.
+  const [desborda, setDesborda] = useState(testimonio.length > 90);
+
+  useEffect(() => {
+    const node = textRef.current;
+    if (!node || expanded) return;
+
+    const medir = () => setDesborda(node.scrollHeight > node.clientHeight + 1);
+    medir();
+
+    const observer = new ResizeObserver(medir);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [expanded, testimonio]);
+
+  // Desplegado el enlace sigue haciendo falta para poder cerrar.
+  const necesitaVerMas = expanded || desborda;
 
   return (
     <article
-      className={`group relative flex h-112 flex-col justify-end overflow-hidden rounded-2xl shadow-md transition-shadow duration-300 hover:shadow-xl ${BRAND_BG}`}
+      className={`group relative flex h-112 flex-col justify-end lg:h-88 overflow-hidden rounded-2xl shadow-md transition-shadow duration-300 hover:shadow-xl ${BRAND_BG}`}
     >
       {/* El zoom del hover va en el contenedor para no pisar el transform del encuadre. */}
       {foto && (
@@ -79,15 +98,15 @@ export default function TestimonioCard({
 
       <FaQuoteLeft
         aria-hidden='true'
-        size={64}
-        className='pointer-events-none absolute top-5 right-5 text-white/15'
+        className='pointer-events-none absolute top-5 right-5 h-16 w-16 text-white/15 lg:h-11 lg:w-11'
       />
 
-      <div className='relative p-6 text-white'>
+      <div className='relative p-6 text-white lg:p-5'>
         <p
+          ref={textRef}
           id={`testimonio-${pais}-${nombre.replace(/\s+/g, '-')}`}
           className={`text-sm leading-relaxed text-white/90 ${
-            expanded ? 'max-h-56 overflow-y-auto pr-1' : 'line-clamp-2'
+            expanded ? 'max-h-44 overflow-y-auto pr-1 lg:max-h-52' : 'line-clamp-2'
           }`}
         >
           {testimonio}
