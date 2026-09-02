@@ -251,7 +251,8 @@
     "requerido": "Este campo es obligatorio.",
     "hintLetras": "Solo se permiten letras.",
     "hintCelular": "Solo números, entre 6 y 15 dígitos.",
-    "hintCorreo": "Ingresa un correo válido, por ejemplo nombre@dominio.com"
+    "hintCorreo": "Ingresa un correo válido, por ejemplo nombre@dominio.com",
+    "errorEnvio": "No pudimos enviar tus datos. Revisa tu conexión e inténtalo de nuevo, o escríbenos por WhatsApp."
   },
   "scrollTop": {
     "label": "Volver arriba"

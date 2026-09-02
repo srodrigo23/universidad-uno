@@ -28,6 +28,7 @@ import {
 } from 'country-flag-icons/react/3x2';
 import { AnimatePresence, motion } from 'motion/react';
 import { track } from '../../lib/analytics';
+import { enviarPreinscripcion } from '../../lib/preinscripcion';
 
 export interface CareerOption {
   slug: string;
@@ -79,6 +80,8 @@ interface FormValues {
   celular: string;
   correo: string;
   carrera: string;
+  /** Honeypot: oculto para personas, irresistible para bots. */
+  website: string;
 }
 
 interface Props {
@@ -100,6 +103,7 @@ interface Props {
     close: string;
     successTitle: string;
     successText: string;
+    errorEnvio: string;
     requerido: string;
     hintLetras: string;
     hintCelular: string;
@@ -110,6 +114,7 @@ interface Props {
 export default function PreinscripcionModal({ open, onClose, careers, defaultCareer, t }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [errorEnvio, setErrorEnvio] = useState(false);
 
   const {
     register,
@@ -127,6 +132,7 @@ export default function PreinscripcionModal({ open, onClose, careers, defaultCar
       celular: '',
       correo: '',
       carrera: defaultCareer ?? '',
+      website: '',
     },
   });
 
@@ -160,10 +166,20 @@ export default function PreinscripcionModal({ open, onClose, careers, defaultCar
     if (submitted) closeRef.current?.focus();
   }, [submitted]);
 
-  const onSubmit = (values: FormValues) => {
-    console.log('Preinscripción', values);
-    track('generate_lead', { carrera: values.carrera, prefijo: values.prefijo });
-    setSubmitted(true);
+  const onSubmit = async (values: FormValues) => {
+    setErrorEnvio(false);
+
+    try {
+      // Se espera la respuesta antes de dar el acuse: mostrar éxito y perder el
+      // dato sería peor que pedirle al usuario que reintente.
+      await enviarPreinscripcion(values);
+      track('generate_lead', { carrera: values.carrera, prefijo: values.prefijo });
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Preinscripción', error);
+      track('preinscripcion_error');
+      setErrorEnvio(true);
+    }
   };
 
   /** Filtra caracteres inválidos al escribir y al pegar, antes de que RHF registre el valor. */
@@ -371,6 +387,22 @@ export default function PreinscripcionModal({ open, onClose, careers, defaultCar
                     </select>
                     <FieldError id="pre-carrera-error" message={errors.carrera?.message} />
                   </div>
+
+                  {/* Fuera del flujo y del foco: un lector de pantalla tampoco lo anuncia. */}
+                  <input
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="absolute -left-[9999px] h-px w-px opacity-0"
+                    {...register('website')}
+                  />
+
+                  {errorEnvio && (
+                    <p role="alert" className="text-xs font-medium text-red-600">
+                      {t.errorEnvio}
+                    </p>
+                  )}
 
                   <button
                     type="submit"
