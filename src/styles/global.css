@@ -45,6 +45,21 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Respeta a quien pide menos movimiento: tecleo, zoom del hero, autoplay de los
+   carruseles, revelados al hacer scroll y pulsos de cursor. No se elimina la
+   animación (romperia estados que dependen de onAnimationEnd), se reduce a un
+   instante. Los componentes que consultan el flag por JS lo hacen aparte. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   font-family: var(--font-body);
   font-weight: 300;

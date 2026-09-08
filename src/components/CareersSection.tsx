@@ -58,7 +58,6 @@ export default function CareersSection({
               href={`${basePath}/${career.slug}`}
               nombre={career.nombre}
               image={career.image}
-              video={careerVideo(career.videoSlug)}
               badge={cardT.badge}
               cta={cardT.cta}
               verVideo={cardT.verVideo}

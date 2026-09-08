@@ -1,14 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { FaArrowRight, FaPlay } from 'react-icons/fa6';
-import type { CareerVideo } from '../../data/careers';
 import { track } from '../../lib/analytics';
 
 interface Props {
   href: string;
   nombre: string;
   image: ImageMetadata;
-  video: CareerVideo;
   badge: string;
   cta: string;
   verVideo: string;
@@ -20,40 +17,14 @@ export default function CareerCard({
   href,
   nombre,
   image,
-  video,
   badge,
   cta,
   verVideo,
   onPlay,
   index = 0,
 }: Props) {
-  const cardRef = useRef<HTMLElement>(null);
-  const [showPreview, setShowPreview] = useState(false);
-
-  useEffect(() => {
-    const node = cardRef.current;
-    if (!node) return;
-
-    // Con movimiento reducido nos quedamos en la imagen fija y no bajamos el clip.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          setShowPreview(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '200px' },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <motion.article
-      ref={cardRef}
       className='group relative flex h-72 flex-col justify-end overflow-hidden rounded-2xl shadow-sm transition hover:-translate-y-1 hover:shadow-xl'
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -70,19 +41,6 @@ export default function CareerCard({
         alt={`Estudiantes de ${nombre} en la Universidad Privada UNO Cochabamba`}
         className='absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105'
       />
-      {/* {showPreview && (
-        <video
-          aria-hidden='true'
-          src={video.preview}
-          poster={video.poster}
-          preload='metadata'
-          muted
-          loop
-          playsInline
-          autoPlay
-          className='absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105'
-        />
-      )} */}
       <div className='absolute inset-0 bg-primary-dark/15' />
       <div
         className='absolute inset-0'
