@@ -10,12 +10,12 @@ import {
   CarouselDots,
 } from './HeroCarousel';
 
-// import slide0 from '../assets/images/estudiantes/estudiante-mujer-modelo-uno.webp';
-import slide1 from '../assets/images/estudiantes/estudiantes-biblioteca.webp';
-import slide2 from '../assets/images/estudiantes/estudiantes-libro-biblioteca.webp';
-import slide3 from '../assets/images/medicina/med-todos.webp';
-import slide4 from '../assets/images/enfermeria/enf-estudiandes-uno.webp';
-import slide5 from '../assets/images/admin/admin-todos-uno.webp';
+// import slide0 from '../assets/images/estudiantes/hero/estudiante-mujer-modelo-uno.webp';
+import slide1 from '../assets/images/estudiantes/hero/estudiantes-biblioteca.webp';
+import slide2 from '../assets/images/estudiantes/hero/estudiantes-libro-biblioteca.webp';
+import slide3 from '../assets/images/medicina/hero/med-todos.webp';
+import slide4 from '../assets/images/enfermeria/hero/enf-estudiandes-uno.webp';
+import slide5 from '../assets/images/admin/hero/admin-todos-uno.webp';
 
 const slides = [slide1, slide2, slide3, slide4, slide5];
 

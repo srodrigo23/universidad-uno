@@ -5,7 +5,7 @@ import Reveal from './shared/Reveal';
 import Eyebrow from './Eyebrow';
 import SectionGlow from './SectionGlow';
 
-import bgImage from '../assets/images/estudiantes/estudiantes-mochila-modelo.webp';
+import bgImage from '../assets/images/estudiantes/seccion/estudiantes-mochila-modelo.webp';
 
 interface Props {
   t: {

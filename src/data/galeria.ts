@@ -1,9 +1,9 @@
-import labComputo from '../assets/images/admin/admin-compu-todos.webp';
-import primerosAuxilios from '../assets/images/enfermeria/enf-enseniando-primeros-auxilios.webp';
-import electrocardiograma from '../assets/images/medicina/med-electrocardiograma.webp';
-import claseMedicina from '../assets/images/medicina/med-enseniando-a-grupo.webp';
-import areaRecreacional from '../assets/images/estudiantes/estudiante-jugando-area-recreacional.webp';
-import pinpon from '../assets/images/estudiantes/estudiantes-jugando-pinpon.webp';
+import labComputo from '../assets/images/admin/galeria/admin-compu-todos.webp';
+import primerosAuxilios from '../assets/images/enfermeria/galeria/enf-enseniando-primeros-auxilios.webp';
+import electrocardiograma from '../assets/images/medicina/galeria/med-electrocardiograma.webp';
+import claseMedicina from '../assets/images/medicina/galeria/med-enseniando-a-grupo.webp';
+import areaRecreacional from '../assets/images/estudiantes/hero/estudiante-jugando-area-recreacional.webp';
+import pinpon from '../assets/images/estudiantes/hero/estudiantes-jugando-pinpon.webp';
 
 export interface GaleriaFoto {
   image: ImageMetadata;

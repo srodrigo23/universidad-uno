@@ -8,10 +8,10 @@ import {
   CarouselDots,
 } from './HeroCarousel';
 
-import slide1 from '../assets/images/estudiantes/estudiante-mujer-modelo-uno.webp';
-import slide2 from '../assets/images/estudiantes/estudiante-hombre-modelo-mochila.webp';
-import slide3 from '../assets/images/estudiantes/estudiante-jugando-area-recreacional.webp';
-import slide4 from '../assets/images/estudiantes/estudiantes-jugando-pinpon.webp';
+import slide1 from '../assets/images/estudiantes/hero/estudiante-mujer-modelo-uno.webp';
+import slide2 from '../assets/images/estudiantes/hero/estudiante-hombre-modelo-mochila.webp';
+import slide3 from '../assets/images/estudiantes/hero/estudiante-jugando-area-recreacional.webp';
+import slide4 from '../assets/images/estudiantes/hero/estudiantes-jugando-pinpon.webp';
 
 const slides = [slide1, slide2, slide3, slide4];
 

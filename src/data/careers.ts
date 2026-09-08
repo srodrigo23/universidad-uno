@@ -1,12 +1,12 @@
-import enfermeriaImg from '../assets/images/enfermeria/enf-enseniando-presion.webp';
-import medicinaImg from '../assets/images/medicina/med-laboratorio.webp';
-import fisioImg from '../assets/images/fisio/fisio-area-fisio.webp';
-import derechoImg from '../assets/images/derecho/derecho-juicio.webp';
-import adminImg from '../assets/images/admin/admin-laboratorio-de-comp.webp';
+import enfermeriaImg from '../assets/images/enfermeria/tarjeta/enf-enseniando-presion.webp';
+import medicinaImg from '../assets/images/medicina/tarjeta/med-laboratorio.webp';
+import fisioImg from '../assets/images/fisio/tarjeta/fisio-area-fisio.webp';
+import derechoImg from '../assets/images/derecho/hero/derecho-juicio.webp';
+import adminImg from '../assets/images/admin/hero/admin-laboratorio-de-comp.webp';
 
-import enfermeriaHeroImg from '../assets/images/enfermeria/enf-enseniando-ecografia.webp';
-import medicinaHeroImg from '../assets/images/medicina/med-un-medico.webp';
-import fisioHeroImg from '../assets/images/fisio/fisio-dos-estudiantes.webp';
+import enfermeriaHeroImg from '../assets/images/enfermeria/hero/enf-enseniando-ecografia.webp';
+import medicinaHeroImg from '../assets/images/medicina/hero/med-un-medico.webp';
+import fisioHeroImg from '../assets/images/fisio/hero/fisio-dos-estudiantes.webp';
 
 export type Valor = string | { titulo: string; descripcion: string };
 export type CompetenciaGrupo = { titulo: string; items: string[] };
