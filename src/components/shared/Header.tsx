@@ -17,11 +17,12 @@ interface Props {
   careerLinks: CareerLink[];
   t: {
     nav: {
-      misionVision: string;
-      sobreNosotros: string;
       carreras: string;
-      faq: string;
+      vidaUniversitaria: string;
+      admision: string;
+      sobreNosotros: string;
     };
+    cta: string;
     verTodasCarreras: string;
     openMenu: string;
     closeMenu: string;
@@ -74,12 +75,21 @@ export default function Header({ locale, switchHref, currentPath, careerLinks, t
   const normalizedPath = currentPath.replace(/\/$/, '');
   const isCareerRoute = normalizedPath.startsWith(`${careersBase}/`);
 
+  const isHome = normalizedPath === '' || normalizedPath === '/pt';
+  /** Dentro de la home el ancla es local; fuera hay que volver a ella primero. */
+  const anchor = (id: string) => (isHome ? `#${id}` : `${homeHref}#${id}`);
+
   const navItems = [
-    { id: 'mision-vision', href: `${sobreNosotrosHref}#mision-vision`, label: t.nav.misionVision, isRoute: false },
-    { id: 'carreras', href: `${homeHref}#carreras`, label: t.nav.carreras, isRoute: false },
+    { id: 'carreras', href: anchor('carreras'), label: t.nav.carreras, isRoute: false },
+    { id: 'vida-universitaria', href: anchor('vida-universitaria'), label: t.nav.vidaUniversitaria, isRoute: false },
+    { id: 'como-postular', href: anchor('como-postular'), label: t.nav.admision, isRoute: false },
     { id: 'sobre-nosotros', href: sobreNosotrosHref, label: t.nav.sobreNosotros, isRoute: true },
-    { id: 'faq', href: `${sobreNosotrosHref}#faq`, label: t.nav.faq, isRoute: false },
   ];
+
+  // Existe en la home, en sobre-nosotros y en cada carrera, así que el ancla local vale siempre.
+  const ctaHref = '#preinscripcion';
+  const ctaClass =
+    'inline-flex items-center rounded-full bg-secondary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition hover:-translate-y-px hover:bg-secondary-dark';
 
   const isItemActive = (item: (typeof navItems)[number]) => {
     if (item.id === 'carreras') return isCareerRoute || activeSection === 'carreras';
@@ -140,8 +150,10 @@ export default function Header({ locale, switchHref, currentPath, careerLinks, t
   }, [dropdownOpen]);
 
   useEffect(() => {
+    // Solo las anclas de esta misma página: si no, al pasar por una sección se
+    // encendería un item que en realidad enlaza a otra ruta.
     const sections = navItems
-      .filter((item) => !item.isRoute)
+      .filter((item) => item.href.startsWith('#'))
       .map((item) => document.getElementById(item.id))
       .filter((el): el is HTMLElement => el !== null);
 
@@ -311,6 +323,11 @@ export default function Header({ locale, switchHref, currentPath, careerLinks, t
                   {localeLabels[otherLocale]}
                 </a>
               </li>
+              <li>
+                <a href={ctaHref} className={ctaClass}>
+                  {t.cta}
+                </a>
+              </li>
             </ul>
           </nav>
 
@@ -411,7 +428,16 @@ export default function Header({ locale, switchHref, currentPath, careerLinks, t
                               </motion.li>
                             );
                           })}
-                        </motion.ul>
+  <motion.li variants={itemVariants} className="mt-4">
+                  <a
+                    href={ctaHref}
+                    onClick={() => setOpen(false)}
+                    className={`${ctaClass} w-full justify-center`}
+                  >
+                    {t.cta}
+                  </a>
+                </motion.li>
+                                      </motion.ul>
                       )}
                     </motion.li>
                   );

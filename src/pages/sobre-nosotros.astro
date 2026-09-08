@@ -5,12 +5,15 @@ import Historia from '../components/Historia';
 import MisionVision from '../components/MisionVision';
 import Faq from '../components/Faq';
 import Ubicacion from '../components/Ubicacion';
+import PreinscripcionCta from '../components/PreinscripcionCta';
+import { careers } from '../data/careers';
 import { dictionaries, localizedPath } from '../i18n/config';
 import SeoJsonLd from '../components/SeoJsonLd.astro';
 import { faqSchema } from '../data/schema';
 
 const locale = 'es';
 const dict = dictionaries[locale];
+const careerOptions = careers.map((career) => ({ slug: career.slug, nombre: career[locale].nombre }));
 ---
 
 <Layout
@@ -28,4 +31,10 @@ const dict = dictionaries[locale];
 	<MisionVision t={dict.misionVision} client:visible />
 	<Faq t={dict.faq} client:visible />
 	<Ubicacion t={dict.ubicacion} client:visible />
+	<PreinscripcionCta
+		titulo={dict.preinscripcion.sectionTitleHome}
+		careers={careerOptions}
+		t={dict.preinscripcion}
+		client:visible
+	/>
 </Layout>

@@ -5,11 +5,12 @@
   },
   "header": {
     "nav": {
-      "misionVision": "Misión y Visión",
-      "sobreNosotros": "Sobre nosotros",
       "carreras": "Carreras",
-      "faq": "Preguntas frecuentes"
+      "vidaUniversitaria": "Vida universitaria",
+      "admision": "Admisión",
+      "sobreNosotros": "Sobre nosotros"
     },
+    "cta": "Preinscríbete",
     "verTodasCarreras": "Ver todas las carreras",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú"
@@ -47,7 +48,10 @@
         "detail": "Ciencias de la Salud, Ciencias Empresariales y Derecho"
       },
       {
-        "value": "ES · PT",
+        "flags": [
+          "BO",
+          "BR"
+        ],
         "label": "Asesoría en español y portugués",
         "detail": "Abierta a estudiantes de Bolivia, Brasil y Latinoamérica"
       }

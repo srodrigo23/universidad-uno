@@ -5,11 +5,12 @@
   },
   "header": {
     "nav": {
-      "misionVision": "Missão e Visão",
-      "sobreNosotros": "Sobre nós",
       "carreras": "Cursos",
-      "faq": "Perguntas frequentes"
+      "vidaUniversitaria": "Vida universitária",
+      "admision": "Admissão",
+      "sobreNosotros": "Sobre nós"
     },
+    "cta": "Pré-inscrição",
     "verTodasCarreras": "Ver todos os cursos",
     "openMenu": "Abrir menu",
     "closeMenu": "Fechar menu"
@@ -47,7 +48,10 @@
         "detail": "Ciências da Saúde, Ciências Empresariais e Direito"
       },
       {
-        "value": "ES · PT",
+        "flags": [
+          "BO",
+          "BR"
+        ],
         "label": "Atendimento em espanhol e português",
         "detail": "Aberta a estudantes da Bolívia, do Brasil e da América Latina"
       }

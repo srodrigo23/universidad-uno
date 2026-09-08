@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { FaChevronDown, FaCircleCheck, FaLocationDot } from 'react-icons/fa6';
 import Reveal from './shared/Reveal';
 import HeroBottomFade from './HeroBottomFade';
+import HeroRotatingText from './HeroRotatingText';
+import { useSeccionVisible } from '../lib/useSeccionVisible';
 import {
   useHeroCarousel,
   CarouselBackground,
@@ -27,60 +29,18 @@ interface Props {
   };
 }
 
-const ROTATE_TYPE_SPEED_MS = 40;
-const ROTATE_DELETE_SPEED_MS = 22;
-const ROTATE_HOLD_MS = 2600;
-const ROTATE_PAUSE_MS = 400;
-
 export default function Hero({ t }: Props) {
-  const { emblaRef, emblaApi, selectedIndex, settledIndex } = useHeroCarousel();
-  // La primera frase se renderiza completa desde el inicio (SSR incluido) para
-  // que la línea nunca aparezca vacía; el ciclo arranca borrándola.
-  const [rotatingText, setRotatingText] = useState(t.rotatingPhrases?.[0] ?? '');
-
-  useEffect(() => {
-    const phrases = t.rotatingPhrases;
-    if (!phrases || phrases.length < 2) return;
-
-    let phraseIndex = 0;
-    let charCount = phrases[0].length;
-    let timeoutId: ReturnType<typeof setTimeout>;
-
-    const type = () => {
-      const current = phrases[phraseIndex];
-      charCount += 1;
-      setRotatingText(current.slice(0, charCount));
-      timeoutId = setTimeout(
-        charCount < current.length ? type : erase,
-        charCount < current.length ? ROTATE_TYPE_SPEED_MS : ROTATE_HOLD_MS,
-      );
-    };
-
-    const erase = () => {
-      const current = phrases[phraseIndex];
-      charCount -= 1;
-      setRotatingText(current.slice(0, charCount));
-      if (charCount > 0) {
-        timeoutId = setTimeout(erase, ROTATE_DELETE_SPEED_MS);
-      } else {
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-        timeoutId = setTimeout(type, ROTATE_PAUSE_MS);
-      }
-    };
-
-    setRotatingText(phrases[0]);
-    timeoutId = setTimeout(erase, ROTATE_HOLD_MS);
-
-    return () => clearTimeout(timeoutId);
-  }, [t.rotatingPhrases]);
-
+  const sectionRef = useRef<HTMLElement>(null);
+  const visible = useSeccionVisible(sectionRef);
+  const { emblaRef, emblaApi, selectedIndex, settledIndex } = useHeroCarousel(visible);
   return (
-    <section className='relative flex min-h-screen items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white sm:pb-24'>
+    <section ref={sectionRef} className='relative flex min-h-screen items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white sm:pb-24'>
       <CarouselBackground
         emblaRef={emblaRef}
         slides={slides}
         activeIndex={selectedIndex}
         settledIndex={settledIndex}
+        visible={visible}
       />
       <div
         className='absolute inset-0'
@@ -125,10 +85,7 @@ export default function Hero({ t }: Props) {
             aria-hidden='true'
           >
             <span className='mr-3 mt-2.5 hidden h-px w-8 shrink-0 bg-secondary-light/70 sm:block' />
-            <span>
-              {rotatingText}
-              <span className='ml-0.5 inline-block h-[0.9em] w-0.5 translate-y-[0.15em] animate-pulse bg-secondary-light align-middle' />
-            </span>
+            <HeroRotatingText phrases={t.rotatingPhrases} />
           </p>
         </Reveal>
 

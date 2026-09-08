@@ -70,7 +70,7 @@ export default function CareerCard({
         alt={`Estudiantes de ${nombre} en la Universidad Privada UNO Cochabamba`}
         className='absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105'
       />
-      {showPreview && (
+      {/* {showPreview && (
         <video
           aria-hidden='true'
           src={video.preview}
@@ -82,7 +82,7 @@ export default function CareerCard({
           autoPlay
           className='absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105'
         />
-      )}
+      )} */}
       <div className='absolute inset-0 bg-primary-dark/15' />
       <div
         className='absolute inset-0'

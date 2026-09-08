@@ -1,4 +1,6 @@
+import { useRef } from 'react';
 import Reveal from './shared/Reveal';
+import { useSeccionVisible } from '../lib/useSeccionVisible';
 import HeroBottomFade from './HeroBottomFade';
 import {
   useHeroCarousel,
@@ -22,15 +24,18 @@ interface Props {
 }
 
 export default function SobreNosotrosHero({ t }: Props) {
-  const { emblaRef, emblaApi, selectedIndex, settledIndex } = useHeroCarousel();
+  const sectionRef = useRef<HTMLElement>(null);
+  const visible = useSeccionVisible(sectionRef);
+  const { emblaRef, emblaApi, selectedIndex, settledIndex } = useHeroCarousel(visible);
 
   return (
-    <section className='relative flex min-h-[75vh] items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white'>
+    <section ref={sectionRef} className='relative flex min-h-[75vh] items-end overflow-hidden bg-primary-dark px-6 pt-32 pb-20 text-white'>
       <CarouselBackground
         emblaRef={emblaRef}
         slides={slides}
         activeIndex={selectedIndex}
         settledIndex={settledIndex}
+        visible={visible}
         imageClassName='md:origin-[50%_25%] md:object-[50%_25%]'
       />
       <div

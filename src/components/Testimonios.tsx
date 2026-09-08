@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { FaComments, FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
@@ -7,6 +7,7 @@ import Eyebrow from './Eyebrow';
 import SectionGlow from './SectionGlow';
 import TestimonioCard from './cards/TestimonioCard';
 import { testimonios } from '../data/testimonios';
+import { useSeccionVisible } from '../lib/useSeccionVisible';
 
 interface Props {
   t: {
@@ -33,6 +34,8 @@ export default function Testimonios({ t }: Props) {
   );
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const visible = useSeccionVisible(sectionRef);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -44,19 +47,19 @@ export default function Testimonios({ t }: Props) {
     });
   }, [emblaApi]);
 
-  // Mientras se lee un testimonio completo el carrusel no debe avanzar solo.
+  // No avanza solo mientras se lee un testimonio desplegado, ni fuera de pantalla.
   useEffect(() => {
     const autoplay = emblaApi?.plugins()?.autoplay;
     if (!autoplay) return;
-    if (expandedIndex === null) autoplay.play();
+    if (visible && expandedIndex === null) autoplay.play();
     else autoplay.stop();
-  }, [emblaApi, expandedIndex]);
+  }, [emblaApi, expandedIndex, visible]);
 
   const navClass =
     'inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-primary transition-colors hover:border-secondary hover:bg-secondary hover:text-white';
 
   return (
-    <section id='testimonios' className='px-6 py-16'>
+    <section ref={sectionRef} id='testimonios' className='px-6 py-16'>
       <div className='relative mx-auto max-w-6xl'>
         <SectionGlow />
         <Reveal>

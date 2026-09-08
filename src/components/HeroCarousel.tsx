@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
-export function useHeroCarousel() {
+export function useHeroCarousel(visible = true) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }),
   ]);
@@ -27,6 +27,16 @@ export function useHeroCarousel() {
     };
   }, [emblaApi]);
 
+  // El autoplay de Embla no sabe nada del viewport: sin esto sigue cambiando
+  // slides —y animando transforms— con el hero fuera de pantalla.
+  useEffect(() => {
+    const autoplay = emblaApi?.plugins()?.autoplay;
+    if (!autoplay) return;
+
+    if (visible) autoplay.play();
+    else autoplay.stop();
+  }, [emblaApi, visible]);
+
   return { emblaRef, emblaApi, selectedIndex, settledIndex };
 }
 
@@ -37,6 +47,8 @@ interface BackgroundProps {
   activeIndex: number;
   /** Slide ya asentado; mantiene el zoom en el saliente durante la transición. */
   settledIndex?: number;
+  /** Fuera de pantalla no se anima nada: una animación CSS infinita no se pausa sola. */
+  visible?: boolean;
   /** Ajusta el encuadre por breakpoint, p. ej. "md:object-top md:origin-top". */
   imageClassName?: string;
 }
@@ -46,6 +58,7 @@ export function CarouselBackground({
   slides,
   activeIndex,
   settledIndex = activeIndex,
+  visible = true,
   imageClassName = '',
 }: BackgroundProps) {
   return (
@@ -55,7 +68,7 @@ export function CarouselBackground({
           // Animar los cinco slides a la vez promueve cinco texturas del tamaño
           // completo de cada foto; las que no se ven no aportan nada y sí obligan
           // al compositor a rasterizarlas en cada fotograma.
-          const animated = i === activeIndex || i === settledIndex;
+          const animated = visible && (i === activeIndex || i === settledIndex);
 
           return (
             <div key={i} className="relative h-full min-w-0 flex-[0_0_100%] overflow-hidden">
