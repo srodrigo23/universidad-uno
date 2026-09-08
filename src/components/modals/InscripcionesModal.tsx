@@ -9,6 +9,31 @@ type Locale = 'es' | 'pt';
 
 const banners: Record<Locale, ImageMetadata> = { es: modalEsp, pt: modalPort };
 
+const CLAVE_VISTO = 'uno:modal-inscripciones-visto';
+const INTERVALO_MS = 60 * 60 * 1000; // 1 hora
+
+/**
+ * localStorage lanza en modo privado y con el almacenamiento bloqueado, así que
+ * todo acceso va protegido: no poder recordar la visita degrada a "mostrar el
+ * modal", nunca a romper la página.
+ */
+function leerUltimaVez() {
+  try {
+    const valor = Number(localStorage.getItem(CLAVE_VISTO));
+    return Number.isFinite(valor) && valor > 0 ? valor : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function marcarVisto() {
+  try {
+    localStorage.setItem(CLAVE_VISTO, String(Date.now()));
+  } catch {
+    // Sin persistencia el modal reaparecerá en la próxima visita. Es aceptable.
+  }
+}
+
 interface Props {
   locale: Locale;
   homeHref: string;
@@ -26,7 +51,24 @@ export default function InscripcionesModal({ locale, homeHref, t }: Props) {
   const banner = banners[locale];
 
   useEffect(() => {
-    const timer = setTimeout(() => setOpen(true), 500);
+    const ultimaVez = leerUltimaVez();
+    const transcurrido = Date.now() - ultimaVez;
+
+    // `transcurrido < 0` significa marca en el futuro: pasa si el reloj del
+    // equipo iba adelantado y luego se corrigió. Sin este caso, esa marca
+    // bloquearía el modal hasta que el reloj la alcanzase.
+    const dentroDeLaHora =
+      ultimaVez > 0 && transcurrido >= 0 && transcurrido < INTERVALO_MS;
+
+    if (dentroDeLaHora) return;
+
+    const timer = setTimeout(() => {
+      setOpen(true);
+      // Se marca al mostrarlo, no al cerrarlo: si el usuario se va sin cerrar,
+      // el modal ya le apareció y no debe repetirse.
+      marcarVisto();
+    }, 500);
+
     return () => clearTimeout(timer);
   }, []);
 
