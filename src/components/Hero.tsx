@@ -19,6 +19,9 @@ import slide5 from '../assets/images/admin/hero/admin-todos-uno.webp';
 
 const slides = [slide1, slide2, slide3, slide4, slide5];
 
+/** El primero es el candidato a LCP: la página lo precarga desde el <head>. */
+export const heroLcpImage = slides[0];
+
 interface Props {
   t: {
     eyebrow: string;

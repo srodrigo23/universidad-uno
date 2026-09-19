@@ -75,6 +75,12 @@ export function CarouselBackground({
               <img
                 src={slide.src}
                 alt=""
+                // El slide 0 es el elemento LCP. Sin esto los cinco se piden a la
+                // vez con la misma prioridad y compite con ~700 KB que nadie ve.
+                // No se usa loading="lazy" en los demás: el autoplay los necesita
+                // a los 5 s y llegarían en blanco.
+                fetchPriority={i === 0 ? 'high' : 'low'}
+                decoding={i === 0 ? 'sync' : 'async'}
                 className={`h-full w-full origin-center object-cover ${
                   animated ? 'animate-hero-zoom will-change-transform' : ''
                 } ${imageClassName}`}

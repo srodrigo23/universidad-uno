@@ -18,6 +18,8 @@ interface Props {
   description?: string;
   /** Ruta pública de la tarjeta social (1200×630). Se generan con `node scripts/generate-og.mjs`. */
   ogImage?: string;
+  /** Imagen que domina la primera pantalla. Se precarga para adelantar el LCP. */
+  lcpImage?: ImageMetadata;
 }
 
 const {
@@ -27,6 +29,7 @@ const {
   title = dict.meta.title,
   description = dict.meta.description,
   ogImage = '/og/default.jpg',
+  lcpImage,
 } = Astro.props;
 const homeHref = locale === 'es' ? '/' : '/pt/';
 
@@ -71,6 +74,14 @@ const careerLinks = careers.map((career) => ({
     <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
     <!-- <meta name="apple-mobile-web-app-title" content="universidad-uno" /> -->
     <link rel='manifest' href='/site.webmanifest' />
+
+    {
+      /* Antes que nada: el escáner de precarga lo encuentra sin esperar a parsear
+         la isla que lo contiene. */
+      lcpImage && (
+        <link rel='preload' as='image' href={lcpImage.src} fetchpriority='high' />
+      )
+    }
 
     <meta name='generator' content={Astro.generator} />
     <meta name='description' content={description} />

@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import SobreNosotrosHero from '../../components/SobreNosotrosHero';
+import SobreNosotrosHero, { sobreNosotrosLcpImage } from '../../components/SobreNosotrosHero';
 import Historia from '../../components/Historia';
 import MisionVision from '../../components/MisionVision';
 import Faq from '../../components/Faq';
@@ -17,6 +17,7 @@ const careerOptions = careers.map((career) => ({ slug: career.slug, nombre: care
 ---
 
 <Layout
+	lcpImage={sobreNosotrosLcpImage}
 	locale={locale}
 	dict={dict}
 	switchHref={localizedPath('es', '/sobre-nosotros')}

@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Hero from '../../components/Hero';
+import Hero, { heroLcpImage } from '../../components/Hero';
 import Credenciales from '../../components/Credenciales';
 import PorQueUno from '../../components/PorQueUno';
 import CareersSection from '../../components/CareersSection';
@@ -46,7 +46,8 @@ const galeriaFotos = await Promise.all(
 );
 ---
 
-<Layout locale={locale} dict={dict} switchHref={localizedPath('es', '/')}>
+<Layout
+	lcpImage={heroLcpImage} locale={locale} dict={dict} switchHref={localizedPath('es', '/')}>
 	<Fragment slot="head">
 		<SeoJsonLd schema={organizationSchema(Astro.site, locale, dict)} />
 		<SeoJsonLd schema={careerListSchema(Astro.site, locale, dict)} />

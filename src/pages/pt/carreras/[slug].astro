@@ -30,6 +30,7 @@ const careerOptions = careers.map((item) => ({ slug: item.slug, nombre: item[loc
 ---
 
 <Layout
+	lcpImage={career.heroImage}
 	locale={locale}
 	dict={dict}
 	switchHref={localizedPath('es', `/carreras/${career.slug}`)}
